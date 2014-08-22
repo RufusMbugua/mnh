@@ -1085,9 +1085,9 @@ ORDER BY fac_level;");
 		
         $this->getResourcesStatistics($criteria, $value, $survey, $survey_category, 'hwr', 'availability');
 	}
-	public function getCHResourcesLocation($criteria, $value, $survey, $survey_category) {
+	public function getCHResourceLocation($criteria, $value, $survey, $survey_category) {
 		
-        $this->getResourcesLocation($criteria, $value, $survey, $survey_category, 'mch');
+        $this->getResourceLocation($criteria, $value, $survey, $survey_category, 'mch');
 	}
 	public function getCHresourcesSupplier($criteria, $value, $survey, $survey_category) {
 	
@@ -1186,9 +1186,9 @@ ORDER BY fac_level;");
      * @param  [type] $choice   [description]
      * @return [type]           [description]
      */
-    public function getMNHResourcesLocation($criteria, $value, $survey, $survey_category) {
+    public function getMNHResourceLocation($criteria, $value, $survey, $survey_category) {
   
-        $this->getResourcesLocation($criteria, $value, $survey, $survey_category, 'mnh');
+        $this->getResourceLocation($criteria, $value, $survey, $survey_category, 'mnh');
 
         //echo "<pre>"; print_r($results);echo "</pre>";die;
 
@@ -1485,7 +1485,7 @@ ORDER BY fac_level;");
      * @param  [type] $for      [description]
      * @return [type]           [description]
      */
-    public function getResourcesLocation($criteria, $value, $survey, $survey_category, $for) {
+    public function getResourceLocation($criteria, $value, $survey, $survey_category, $for) {
         $results = $this->m_analytics->getResourceLocation($criteria, $value, $survey, $survey_category, $for);
 
         //echo "<pre>";print_r($results);echo "</pre>";die;
