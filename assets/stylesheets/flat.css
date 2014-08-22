@@ -9138,3 +9138,13 @@ a.disabled:hover {
 .dataTables_info {
   font-size: 14px;
 }
+
+progress
+{
+  -webkit-appearance: progress-bar;
+  box-sizing: border-box;
+  display: inline-block;
+  height: 1em;
+  width: 10em;
+  vertical-align: -0.2em;
+}

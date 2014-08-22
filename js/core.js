@@ -309,7 +309,9 @@ function getCountyData(base_url, county, survey_type, survey_category) {
             $('#finished .digit').text(obj[0].reported);
             $('#started .digit').text(obj[0].unfinished);
             $('#not_started .digit').text(obj[0].notstarted);
-            $('#county_progress').text((obj[0].reported / obj[0].actual * 100) + ' %');
+            var percent = obj[0].reported / obj[0].actual * 100;
+            $( "#c_progress" ).attr( "value", percent );
+            $("#county_progress span").text(obj[0].reported + ' / ' + obj[0].actual + '(' + percent +'%)');
             url = base_url + 'c_analytics/setActive/' + county + '/' + survey_type + '/' + survey_category;
             $('#load_analytics').attr('data-url', url);
             new_url = base_url + 'c_analytics/getCountyReportingSummary/'+survey + '/' + survey_category;
