@@ -30,10 +30,10 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Offline Forms <b class="caret"></b> </a>
                             <ul class="dropdown-menu">
                                 <li id="mnh-form">
-                                    <a href="#"> 1. Maternal Neonatal Health - Emergency Obstetric Care Analysis </a>
+                                    <a href="#"> 1. Maternal Neonatal Health - Emergency Obstetric Care  </a>
                                 </li>
                                 <li id="mch-form">
-                                    <a href="#"> 2. Child Health - Diarrhoea, Treatment Scale Up Analysis </a>
+                                    <a href="#"> 2. Child Health - Diarrhoea, Treatment Scale Up  </a>
                                 </li>
                                 <li id="hcw-form">
                                     <a href="#"> 3. Follow-Up Tool after IMCI Training </a>
@@ -61,7 +61,7 @@
                             <a href="<?php echo $this -> config -> item('project_url'); ?>">Program Monitoring Tool</a>
                         </li>
                         <li>
-                            <a href="<?php echo $this -> config -> item('hcmp_url'); ?>">HCMP</a>
+                            <a href="health-cmp.or.ke">HCMP</a>
                         </li>
                     </ul>
 

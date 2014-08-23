@@ -1,0 +1,33 @@
+{
+  "name": "cheet.js",
+  "version": "0.3.2",
+  "description": "easy easter eggs (konami code, etc) for your site",
+  "keywords": [
+    "cheet",
+    "cheat",
+    "easter",
+    "eggs",
+    "keyboard",
+    "silly"
+  ],
+  "license": "MIT",
+  "ignore": [
+    ".editorconfig",
+    "tests/",
+    "node_modules/",
+    "Makefile",
+    "package.json"
+  ],
+  "main": "cheet.js",
+  "homepage": "https://github.com/namuol/cheet.js",
+  "_release": "0.3.2",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.3.2",
+    "commit": "f96ec960b615b701e714ad5407acf16d927eeab6"
+  },
+  "_source": "git://github.com/namuol/cheet.js.git",
+  "_target": "~0.3.2",
+  "_originalSource": "cheet.js",
+  "_direct": true
+}

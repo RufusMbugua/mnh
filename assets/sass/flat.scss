@@ -26,6 +26,7 @@ $stat-color:#16a085;
 //Body
 body{
     font-family:Lato !important;
+    height:auto !important;
     // @extend .zeta;
 }
 #menu{
@@ -144,7 +145,7 @@ button{
 
 }
 form{
-    input,select{
+    input,select,textarea{
         @extend .form-control;
     }
     button{
@@ -165,6 +166,9 @@ form{
     }
     input[type="radio"]{
         height:auto;
+    }
+    label{
+        float: left !important;
     }
 }
 .form-container{
@@ -258,16 +262,44 @@ table{
         display: inline-block;
     }
 }
-.portlet.md.box{
-    @extend .col-md-4;
+.large-graph{
+    @extend .col-md-12;
+    @extend .standard-graph;
+    .portlet-body{
+        height:500px;
+        overflow-y:auto;
+    }
 }
-.portlet.box{
+.medium-graph{
+    @extend .col-md-4;
+    @extend .standard-graph;
+    .portlet-body{
+        height:300px;
+        overflow-y:auto;
+    }
+}
+.small-graph{
+    @extend .standard-graph;
+    @extend .col-md-3;
+    .portlet-body{
+        height:300px;
+
+    }
+}
+.semi-large-graph{
+    @extend .standard-graph;
     @extend .col-md-6;
+    .portlet-body{
+        height:300px;
+
+    }
+}
+
+.standard-graph{
     .portlet-title{
         h6{
             margin-bottom:0;
-
-            padding: 10px 15px;
+            padding: 5px 7.5px;
             color: #333333;
             background-color: whitesmoke;
             border-color: #e7e7e7;
@@ -295,11 +327,16 @@ table{
         }
     }
     .portlet-body{
-        height:300px;
         overflow-y:auto;
     }
 }
-
+.sectionList{
+     li{
+        a{
+         padding:5px 7.5px !important;
+        }
+     }
+}
 .reporting {
     overflow-y: auto;
     height: 300px;
@@ -431,7 +468,7 @@ h4{
     padding:0 !important;
 }
 h6{
-    @extend .epsilon;
+    font-size:16px;
 }
 //SideBar
 .panel{
@@ -637,4 +674,23 @@ a.disabled:hover{
 }
 .dataTables_info{
     font-size:14px;
+}
+//X-editable
+.editable-click:hover{
+    cursor: hand !important;
+}
+.modal{
+    //z-index:2000000000000000000000000;
+}
+//Resize Icons
+.sizer{
+    float:right;
+    i{
+        color:#ccc;
+        cursor:pointer;
+    }
+    i:hover{
+       color:#333;
+        cursor:hand;
+    }
 }

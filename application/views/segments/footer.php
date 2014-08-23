@@ -8,4 +8,4 @@
     &nbsp;
 </div>
 <?php $this->load->view('segments/modals'); ?>
-<script src="<?php echo base_url();?>assets/bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
+

@@ -7,10 +7,8 @@
 
 <div class="login-container">
     <div class="row">
-        <div id="form-description">
-
-        </div>
-        <div id="form-login">
+        
+		<div id="form-login" style = "width: 60%: margin: 0 auto;">
             <form id="authenticate" name="authenticate" action="<?php echo base_url().'session/new'?>" method="post" accept-charset="utf-8">
                 <h2><?php echo $login_message; ?></h2>
 
@@ -33,7 +31,7 @@
                 </div>
 
                 <div class="form-group">
-                    <input id="usercode" name="usercode" type="password"/>
+                    <input id="usercode" name="usercode" type="password" placeholder="Please Enter the Correct Password"/>
                 </div>
                 <label style="color: #e34848;display:none" for="buttonsPane" >Invalid District/Sub County and Password Combination!</label>
                 <div class="buttonsPane">

@@ -263,7 +263,7 @@ class M_MNH_Survey extends MY_Model
             
             //Working with an object of the entity
             try {
-                $this->district = $this->em->getRepository('models\Entities\Districts')->findOneBy(array('districtId' => $this->input->post('username', TRUE), 'districtAccessCode' => md5($this->input->post('usercode', TRUE))));
+                $this->district = $this->em->getRepository('models\Entities\Districts')->findOneBy(array('districtName' => $this->input->post('district', TRUE), 'districtAccessCode' => md5($this->input->post('usercode', TRUE))));
                 
                 if ($this->district) {
                     return $this->isDistrict = 'true';
@@ -1125,7 +1125,12 @@ class M_MNH_Survey extends MY_Model
             
             //echo $this -> elements[$i]['mnhceocReason'];exit;
             //go ahead and persist data posted
-            $this->theForm = new \models\Entities\LogQuestions();
+            $this->theForm = $this->getvalueby('models\Entities\LogQuestions', array('ssId' => $this->session->userdata('survey_status'), 'questionCode' => $this->elements[$i]['serviceAspectCode']));
+
+            if($this->theForm == NULL)
+            {
+                $this->theForm = new \models\Entities\LogQuestions();
+            }
             
             //create an object of the model
             
@@ -1287,7 +1292,8 @@ class M_MNH_Survey extends MY_Model
         }
         
         //close foreach ($this -> input -> post() as $key => $val)
-        // print var_dump($this->elements);
+        //print var_dump($this->elements);]
+        //echo "<pre>";print_r($this->elements);echo "</pre>";die;
         
         //exit;
         
@@ -1298,8 +1304,12 @@ class M_MNH_Survey extends MY_Model
             
             //echo $this -> elements[$i]['mnhceocReason'];exit;
             //go ahead and persist data posted
-            $this->theForm = new \models\Entities\LogQuestions();
-            
+            $this->theForm = $this->getvalueby('models\Entities\LogQuestions', array('ssId' => $this->session->userdata('survey_status'), 'questionCode' => $this->elements[$i]['committeeAspectCode']));
+
+            if($this->theForm == NULL)
+            {
+                $this->theForm = new \models\Entities\LogQuestions();
+            }
             //create an object of the model
             
             $this->theForm->setQuestionCode($this->elements[$i]['committeeAspectCode']);
@@ -2003,7 +2013,12 @@ class M_MNH_Survey extends MY_Model
             
             //echo $this -> elements[$i]['mnhceocReason'];exit;
             //go ahead and persist data posted
-            $this->theForm = new \models\Entities\LogQuestions();
+           $this->theForm = $this->getvalueby('models\Entities\LogQuestions', array('ssId' => $this->session->userdata('survey_status'), 'questionCode' => $this->elements[$i]['bedAspectCode']));
+
+            if($this->theForm == NULL)
+            {
+                $this->theForm = new \models\Entities\LogQuestions();
+            }
             
             //create an object of the model
             
@@ -4912,10 +4927,178 @@ class M_MNH_Survey extends MY_Model
         }
         
         //end of innner loop
-        
-        
     }
     
+    private function addMnhHRInfo() {
+       $count = $finalCount = 1;
+       foreach ($this->input->post() as $key => $val) {
+            //For every posted values
+           if (strpos($key, 'contactfacility') !== FALSE) {
+            //var_dump($val);die;
+                //select data for availability of commodities
+               //we separate the attribute name from the number
+
+               $this->frags = explode("_", $key);
+
+               //$this->id = $this->frags[1];  // the id
+
+               $this->id = $count;
+
+               // the id
+
+               $this->attr = $this->frags[0];
+
+               //the attribute name
+
+               //stringify any array value
+               if (is_array($val)) {
+                   $val = implode(',', $val);
+               }
+
+               // print $key.' ='.$val.' <br />';
+               //print 'ids: '.$this->id.'<br />';
+
+               //mark the end of 1 row...for record count
+               if ($this->attr == "contactfacilityopdemail") {
+
+                   //print 'count at:'.$count.'<br />';
+
+                   $finalCount = $count;
+                   $count++;
+
+                   //print 'count at:'.$count.'<br />';
+                   //print 'final count at:'.$finalCount.'<br />';
+                   //print 'DOM: '.$key.' Attr: '.$this->attr.' val='.$val.' id='.$this->id.' <br />';
+
+               }
+
+               //collect key and value to an array
+               if (!empty($val)) {
+
+                   //We then store the value of this attribute for this element.
+                   $this->elements[$this->id][$this->attr] = htmlentities($val);
+
+                   //$this->elements[$this->attr]=htmlentities($val);
+
+               } else {
+                   $this->elements[$this->id][$this->attr] = '';
+
+                   //$this->element=array('id'=>$this->id,'name'=>$this->attr,'value'=>'');
+
+               }
+           }
+       }
+        //close foreach ($this -> input -> post() as $key => $val)
+       // print_r($this->elements);die;
+       //get the highest value of the array that will control the number of inserts to be done
+       $this->noOfInsertsBatch = $finalCount;
+
+       for ($i = 1; $i <= $this->noOfInsertsBatch + 1; ++$i) {
+
+           //go ahead and persist data posted
+           $this->theForm = $this->getvalueby('models\Entities\HrInformation', array('ssId' => $this->session->userdata('survey_status'), 'facilityMfl' => $this->session->userdata('facilityMFL')));
+
+            if($this->theForm == NULL)
+            {
+                $this->theForm = new \models\Entities\HrInformation();
+            }
+
+           //create an object of the model
+
+           //$this->theForm->setStrategyCode(1);
+            //$this -> elements[$i]['mchCommunityStrategyQCode']);
+           $this->theForm->setFacilityMfl($this->session->userdata('facilityMFL'));
+
+           //check if that key exists, else set it to some default value
+           (isset($this->elements[$i]['contactfacilityInchargename']) && $this->elements[$i]['contactfacilityInchargename'] != '') ? $this->theForm->setFacilityInchargeName($this->elements[$i]['contactfacilityInchargename']) : $this->theForm->setFacilityInchargeName('N/A');
+           (isset($this->elements[$i]['contactfacilityInchargemobile']) && $this->elements[$i]['contactfacilityInchargemobile'] != '') ? $this->theForm->setFacilityInchargeMobile($this->elements[$i]['contactfacilityInchargemobile']) : $this->theForm->setFacilityInchargeMobile(-1);
+           (isset($this->elements[$i]['contactfacilityInchargeemail']) && $this->elements[$i]['contactfacilityInchargeemail'] != '') ? $this->theForm->setFacilityInchargeEmailaddress($this->elements[$i]['contactfacilityInchargeemail']) : $this->theForm->setFacilityInchargeEmailaddress('N/A');
+           (isset($this->elements[$i]['contactfacilityMchname']) && $this->elements[$i]['contactfacilityMchname'] != '') ? $this->theForm->setMchInchargeName($this->elements[$i]['contactfacilityMchname']) : $this->theForm->setMchInchargeName('N/A');
+           (isset($this->elements[$i]['contactfacilityMchmobile']) && $this->elements[$i]['contactfacilityMchmobile'] != '') ? $this->theForm->setMchInchargeMobile($this->elements[$i]['contactfacilityMchmobile']) : $this->theForm->setMchInchargeMobile('-1');
+           (isset($this->elements[$i]['contactfacilityMchemail']) && $this->elements[$i]['contactfacilityMchemail'] != '') ? $this->theForm->setMchInchargeEmailaddress($this->elements[$i]['contactfacilityMchemail']) : $this->theForm->setMchInchargeEmailaddress('N/A');
+
+           (isset($this->elements[$i]['contactfacilityMaternityname']) && $this->elements[$i]['contactfacilityMaternityname'] != '') ? $this->theForm->setMaternityInchargeName($this->elements[$i]['contactfacilityMaternityname']) : $this->theForm->setMchInchargeName('N/A');
+           (isset($this->elements[$i]['contactfacilityMaternitymobile']) && $this->elements[$i]['contactfacilityMaternitymobile'] != '') ? $this->theForm->setMaternityInchargeMobile($this->elements[$i]['contactfacilityMaternitymobile']) : $this->theForm->setMchInchargeMobile('-1');
+           (isset($this->elements[$i]['contactfacilityMaternityemail']) && $this->elements[$i]['contactfacilityMaternityemail'] != '') ? $this->theForm->setMaternityInchargeEmailaddress($this->elements[$i]['contactfacilityMaternityemail']) : $this->theForm->setMchInchargeEmailaddress('N/A');
+
+           $this->theForm->setCreated(new DateTime());
+           $this->theForm->setSsId((int)$this->session->userdata('survey_status'));
+
+           /*timestamp option*/
+           $this->em->persist($this->theForm);
+
+           //now do a batched insert, default at 5
+           $this->batchSize = 5;
+           if ($i % $this->batchSize == 0) {
+               try {
+
+                   $this->em->flush();
+                   $this->em->clear();
+
+                   //detaches all objects from doctrine
+
+                   //on the last record to be inserted, log the process and return true;
+                   if ($i == $this->noOfInsertsBatch) {
+
+                       //die(print 'Limit: '.$this->noOfInsertsBatch);
+                       //$this->writeAssessmentTrackerLog();
+                       return true;
+                   }
+
+                   //return true;
+
+               }
+               catch(Exception $ex) {
+
+                   //die($ex -> getMessage());
+                   return false;
+
+                   /*display user friendly message*/
+               }
+                //end of catch
+
+
+           } else if ($i < $this->batchSize || $i > $this->batchSize || $i == $this->noOfInsertsBatch && $this->noOfInsertsBatch - $i < $this->batchSize) {
+
+               //total records less than a batch, insert all of them
+               try {
+
+                   $this->em->flush();
+                   $this->em->clear();
+
+                   //detactes all objects from doctrine
+
+                   //on the last record to be inserted, log the process and return true;
+                   if ($i == $this->noOfInsertsBatch) {
+
+                       //die(print 'Limit: '.$this->noOfInsertsBatch);
+                       //$this->writeAssessmentTrackerLog();
+                       return true;
+                   }
+
+                   //return true;
+
+               }
+               catch(Exception $ex) {
+
+                   //die($ex->getMessage());
+                   return false;
+
+                   /*display user friendly message*/
+               }
+                //end of catch
+
+
+           }
+
+           //end of batch condition
+
+       }
+        //end of innner loop
+
+   }
+    //close addMNHHRInfo()
+
     function store_data() {
         
         /*check assessment tracker log*/
@@ -4930,7 +5113,7 @@ class M_MNH_Survey extends MY_Model
                     //insert log entry if new, else update the existing one
                     if ($this->sectionExists == false) {
                         // if ($this->updateFacilityInfo()==true && 
-                           if($this->addQuestionsInfo() == true && $this->addServicesInfo() == true && $this->addCommitteeInfo() == true && $this->addBedsInfo() == true && $this->addNoReasonForDeliveries() == true) {
+                           if($this->addQuestionsInfo() == true && $this->addServicesInfo() == true && $this->addCommitteeInfo() == true && $this->addBedsInfo() == true && $this->addNoReasonForDeliveries() == true && $this->addMnhHRInfo() == true) {
                             
                             //Defined in MY_Model
                             //if($this->addNoReasonForDeliveries()== true){

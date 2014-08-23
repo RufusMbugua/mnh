@@ -24,6 +24,7 @@
 
 <link rel="stylesheet" href="<?php echo base_url();?>assets/bower_components/select2/select2-bootstrap.css">
 <link rel="stylesheet" href="<?php echo base_url();?>assets/bower_components/select2/select2.css">
+<link rel="stylesheet" href="<?php echo base_url();?>assets/bower_components/x-editable/dist/bootstrap3-editable/css/bootstrap-editable.css">
 <!--
 <link rel="stylesheet" href="<?php echo base_url();?>assets/bower_components/qunit/qunit/qunit.css">
 <link rel="stylesheet" href="<?php echo base_url();?>assets/bower_components/tablesaw/dist/tablesaw.css">
@@ -40,7 +41,7 @@
 <script src="<?php echo base_url(); ?>js/js_ajax_load.js"></script>
 <!--<script src="<?php echo base_url();?>assets/bower_components/jquery/dist/jquery.js"></script>-->
 <script src="<?php echo base_url();?>assets/bower_components/select2/select2.js"></script>
-
+<script src="<?php echo base_url();?>js/core.js"></script>
 <script src="<?php echo base_url();?>assets/bower_components/flat-ui-official/js/jquery.ui.touch-punch.min.js"></script>
 <script src="<?php echo base_url();?>assets/bower_components/flat-ui-official/js/bootstrap.min.js"></script>
 <script src="<?php echo base_url();?>assets/bower_components/flat-ui-official/js/bootstrap-select.js"></script>
@@ -53,16 +54,24 @@
 <script src="<?php echo base_url();?>assets/bower_components/qunit/qunit/qunit.js"></script>
 <script src="<?php echo base_url();?>assets/bower_components/tablesaw/dist/tablesaw.js"></script>
 <script src="<?php echo base_url();?>assets/bower_components/intro.js/intro.js"></script>
+<script src="<?php echo base_url();?>assets/bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
+<script src="<?php echo base_url();?>assets/bower_components/skrollr/dist/skrollr.min.js"></script>
+<script src="<?php echo base_url();?>assets/bower_components/skrollr-menu/dist/skrollr.menu.min.js"></script>
 
-<script src="<?php echo base_url();?>assets/bower_components/skrollr/dist//skrollr.min.js"></script>
-<script src="<?php echo base_url();?>assets/bower_components/skrollr-menu/dist//skrollr.menu.min.js"></script>
+<script src="<?php echo base_url();?>assets/bower_components/cheet.js/cheet.js"></script>
 
-<script src="<?php echo base_url();?>js/core.js"></script>
+<script src="<?php echo base_url()?>js/jquery.quickfit.js"></script>
+<!-- <script> Scripts for Editable and Searchable Tables </script> -->
+<script src="<?php echo base_url();?>assets/bower_components/x-editable/dist/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
+<script src="<?php echo base_url();?>assets/bower_components/list.js/dist/list.js"></script>
+
+
 <!--script src="<?php echo base_url();?>assets/bower_components/"></script-->
 
 
 <script src="<?php echo base_url()?>js/highcharts.js"></script>
 <script src="<?php echo base_url()?>js/exporting.js"></script>
+
 <!--<script src="<?php echo base_url()?>js/Merged-JS.js"></script>-->
 <script src="<?php echo base_url()?>js/FusionMaps/FusionCharts.js"></script>
 
@@ -101,13 +110,13 @@
         });
         $('#master_list').click(function(){
 
-            $('#masterFacilityList').modal('show');
-            $('#masterFacilityList').delay(4000,function(nxt){
-                loadMasterFacilityList(base_url,'#masterFacilityList .modal-body');
-                nxt();
-            });
+            showMasterFacilityList(base_url,'table');
 
         });
+
+        // $('.modal-footer .btn-primary').click(function()){
+            
+        // }
 
 
         var s = skrollr.init(/*other stuff*/);

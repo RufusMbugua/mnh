@@ -102,6 +102,7 @@ progress[value]::-webkit-progress-value::before {
                         <button id="load_analytics"><i class="fa fa-bar-chart-o"></i>Click to View Analytics</button>
                         <button id="load_county_summary"><i class="fa fa-bar-chart-o"></i>Click to Download Excel Summary</button>
                     </div>
+                    
                 </div>
 
             </div>

@@ -17,19 +17,18 @@
 
 
 
-<div class="modal fade"  id="masterFacilityList" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog" style="width:100%">
+<div class="modal fade"  id="universalModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" style="width:80%">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title" id="myModalLabel">Master Facility List</h4>
+        <h4 class="modal-title" id="myModalLabel"></h4>
       </div>
       <div class="modal-body">
-        ...
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="submit" form="modal-form" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>
