@@ -4664,20 +4664,22 @@ GROUP BY st_name,sc_name,facilityCode;";
         
         //Looping through the cells
         $column = 0;
-        foreach ($data['title'] as $cell) {
+        //echo '<pre>';print_r($data);echo'</pre>';die;
+        foreach ($data[0] as $k=>$cell) {
             
             //echo $column . $rowExec; die;
-            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($column, $rowExec, $cell);
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($column, $rowExec, ucwords(str_replace('lq','',str_replace('fac', 'facility', str_replace('_', ' ', $k)))));
             $objPHPExcel->getActiveSheet()->getStyle(PHPExcel_Cell::stringFromColumnIndex($column) . $rowExec)->getFont()->setBold(true)->setSize(14);
             $objPHPExcel->getActiveSheet()->getColumnDimension(PHPExcel_Cell::stringFromColumnIndex($column))->setAutoSize(true);
             
             $column++;
         }
         $rowExec = 2;
-        foreach ($data['data'] as $rowset) {
+        foreach ($data as $key=>$rowset) {
             
             //Looping through the cells per facility
             $column = 0;
+            //var_dump($rowset);die;
             foreach ($rowset as $cell) {
                 $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($column, $rowExec, $cell);
                 $column++;
@@ -4720,16 +4722,42 @@ GROUP BY st_name,sc_name,facilityCode;";
         
         //echo $data;die;
         $stylesheet = ('
-        th{
-            padding:5px;
-            text-align:left;
+            <style>
+        input[type="text"]{
+            width:200%;
         }
-        tr.tableRow:nth-child(even){
-            background:#DDD;
+        input[type="number"]{
+            width:400px;
         }
-        h3 em {
-            color:red;
+        table{
+            width:1000px;
         }
+        .break { page-break-before: always; }
+        .success {
+background: #cbc9c9;
+color: #000;
+border-color: #FFFFEE;
+font: bold 100% sans-serif;}
+        td:even{
+            background:#eee;
+            
+        }
+        th {
+text-align: left;
+background: #ddd;
+}
+.not-read{
+    background:#aaa;
+}
+.instruction{
+    font-weight:bold;
+    padding:3px;
+    width:1000px;
+    margin:0;
+    background:#fdde0e;
+
+}
+        </style>
         ');
         $html = ($data);
         $this->load->library('mpdf');
@@ -4738,8 +4766,8 @@ GROUP BY st_name,sc_name,facilityCode;";
         $this->mpdf->SetHTMLHeader('<em>Assessment Tool</em>');
         $this->mpdf->SetHTMLFooter('<em>Assessment Tool</em>');
         $this->mpdf->simpleTables = true;
-        $this->mpdf->WriteHTML($stylesheet, 1);
-        $this->mpdf->WriteHTML($html, 2);
+        //$this->mpdf->WriteHTML($stylesheet, 1);
+        $this->mpdf->WriteHTML($stylesheet.$html);
         $report_name = $filename . ".pdf";
         $this->mpdf->Output($report_name, 'I');
     }
@@ -4756,7 +4784,7 @@ GROUP BY st_name,sc_name,facilityCode;";
      * @param  string  $type        [description]
      * @return [type]               [description]
      */
-    public function populateGraph($resultArray = '', $drilldown = '', $category = '', $criteria = '', $stacking = '', $margin = 0, $type = '', $resultSize = '') {
+    public function populateGraph($resultArray = '', $drilldown = '', $category = '', $criteria = '', $stacking = '', $margin = 0, $type = '', $resultSize = '',$for='',$parent='',$statistics='') {
         $datas = array();
         $chart_size = (count($category) < 5) ? 5 : count($category);
         $given_size = ($resultSize != '' && $resultSize < 5) ? 5 : $resultSize;
@@ -4782,6 +4810,9 @@ GROUP BY st_name,sc_name,facilityCode;";
                 //$datas['chart_width'] = 100;
                 break;
         }
+        $datas['statistics']=$statistics;
+        $datas['data_parent']=$parent;
+        $datas['data_for']=$for;
         $datas['chart_stacking'] = $stacking;
         $datas['color_scheme'] = ($stacking != '') ? array('#8bbc21', '#fb4347', '#92e18e', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#a6c96a') : array('#66aaf7', '#f66c6f', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#a6c96a');
         $datas['chart_categories'] = $category;
@@ -4813,7 +4844,7 @@ GROUP BY st_name,sc_name,facilityCode;";
         return $result;
     }
     public function loadTable($data, $editable = '') {
-        $tmpl = array('table_open' => '<div class="table-container"><table border="1" cellpadding="4" cellspacing="0" class="table table-condensed table-striped table-bordered table-hover dataTable">', 'heading_row_start' => '<tr>', 'heading_row_end' => '</tr>', 'heading_cell_start' => '<th>', 'heading_cell_end' => '</th>', 'row_start' => '<tr>', 'row_end' => '</tr>', 'cell_start' => '<td>', 'cell_end' => '</td>', 'row_alt_start' => '<tr>', 'row_alt_end' => '</tr>', 'cell_alt_start' => '<td>', 'cell_alt_end' => '</td>', 'table_close' => '</table></div>');
+        $tmpl = array('table_open' => '<div class="table-container"><table cellpadding="4" cellspacing="0" class="table table-condensed table-striped table-bordered table-hover dataTable">', 'heading_row_start' => '<tr>', 'heading_row_end' => '</tr>', 'heading_cell_start' => '<th>', 'heading_cell_end' => '</th>', 'row_start' => '<tr>', 'row_end' => '</tr>', 'cell_start' => '<td>', 'cell_end' => '</td>', 'row_alt_start' => '<tr>', 'row_alt_end' => '</tr>', 'cell_alt_start' => '<td>', 'cell_alt_end' => '</td>', 'table_close' => '</table></div>');
         
         $this->table->set_template($tmpl);
         
@@ -4823,7 +4854,7 @@ GROUP BY st_name,sc_name,facilityCode;";
             //set table headers
             foreach ($data[0] as $title => $column) {
                 if ($pk != 0) {
-                    $titles[] = ucwords(str_replace('fac', 'facility', str_replace('_', ' ', $title)));
+                    $titles[] = ucwords(str_replace('lq','',str_replace('fac', 'facility', str_replace('_', ' ', $title))));
                 } else {
                     $primary_key = $title;
                 }

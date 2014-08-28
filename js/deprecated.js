@@ -540,14 +540,14 @@ $('ul.sub li').click(function() {
 				break;
 
 			case 'resourceLocation':
-				currentChart = base_url + 'c_analytics/getResourcesLocation/';
+				currentChart = base_url + 'c_analytics/getResourceLocation/';
 				appendToTitle = ' ';
 				currentDiv = '#graph_3';
 				$('span.statistic').text('Hardware Resource Location');
 				$('#resources-parent').addClass('active');
 				$('#resources-parent a').append('<span class="selected"></span>');
-				$('#graph_1').load(base_url + 'c_analytics/getResourcesLocation/national/n/ch/' + extraStat);
-				$('#graph_2').load(base_url + 'c_analytics/getResourcesLocation/county/' + county + '/ch/' + extraStat);
+				$('#graph_1').load(base_url + 'c_analytics/getResourceLocation/national/n/ch/' + extraStat);
+				$('#graph_2').load(base_url + 'c_analytics/getResourceLocation/county/' + county + '/ch/' + extraStat);
 				//$('#graph_2').load('<?php //echo base_url();?>c_analytics/getResources/county/'+county+'/ch/'+extraStat);
 				break;
 

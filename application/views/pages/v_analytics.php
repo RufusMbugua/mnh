@@ -78,10 +78,10 @@
                                     <option data-scope="county" >All Sub-Counties Selected</option>
 
                                 </select>
-                                <select name="facility_select" id="facility_select" class="input">
+                                <!-- <select name="facility_select" id="facility_select" class="input">
                                     <option data-scope="national" >All Facilities Selected</option>
 
-                                </select>
+                                </select> -->
                             <!--<a data-start="display:none" data-top="display:inline-block" href="" class="go-top">
                 <i class="fa fa-chevron-up title="Top""></i>
                 &nbsp; Move to Top

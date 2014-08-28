@@ -209,7 +209,7 @@ class MY_Model extends CI_Model
     }
      /*end of getAllCommodityNames*/
     
-    function getCommodityUsageOptions() {
+    function getCommodityUsageOptionsList() {
         
         /*using DQL*/
         try {

@@ -38,7 +38,7 @@
 |
 */
 
-$route['default_controller'] = 'c_front';
+$route['default_controller'] = 'c_analytics';
 $route['home']='c_front/index';
 $route['404_override'] = '';
 

@@ -262,8 +262,16 @@ table{
         display: inline-block;
     }
 }
-.large-graph{
+.x-large-graph{
     @extend .col-md-12;
+    @extend .standard-graph;
+    .portlet-body{
+        height:500px;
+        overflow-y:auto;
+    }
+}
+.large-graph{
+    @extend .col-md-8;
     @extend .standard-graph;
     .portlet-body{
         height:500px;
@@ -324,6 +332,7 @@ table{
                 color: #333333;
                 cursor: hand;
             }
+
         }
     }
     .portlet-body{
@@ -331,11 +340,11 @@ table{
     }
 }
 #sectionList{
-     li{
+    li{
         a{
-         padding:5px 7.5px !important;
+            padding:5px 7.5px !important;
         }
-     }
+    }
 }
 #reporting {
     overflow-y: auto;
@@ -653,14 +662,14 @@ a.disabled:hover{
     width:200px;
     float:left;
     label{
-    select{
-        display:inherit;
-        width:50px !important;
-        @extend .form-control;
-    }
+        select{
+            display:inherit;
+            width:50px !important;
+            @extend .form-control;
+        }
     }
 }
-.datatables_filter{
+.dataTables_filter{
     label{
         float:right;
         padding-right:5%;
@@ -683,12 +692,56 @@ a.disabled:hover{
     //z-index:2000000000000000000000000;
 }
 //Resize Icons
-.sizer{
+.sizer, .show-collapse{
     float:right;
-        color:#ccc;
-        cursor:pointer;
+    color:#ccc;
+    cursor:pointer;
 }
-.sizer:hover{
-       color:#333;
-        cursor:hand;
+.sizer:hover, .show-collapse:hover{
+    color:#333;
+    cursor:hand;
+}
+//Enlarged Graphs
+#graph{
+    height:300px;
+    overflow:auto;
+}
+h6.table-header{
+    margin-bottom: 2px !important;
+    padding:5px 7.5px;
+    background:#e7e7e7;
+    span{
+        padding-left:30%;
+        button{
+            margin-left:5px;
+            @extend .btn;
+            @extend .btn-primary;
+            @extend .btn-xs;
+        }
+    }
+}
+//Hijacking Panels
+.analytics_row{
+    border-top: 1px solid #ddd !important;
+    box-shadow: none !important;
+    .panel-heading{
+        border-top:1px solid #ddd;
+        background-color: #fff !important;
+        border:none;
+        h4.panel-title{
+            padding-left:0;
+            @extend .epsilon;
+            margin-bottom:5px !important;
+            a{
+                text-decoration: none !important;
+            }
+        }
+    }
+    .panel-collapse{
+        .panel-body{
+            border:none !important;
+            box-shadow: 0;
+        }
+    }
+
 }

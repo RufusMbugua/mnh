@@ -18,13 +18,16 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li>
-                            <a href="<?php echo base_url(); ?>">Home</a>
+                            <a href="<?php echo base_url('analytics'); ?>">Home</a>
                         </li>
                         <li>
                             <a href="<?php echo base_url('takesurvey'); ?>">Take Survey</a>
                         </li>
                         <li>
                             <a href="<?php echo base_url('analytics'); ?>">View Analytics</a>
+                        </li>
+                        <li>
+                            <a href="<?php echo base_url('home'); ?>">Reporting Progress</a>
                         </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Offline Forms <b class="caret"></b> </a>
