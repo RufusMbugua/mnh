@@ -300,27 +300,42 @@ function notify_email(email, message) {
     });
 }
 
-
+/**
+ * [getCountyData description]
+ * @param  {[type]} base_url        [description]
+ * @param  {[type]} county          [description]
+ * @param  {[type]} survey_type     [description]
+ * @param  {[type]} survey_category [description]
+ * @return {[type]}                 [description]
+ */
 function getCountyData(base_url,county, survey_type, survey_category){
+    decodedCounty=county;
+    county = encodeURIComponent(county);
     $.ajax({
-        url: base_url + 'c_analytics/getCountyData/' + county + '/' + survey_type + '/' + survey_category,
+        url: base_url + 'c_analytics/getCountyData/' + survey_type + '/' + survey_category+ '/'+ county,
         beforeSend: function(xhr) {
             xhr.overrideMimeType("text/plain; charset=x-user-defined");
         },
         success: function(data) {
             obj = jQuery.parseJSON(data);
             console.log(obj);
-            $('#county_name').text(county);
+            $('#county_name').text(decodedCounty);
             $('#survey_type').text(survey_type.toUpperCase());
             $('#survey_category').text(survey_category.toUpperCase());
             $('#targeted .digit').text(obj[0].actual);
             $('#finished .digit').text(obj[0].reported);
             $('#started .digit').text(obj[0].unfinished);
-
             $('#not_started .digit').text(obj[0].notstarted);
+<<<<<<< HEAD
             var percent = obj[0].reported / obj[0].actual * 100;
             $( "#c_progress" ).attr( "value", percent );
             $("#county_progress span").text(obj[0].reported + ' / ' + obj[0].actual + '(' + percent +'%)');
+=======
+            percentage = Math.round((obj[0].reported / obj[0].actual * 100),2);
+            $('#county_progress .progress-bar').text(percentage+'%' );
+             $('#county_progress .progress-bar').attr('aria-valuenow',percentage );
+             $('#county_progress .progress-bar').css('width',percentage+'%' );
+>>>>>>> 1a20efed662b0f2cb0636541cd76449374e1fec5
             url = base_url + 'c_analytics/setActive/' + county + '/' + survey_type + '/' + survey_category;
             $('#load_analytics').attr('data-url', url);
             new_url = base_url + 'c_analytics/getCountyReportingSummary/'+survey + '/' + survey_category;
@@ -328,6 +343,7 @@ function getCountyData(base_url,county, survey_type, survey_category){
         }
     });
 }
+
 
 
 /**
@@ -441,7 +457,7 @@ function loadHelpForm(base_url) {
 
     $('#county').select2({
         placeholder: 'Please Select Your County',
-        data: getCountyData()
+        data: getCountyDataAll()
     });
     $('#county').change(function() {
         county = $(this).val();
@@ -478,7 +494,7 @@ function getFacilityData() {
  * [getCountyData description]
  * @return {[type]} [description]
  */
-function getCountyData() {
+function getCountyDataAll() {
     var result;
     $.ajax({
         url: base_url + 'assets/data/fac_county.json',

@@ -330,14 +330,14 @@ table{
         overflow-y:auto;
     }
 }
-.sectionList{
+#sectionList{
      li{
         a{
          padding:5px 7.5px !important;
         }
      }
 }
-.reporting {
+#reporting {
     overflow-y: auto;
     height: 300px;
     width: 97%;
@@ -685,12 +685,10 @@ a.disabled:hover{
 //Resize Icons
 .sizer{
     float:right;
-    i{
         color:#ccc;
         cursor:pointer;
-    }
-    i:hover{
+}
+.sizer:hover{
        color:#333;
         cursor:hand;
-    }
 }

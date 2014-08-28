@@ -8789,12 +8789,12 @@ table td {
 }
 
 /* line 335, ../sass/flat.scss */
-.sectionList li a {
+#sectionList li a {
   padding: 5px 7.5px !important;
 }
 
 /* line 340, ../sass/flat.scss */
-.reporting {
+#reporting {
   overflow-y: auto;
   height: 300px;
   width: 97%;
@@ -9202,14 +9202,12 @@ progress
 /* line 686, ../sass/flat.scss */
 .sizer {
   float: right;
-}
-/* line 688, ../sass/flat.scss */
-.sizer i {
   color: #ccc;
   cursor: pointer;
 }
-/* line 692, ../sass/flat.scss */
-.sizer i:hover {
+
+/* line 691, ../sass/flat.scss */
+.sizer:hover {
   color: #333;
   cursor: hand;
 }

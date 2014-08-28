@@ -97,8 +97,10 @@ progress[value]::-webkit-progress-value::before {
                         <div class="statistic"><div class="icon"><span><i class="fa fa-hospital-o"></i></span></div><div class="data" id="finished"><span class="text">Facilities that have finished reporting</span><span class="digit">0</span></div></div>
                         <div class="statistic"><div class="icon"><span><i class="fa fa-hospital-o"></i></span></div><div class="data" id="started"><span class="text">Facilities that have started but not finished</span><span class="digit">0</span></div></div>
                         <div class="statistic"><div class="icon"><span><i class="fa fa-hospital-o"></i></span></div><div class="data" id="not_started"><span class="text">Facilities that have not started</span><span class="digit">0</span></div></div>
-                        <div class = "statistic"><div class = "icon"><span><i class = "fa fa-hospital-o"></i></span></div>
-                        <div id = "county_progress"><span>No county selected</span><progress id = "c_progress" max = "100" value = "0">Progress: 80%</progress></div></div>
+
+                        <div class="statistic"><div class="icon"><span><i class="fa fa-bar-chart-o"></i></span></div><div class="data" id="county_progress"><span class="text">Reporting Progress</span><span class="digit"><div class = "progress" style = "width: 300px;"><div class = "progress-bar" aria-valuenow = "0" aria-valuemax = "100" >0%</div></div></span></div></div>
+
+
                         <button id="load_analytics"><i class="fa fa-bar-chart-o"></i>Click to View Analytics</button>
                         <button id="load_county_summary"><i class="fa fa-bar-chart-o"></i>Click to Download Excel Summary</button>
                     </div>

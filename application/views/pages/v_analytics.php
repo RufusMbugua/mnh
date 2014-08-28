@@ -41,7 +41,7 @@
             </div>
             <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
             <!-- BEGIN PAGE CONTAINER-->
-            <div class="container-fluid" data-spy="scroll" data-target=".sectionList">
+            <div class="container-fluid" data-spy="scroll" data-target="#sectionList">
                 <!-- BEGIN PAGE HEADER-->
                 <div class="row-fluid">
                     <div class="span12">

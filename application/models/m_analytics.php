@@ -2619,10 +2619,10 @@ ORDER BY f.fac_county ASC;";
             
             //var_dump($reportingCounties);die;
             for ($x = 0; $x < sizeof($reportingCounties); $x++) {
-                $allData[$reportingCounties[$x]['county']] = $this->getReportingRatio($reportingCounties[$x]['county'], $survey, $survey_category);
+                $allData[$reportingCounties[$x]['county']] = $this->getReportingRatio($survey, $survey_category,$reportingCounties[$x]['county']);
             }
             
-            //var_dump($allData);
+            //echo '<pre>';print_r($allData);echo '</pre>';
             return $allData;
         }
         function getReportingRatio($survey, $survey_category, $county) {
@@ -4507,7 +4507,7 @@ ORDER BY question_code";
          * Community Strategy
          */
         
-        public function getCommunityStrategyMNH($criteria, $value, $survey, $survey_category, $for) {
+        public function getCommunityStatstics($criteria, $value, $survey, $survey_category, $for) {
             
             /*using CI Database Active Record*/
             $value = urldecode($value);
@@ -4523,7 +4523,7 @@ ORDER BY question_code";
                 
                 // Dump the extra resultset.
                 $queryData->free_result();
-                
+                //echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
                 //echo($this->db->last_query());die;
                 if ($this->dataSet !== NULL) {
                     foreach ($this->dataSet as $value) {
@@ -4539,7 +4539,7 @@ ORDER BY question_code";
                     return null;
                 }
                 
-                echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
+                
                 
                 
             }
@@ -4547,7 +4547,7 @@ ORDER BY question_code";
                 
                 //ignore
                 //die($ex->getMessage());//exit;
-                
+                //echo "<pre>";print_r($data);echo "</pre>";die;
                 
             }
             
