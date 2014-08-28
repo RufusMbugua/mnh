@@ -185,16 +185,21 @@
         <div id="collapseThree" class="panel-collapse collapse">
             <div class="panel-body">
                 <div class="medium-graph">
+                   <h5>Data From Under 5 Register</h5>
+                   <div class="x-large-graph">
                     <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Data From Under 5 Register</span><span class="sizer">Click to Enlarge</span></h6>
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Assessment</span><span class="sizer">Click to Enlarge</span></h6>
                     </div>
                     <div class="portlet-body">
 
                         <div class="chart" id="u5_register">
                         </div>
                     </div>
+                    </div>
                 </div>
-                <div class="medium-graph">
+                <div class="x-large-graph">
+                   <h5>Classification and Treatment</h5>
+                    <div class="medium-graph">
                     <div class="portlet-title">
                         <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Diarrhoea</span><span class="sizer">Click to Enlarge</span></h6>
                     </div>
@@ -224,6 +229,8 @@
                         </div>
                     </div>
                 </div>
+                </div>
+
                 <div class="medium-graph">
                     <div class="portlet-title">
                         <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Danger Signs</span><span class="sizer">Click to Enlarge</span></h6>
