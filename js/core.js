@@ -326,7 +326,7 @@ function notify_email(email, message) {
             xhr.overrideMimeType("text/plain; charset=x-user-defined");
         },
         success: function(data) {
-            console.log(data);
+            //console.log(data);
 
         }
     });

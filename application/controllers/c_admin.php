@@ -270,7 +270,7 @@ class C_Admin extends MY_Controller
      * @param  string $contacts [description]
      * @return [type]           [description]
      */
-    public function notify($type, $contact, $message = '') {
+   public function notify($type, $contact, $message = '') {
         $contact = urldecode($contact);
         $message = urldecode($message);
         switch ($type) {
