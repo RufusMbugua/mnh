@@ -358,23 +358,12 @@ function getCountyData(base_url, county, survey_type, survey_category) {
             $('#finished .digit').text(obj[0].reported);
             $('#started .digit').text(obj[0].unfinished);
             $('#not_started .digit').text(obj[0].notstarted);
-<<<<<<< HEAD
-<<<<<<< HEAD
-            var percent = obj[0].reported / obj[0].actual * 100;
-            $( "#c_progress" ).attr( "value", percent );
-            $("#county_progress span").text(obj[0].reported + ' / ' + obj[0].actual + '(' + percent +'%)');
-=======
-            percentage = Math.round((obj[0].reported / obj[0].actual * 100),2);
-            $('#county_progress .progress-bar').text(percentage+'%' );
-             $('#county_progress .progress-bar').attr('aria-valuenow',percentage );
-             $('#county_progress .progress-bar').css('width',percentage+'%' );
->>>>>>> 1a20efed662b0f2cb0636541cd76449374e1fec5
-=======
+
             percentage = Math.round((obj[0].reported / obj[0].actual * 100), 2);
             $('#county_progress .progress-bar').text(percentage + '%');
             $('#county_progress .progress-bar').attr('aria-valuenow', percentage);
             $('#county_progress .progress-bar').css('width', percentage + '%');
->>>>>>> 82c13dd18304b9e07024fdd1a5ecf77746b9a63d
+
             url = base_url + 'c_analytics/setActive/' + county + '/' + survey_type + '/' + survey_category;
             $('#load_analytics').attr('data-url', url);
             new_url = base_url + 'c_analytics/getCountyReportingSummary/' + county + '/' + survey + '/' + survey_category;
