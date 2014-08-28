@@ -1065,15 +1065,11 @@ ORDER BY fac_level;");
      * @return [type]            [description]
      */
     
-<<<<<<< HEAD
-    public function getNonFunctional($criteria, $value, $survey, $survey_category) {
-        $results = $this->m_analytics->getQuestionStatistics($criteria, $value, $survey, $survey_category, 'ortf', 'response');
-        
-=======
+
     public function getORTCornerFunctionality($criteria, $value, $survey, $survey_category, $for, $statistic) {
         $results = $this->m_analytics->getQuestionStatistics($criteria, $value, $survey, $survey_category, $for, $statistic);
         $count = 0;
->>>>>>> 82c13dd18304b9e07024fdd1a5ecf77746b9a63d
+
         
         //echo "<pre>";print_r($results);echo "</pre>";die;
         $number = $resultArray = $q = array();
@@ -1268,16 +1264,7 @@ ORDER BY fac_level;");
         
         
     }
-<<<<<<< HEAD
-	public function getCHresourcesAvailability($criteria, $value, $survey, $survey_category) {
 
-		$this->getResourcesStatistics($criteria, $value, $survey, $survey_category, 'hwr', 'availability');
-
-	}
-	public function getCHresourcesSupplier($criteria, $value, $survey, $survey_category) {
-		$this->getResourcesStatistics($criteria, $value, $survey, $survey_category, 'hwr', 'supplier');
-	}
-=======
     public function getCHresourcesAvailability($criteria, $value, $survey, $survey_category) {
         $this->getResourcesStatistics($criteria, $value, $survey, $survey_category, 'hwr', 'availability');
     }
@@ -1287,7 +1274,7 @@ ORDER BY fac_level;");
     public function getCHresourcesSupplier($criteria, $value, $survey, $survey_category) {
         $this->getResourcesStatistics($criteria, $value, $survey, $survey_category, 'hwr', 'supplier');
     }
->>>>>>> 82c13dd18304b9e07024fdd1a5ecf77746b9a63d
+
     public function getresourcesFrequencyCH($criteria, $value, $survey, $survey_category) {
         $this->getResourcesStatistics($criteria, $value, $survey, $survey_category, 'mhw', 'availability');
     }
@@ -1777,39 +1764,7 @@ ORDER BY fac_level;");
      * @param  [type] $for      [description]
      * @return [type]           [description]
      */
-<<<<<<< HEAD
-    public function getResourceLocation($criteria, $value, $survey, $survey_category, $for) {
 
-        $results = $this->m_analytics->getResourceLocation($criteria, $value, $survey, $survey_category, $for);
-        
-
-        //echo "<pre>";print_r($results);echo "</pre>";die;
-        $number = $resultArray = $q = $pharmacy = $store = $delivery = $other = array();
-        $number = $resultArray = $q = array();
-        $count = 0;
-        
-        foreach ($results as $key => $value) {
-            
-            //echo "<pre>";print_r($results);echo "</pre>";die;
-            
-            //var_dump($value);
-            foreach ($value as $location => $val) {
-                $gData[] = array(ucwords($location), (int)$val);
-            }
-        }
-        $category[] = "Resources";
-        
-        //echo "<pre>";print_r($gData);echo "</pre>";die;
-        $resultArray[] = array('name' => 'Resource Location', 'data' => $gData);
-        
-        //echo "<pre>";print_r($resultArray);echo "</pre>";die;
-        $category = $q;
-        
-        //echo "<pre>";print_r($resultArray);echo "</pre>";die;
-        $this->populateGraph($resultArray, '', $category, $criteria, '', 70, 'pie');
-    }
-=======
->>>>>>> 82c13dd18304b9e07024fdd1a5ecf77746b9a63d
     
     public function getCommodityAvailabilityLocation($criteria, $value, $survey, $survey_category, $for) {
         $results = $this->m_analytics->getCommodityLocation($criteria, $value, $survey, $survey_category, $for);
@@ -1910,15 +1865,7 @@ ORDER BY fac_level;");
         
         $this->getQuestionStatistics($criteria, $value, $survey, $survey_category, 'hiv', 'response');
     }
-<<<<<<< HEAD
 
-
-    public function getFunctional($criteria, $value, $survey, $survey_category) {
-        
-        $this->getQuestionStatistics($criteria, $value, $survey, $survey_category, 'ortf', 'response');
-    }
-=======
->>>>>>> 82c13dd18304b9e07024fdd1a5ecf77746b9a63d
     
     /**
      * Health Facility Management
@@ -3661,13 +3608,9 @@ ORDER BY fac_level;");
     public function getCountyData($survey_type, $survey_category, $county) {
         
         $county = urldecode($county);
-<<<<<<< HEAD
 
         $results = $this->m_analytics->getReportingRatio($survey_type, $survey_category, $county);
 
-=======
-        $results = $this->m_analytics->getReportingRatio($survey_type, $survey_category, $county);
->>>>>>> 82c13dd18304b9e07024fdd1a5ecf77746b9a63d
         echo json_encode($results);
     }
 }
