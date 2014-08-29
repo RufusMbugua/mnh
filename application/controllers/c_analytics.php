@@ -1202,10 +1202,10 @@ ORDER BY fac_level;");
     public function getResourcesStatistics($criteria, $value, $survey, $survey_category, $for, $statistic) {
         $results = $this->m_analytics->getResourcesStatistics($criteria, $value, $survey, $survey_category, $for, $statistic);
         
-        echo "<pre>";
-        print_r($results);
-        echo "</pre>";
-        die;
+        // echo "<pre>";
+        // print_r($results);
+        // echo "</pre>";
+        // die;
         
         foreach ($results as $key => $result) {
             

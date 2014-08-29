@@ -55,15 +55,15 @@
 <script src="<?php echo base_url();?>assets/bower_components/tablesaw/dist/tablesaw.js"></script>
 <script src="<?php echo base_url();?>assets/bower_components/intro.js/intro.js"></script>
 <script src="<?php echo base_url();?>assets/bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
-<script src="<?php echo base_url();?>assets/bower_components/skrollr/dist/skrollr.min.js"></script>
-<script src="<?php echo base_url();?>assets/bower_components/skrollr-menu/dist/skrollr.menu.min.js"></script>
+<!--script src="<?php echo base_url();?>assets/bower_components/skrollr/dist/skrollr.min.js"></script>
+<script src="<?php echo base_url();?>assets/bower_components/skrollr-menu/dist/skrollr.menu.min.js"></script-->
 
 <script src="<?php echo base_url();?>assets/bower_components/cheet.js/cheet.js"></script>
 
 <script src="<?php echo base_url()?>js/jquery.quickfit.js"></script>
 <!-- <script> Scripts for Editable and Searchable Tables </script> -->
-<script src="<?php echo base_url();?>assets/bower_components/x-editable/dist/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
-<script src="<?php echo base_url();?>assets/bower_components/list.js/dist/list.js"></script>
+<!--script src="<?php echo base_url();?>assets/bower_components/x-editable/dist/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
+<script src="<?php echo base_url();?>assets/bower_components/list.js/dist/list.js"></script-->
 
 
 <!--script src="<?php echo base_url();?>assets/bower_components/"></script-->
@@ -119,7 +119,7 @@
         // }
 
 
-        var s = skrollr.init(/*other stuff*/);
+       // var s = skrollr.init(/*other stuff*/);
 
 //The options (second parameter) are all optional. The values shown are the default values.
 //skrollr.menu.init(s, {
@@ -157,9 +157,9 @@
 
 
 <!-- CODEMIRROR: Download from http://codemirror.net/codemirror.zip -->
-<link rel="stylesheet" href="<?php echo base_url(); ?>assets/third-party/codemirror/codemirror.css" />
+<!--link rel="stylesheet" href="<?php echo base_url(); ?>assets/third-party/codemirror/codemirror.css" />
 <script src="<?php echo base_url(); ?>assets/third-party/codemirror/codemirror.js"></script>
 
 <!-- Download from http://www.firepad.io/firepad.zip -->
-<link rel="stylesheet" href="<?php echo base_url(); ?>assets/third-party/firepad/firepad.css" />
-<script src="<?php echo base_url(); ?>assets/third-party/firepad/firepad.js"></script>
+<!--link rel="stylesheet" href="<?php echo base_url(); ?>assets/third-party/firepad/firepad.css" />
+<script src="<?php echo base_url(); ?>assets/third-party/firepad/firepad.js"></script-->

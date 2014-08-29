@@ -2211,7 +2211,7 @@ LIMIT 0 , 1000
                             $data[$value['resource_name']][$value['suppliers']] = (int)$value['total_response'];
                         }
                     }
-                    echo "<pre>";print_r($data);echo "</pre>";die;
+                    // echo "<pre>";print_r($data);echo "</pre>";die;
                     
                     /**
                      * Fix Data

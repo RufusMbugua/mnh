@@ -259,7 +259,7 @@ class M_MNH_Survey extends MY_Model
             
             //check if a post was made
             
-            //die(var_dump($this->input->post()));
+            // echo '<pre>';print_r($this->input->post()); echo '</pre>';die;
             
             //Working with an object of the entity
             try {

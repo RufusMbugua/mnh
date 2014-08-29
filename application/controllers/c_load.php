@@ -63,6 +63,7 @@ class C_Load extends MY_Controller {
      * @return [type]                  [description]
      */
     public function startSurvey($survey_type,$survey_category,$fac_mfl,$survey_year){
+
         $result          =$this->db->get_where('survey_types',array('st_name'=>$survey_type));
         $result          =$result->result_array();
         $survey_type     =$result[0]['st_id'];
@@ -72,7 +73,7 @@ class C_Load extends MY_Controller {
         $survey_category =$result[0]['sc_id'];
 
         $data  =array('ss_year'=>$survey_year,'st_id'=>$survey_type,'sc_id'=>$survey_category,'fac_id'=>$fac_mfl);
-
+//echo '<pre>';print_r($data);echo '</pre>';die;
         $count =$this->checkifExists($data,'survey_status');
         if($count==0){
             $this->db->insert('survey_status',$data);

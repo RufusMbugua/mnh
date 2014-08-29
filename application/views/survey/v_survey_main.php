@@ -111,7 +111,7 @@ $mfacilityMFL = $this -> session -> userdata('facilityMFL');
             });
 
             //so which link was clicked?
-            $('.action').on('click',function(){
+            $('.action').live('click',function(){
                 link_id='#'+$(this).find('a').attr('id');
                 link_id=link_id.substr(link_id.indexOf('#')+1,link_id.length);
                 //linkSub=$(link_id).attr('class');

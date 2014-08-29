@@ -415,7 +415,7 @@ function loadData(base_url, function_url, value, container, placeholder_text) {
  */
 function loadMasterFacilityList(base_url, container, form) {
     $.ajax({
-        url: base_url + 'c_analytics/getMasterFacilityList',
+        url: base_url + 'c_analytics/getMasterFacilityList/'+form,
         async: false,
         beforeSend: function(xhr) {
             xhr.overrideMimeType("text/plain; charset=x-user-defined");
