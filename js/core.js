@@ -326,7 +326,7 @@ function notify_email(email, message) {
             xhr.overrideMimeType("text/plain; charset=x-user-defined");
         },
         success: function(data) {
-            //console.log(data);
+            console.log(data);
 
         }
     });
@@ -358,12 +358,10 @@ function getCountyData(base_url, county, survey_type, survey_category) {
             $('#finished .digit').text(obj[0].reported);
             $('#started .digit').text(obj[0].unfinished);
             $('#not_started .digit').text(obj[0].notstarted);
-
             percentage = Math.round((obj[0].reported / obj[0].actual * 100), 2);
             $('#county_progress .progress-bar').text(percentage + '%');
             $('#county_progress .progress-bar').attr('aria-valuenow', percentage);
             $('#county_progress .progress-bar').css('width', percentage + '%');
-
             url = base_url + 'c_analytics/setActive/' + county + '/' + survey_type + '/' + survey_category;
             $('#load_analytics').attr('data-url', url);
             new_url = base_url + 'c_analytics/getCountyReportingSummary/' + county + '/' + survey + '/' + survey_category;

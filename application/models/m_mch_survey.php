@@ -390,13 +390,13 @@ class M_MCH_Survey extends MY_Model
             //go ahead and persist data posted
             $this->theForm = new \models\Entities\CommunityStrategies();
 
-           	//check if that key exists, else set it to some default value
+            //check if that key exists, else set it to some default value
             (isset($this->elements[$i]['mchCommunityStrategy']) && $this->elements[$i]['mchCommunityStrategy'] != '') ? $this->theForm->setCsResponse($this->elements[$i]['mchCommunityStrategy']) : $this->theForm->setCsResponse(-1);
             $this->theForm->setStrategyCode('mchCommunityStrategyQCode');
-			$this->theForm->setStrategyCode($this->elements[$i]['mchCommunityStrategyQCode']);
-			$this->theForm->setCsCreated(new DateTime());
+            $this->theForm->setStrategyCode($this->elements[$i]['mchCommunityStrategyQCode']);
+            $this->theForm->setCsCreated(new DateTime());
             $this->theForm->setFacMfl($this->session->userdata('facilityMFL'));
-			$this->theForm->setSsId((int)$this->session->userdata('survey_status'));
+            $this->theForm->setSsId((int)$this->session->userdata('survey_status'));
 
             /*timestamp option*/
             $this->em->persist($this->theForm);
@@ -1429,7 +1429,7 @@ class M_MCH_Survey extends MY_Model
         private function addmchConsultationQuestions() {
         $count = $finalCount = 1;
         foreach ($this->input->post() as $key => $val) {
-        	//For every posted values
+            //For every posted values
             if (strpos($key, 'mchC') !== FALSE) {
                 //select data for bemonc signal functions
                 //we separate the attribute name from the number
@@ -3102,7 +3102,7 @@ class M_MCH_Survey extends MY_Model
                     if ($this->sectionExists == false) {
 
                         if ($this->addMCHIndicatorInfo()== true) {
-                        	 //defined in this model
+                             //defined in this model
 
                             $this->writeAssessmentTrackerLog();
                             return $this->response = 'true';
@@ -3180,7 +3180,7 @@ class M_MCH_Survey extends MY_Model
                         return $this->response = 'true';
                     }
                     break;
-					
+                    
                     case 'section-7':
 
                     //check if entry exists
@@ -3230,7 +3230,7 @@ class M_MCH_Survey extends MY_Model
 
                     //insert log entry if new, else update the existing one
                     if ($this->sectionExists == false) {
-                    	if ($this->addMchCommunityStrategyInfo() == true ) {
+                        if ($this->addMchCommunityStrategyInfo() == true ) {
 
                              //defined in this model
                             $this->writeAssessmentTrackerLog();
