@@ -63,7 +63,6 @@ class C_Load extends MY_Controller {
      * @return [type]                  [description]
      */
     public function startSurvey($survey_type,$survey_category,$fac_mfl,$survey_year){
-
         $result          =$this->db->get_where('survey_types',array('st_name'=>$survey_type));
         $result          =$result->result_array();
         $survey_type     =$result[0]['st_id'];
@@ -73,7 +72,7 @@ class C_Load extends MY_Controller {
         $survey_category =$result[0]['sc_id'];
 
         $data  =array('ss_year'=>$survey_year,'st_id'=>$survey_type,'sc_id'=>$survey_category,'fac_id'=>$fac_mfl);
-//echo '<pre>';print_r($data);echo '</pre>';die;
+
         $count =$this->checkifExists($data,'survey_status');
         if($count==0){
             $this->db->insert('survey_status',$data);
@@ -141,7 +140,7 @@ class C_Load extends MY_Controller {
 
                  <p id="data" class="feedback"></p>
                  <!--h3 align="center">COMMODITY, SUPPLIES AND EQUIPMENT ASSESSMENT</h3-->
-                 <p style="color:#488214;font-size:20px;font-style:bold">You are currently taking ' . (((strtoupper($this -> session -> userdata('survey'))) == 'MNH') ? 'Maternal and Newborn Health' : 'Child Health') . ' Survey.</p>
+                 <p style="color:#488214;font-size:20px;font-style:bold">You are currently taking ' . (((strtoupper($this -> session -> userdata('survey'))) == 'CH') ? 'Child Health' : 'Maternal and Newborn Health') . ' Survey.</p>
                  <div id="section-1" class="step">
                  <input type="hidden" name="step_name" value="section-1"/>
                   <p style="display:true" class="message success">SECTION 1 of 7: FACILITY INFORMATION</p>
@@ -293,7 +292,7 @@ class C_Load extends MY_Controller {
 
     <div id="section-2" class="step">
     <input type="hidden" name="step_name" value="section-2"/>
-     <p style="display:true" class="message success">SECTION 2 of 7: DELIVERIES CONDUCTED DATA, PROVISION OF BEmONC FUNCTIONS</p>
+     <p style="display:true" class="message success">SECTION 2 of 9: DELIVERIES CONDUCTED DATA, PROVISION OF BEmONC FUNCTIONS</p>
     <table class="centre">
 
     <thead>
@@ -905,7 +904,7 @@ class C_Load extends MY_Controller {
                  <p style="color:#488214;font-size:20px;font-style:bold">You are currently taking ' . (((strtoupper($this -> session -> userdata('survey'))) == 'CH') ? 'Child Health' : 'Maternal and Newborn Health') . ' Survey</p>
                  <div id="section-1" class="step">
                  <input type="hidden" name="step_name" value="section-1"/>
-                  <p style="display:true" class="message success">SECTION 1 of 7: FACILITY INFORMATION</p>
+                  <p style="display:true" class="message success">SECTION 1 of 9: FACILITY INFORMATION</p>
                 <table class="centre" >
 
                <thead><th colspan="9">FACILITY INFORMATION</th></thead>
@@ -1086,7 +1085,7 @@ class C_Load extends MY_Controller {
                     <th>RESPONSE</th>
 
                 </tr>
-            '.$this->HealthSection.'
+            '.$this-> HealthSection.'
         </table>
     <table>
         <thead><th colspan = "12"> INFRASTRACTURE: IMCI CONSULTATION ROOM</th></thead>
@@ -1112,7 +1111,7 @@ class C_Load extends MY_Controller {
 
     <div id="section-2" class="step">
     <input type="hidden" name="step_name" value="section-2"/>
-     <p style="display:true" class="message success">SECTION 2 of 7: GUIDELINES, JOB AIDS AND TOOLS</p>
+     <p style="display:true" class="message success">SECTION 2 of 9: GUIDELINES, JOB AIDS AND TOOLS</p>
 
      <table class="centre">
         <thead>
@@ -1497,13 +1496,13 @@ Indicate the total # of children that received the following treatment. </br>
             <th rowspan="2" >Commodity Name</th>
             <th rowspan="2" >Commodity Unit</th>
             <th colspan="2" style="text-align:center"> Availability <strong></br> (One Selection Allowed) </strong></th>
-            <th rowspan="2"> Main Reason For  Unavailability </th>
+            <th rowspan="2"> Main Reason For Unavailability </th>
             <th colspan="7" style="text-align:center"> Location of Availability </br><strong> (Multiple Selections Allowed)</strong></th>
             <th rowspan="1" colspan="2" >Available Quantities</th>
         </tr>
         <tr>
-            <th >Available</th>
-            <th>Not Available</th>
+            <th>Available </th>
+            <th>Not Available </th>
             <th>OPD</th>
             <th>MCH</th>
             <th>U5 Clinic</th>
@@ -1720,6 +1719,8 @@ Indicate the total # of children that received the following treatment. </br>
         </div><!--\.section-8-->
     <div id="section-9" class="step">
     <input type="hidden" name="step_name" value="section-9"/>
+    <p style="display:true" class="message success">SECTION 9 of 9: COMMUNITY STRATEGY</p>
+
         <table class="centre">
         <thead>
             <th colspan="2" >COMMUNITY STRATEGY </th>
