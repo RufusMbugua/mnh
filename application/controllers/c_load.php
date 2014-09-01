@@ -143,7 +143,7 @@ class C_Load extends MY_Controller {
                  <p style="color:#488214;font-size:20px;font-style:bold">You are currently taking ' . (((strtoupper($this -> session -> userdata('survey'))) == 'CH') ? 'Child Health' : 'Maternal and Newborn Health') . ' Survey.</p>
                  <div id="section-1" class="step">
                  <input type="hidden" name="step_name" value="section-1"/>
-                  <p style="display:true" class="message success">SECTION 1 of 7: FACILITY INFORMATION</p>
+                  <p style="display:true" class="message success">SECTION 1 of 8: FACILITY INFORMATION</p>
                 <table class="centre" >
 
                <thead><th colspan="9">FACILITY INFORMATION</th></thead>
@@ -1751,8 +1751,11 @@ public function get_hcw_form() {
 <h5 id="status"></h5>
 
                 <form class="bbq" name="hcw_tool" id="hcw_tool" method="POST">
+                <p style="color:#488214;font-size:20px;font-style:bold">You are currently taking ' . (((strtoupper($this -> session -> userdata('survey'))) == 'HCW') ? 'Health Care Worker' : 'Maternal and Newborn Health') . ' Survey.</p>
         <div id="section-1" class="step">
         <input type="hidden" name="step_name" value="section-1"/>
+        <p style="display:true" class="message success">SECTION 1 of 4: FACILITY,HCW and WORK STATION INFORMATION
+</p>
 <table>
     <thead>
         <tr>
@@ -1953,10 +1956,10 @@ public function get_hcw_form() {
 </div> <!-- end of section 1 -->
 
 <div id="section-2" class="step">
+<input type="hidden" name="step_name" value="section-2"/>
+        <p style="display:true" class="message success">SECTION 2 of 4: OBSERVATION OF CASE MANAGEMENT: ONE CASE PER HCW
+</p>
 
-        <input type="hidden" name="step_name" value="section-2"/>
-<p class="message success" style = "text-align: center;">SECTION 2</p>
-<p class="message success">SECTION 2: OBSERVATION OF CASE MANAGEMENT: ONE CASE PER HCW</p>
 <p class="instruction">
         * Assessor should indicate findings alongside Healthcare Worker findings.
 </p>
@@ -2220,9 +2223,10 @@ public function get_hcw_form() {
 </div>
 
 <div id="section-3" class="step">
-
 <input type="hidden" name="step_name" value="section-3"/>
-<p class="message success">SECTION 3: DOES THE HCW CHECK FOR THE FOLLOWING</p>
+        <p style="display:true" class="message success">SECTION 3 of 4: DOES THE HCW CHECK FOR THE FOLLOWING CONDITIONS
+</p>
+
 
 <table class = "center">
 <tr>
@@ -2301,9 +2305,9 @@ public function get_hcw_form() {
 
 
 <div id="section-4" class="step">
-
 <input type="hidden" name="step_name" value="section-4"/>
-<p class="message success">CONSULTATION OBSERVATION</p>
+        <p style="display:true" class="message success">SECTION 4 of 4: CONSULTATION AND EXIT INTERVIEWS
+</p>
 <table class="centre">
 
         <tr>
