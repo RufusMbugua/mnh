@@ -1073,14 +1073,15 @@ ORDER BY fac_level;");
         
         //echo "<pre>";print_r($results);echo "</pre>";die;
         $number = $resultArray = $q = array();
-        $number = $resultArray = $q = $yes = $no = array();
+        $number = $resultArray = $q = $no = array();
+        
         
         foreach ($results as $key => $value) {
-          
+            if ($count == 1):
                 $q[] = $key;
-               
                 $no[] = (int)$value['no'];
-           
+        endif;
+        $count++;
         }
         
         $resultArray = array(array('name' => 'No', 'data' => $no));
@@ -1089,7 +1090,8 @@ ORDER BY fac_level;");
         $category = $q;
         $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 70, 'bar');
     }
-    public function getORTFunctionality($criteria, $value, $survey, $survey_category, $for, $statistic) {
+
+    public function getORTFunctionality($criteria, $value, $survey, $survey_category) {
         $this->getORTCornerFunctionality($criteria, $value, $survey, $survey_category, 'ort', 'response');
     }
     
