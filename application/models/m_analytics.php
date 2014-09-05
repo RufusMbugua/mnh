@@ -2503,7 +2503,7 @@ ORDER BY f.fac_county ASC;";
             //echo '<pre>';print_r($allData);echo '</pre>';
             return $allData;
         }
-        function getReportingRatio($survey, $survey_category, $county) {
+        function getReportingRatio($survey, $survey_category, $county,$statistic) {
             
             /*using DQL*/
             
@@ -2511,7 +2511,7 @@ ORDER BY f.fac_county ASC;";
             
             try {
                 
-                $query = 'CALL get_reporting_ratio("' . $survey . '","' . $survey_category . '","' . $county . '");';
+                $query = 'CALL get_reporting_ratio("' . $survey . '","' . $survey_category . '","' . $county . '","'.$statistic.'");';
                 $myData = $this->db->query($query);
                 $finalData = $myData->result_array();
                 
