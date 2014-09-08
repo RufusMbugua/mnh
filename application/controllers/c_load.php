@@ -2436,11 +2436,11 @@ If YES to all, consider HCW for TOT and Mentorship Training
     }
 
     public function get_facility_list() {
-
+//<div class="breadcrumb">
+        //     <th colspan="22" >' . strtoupper($this -> session -> userdata('dName')) . ' DISTRICT/SUB-COUNTY FACILITIES</th>
+        //     <div>
         $this -> facilityList .= '
-        <p class="message success">
-            <th colspan="22" >' . strtoupper($this -> session -> userdata('dName')) . ' DISTRICT/SUB-COUNTY FACILITIES</th>
-            <p><table class="centre dataTable">
+        <table class="centre dataTable">
 
 <thead>
             <th>#</th>

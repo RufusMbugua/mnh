@@ -180,7 +180,7 @@ class C_Front extends MY_Controller
     }
 
     
-        function getReportingRatio($survey, $survey_category, $county) {
+        function getReportingRatio($survey, $survey_category, $county,$statistic) {
             
             /*using DQL*/
             
@@ -188,7 +188,7 @@ class C_Front extends MY_Controller
             
             try {
                 
-                $query = 'CALL get_reporting_ratio("' . $survey . '","' . $survey_category . '","' . $county . '");';
+                $query = 'CALL get_reporting_ratio("' . $survey . '","' . $survey_category . '","' . $county . '","' . $statistic . '");';
                 $myData = $this->db->query($query);
                 $finalData = $myData->result_array();
                 

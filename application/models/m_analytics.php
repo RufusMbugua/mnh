@@ -2497,7 +2497,7 @@ ORDER BY f.fac_county ASC;";
             
             //var_dump($reportingCounties);die;
             for ($x = 0; $x < sizeof($reportingCounties); $x++) {
-                $allData[$reportingCounties[$x]['county']] = $this->getReportingRatio($survey, $survey_category, $reportingCounties[$x]['county']);
+                $allData[$reportingCounties[$x]['county']] = $this->getReportingRatio($survey, $survey_category, $reportingCounties[$x]['county'],'county');
             }
             
             //echo '<pre>';print_r($allData);echo '</pre>';
@@ -2511,7 +2511,7 @@ ORDER BY f.fac_county ASC;";
             
             try {
                 
-                $query = 'CALL get_reporting_ratio("' . $survey . '","' . $survey_category . '","' . $county . '","'.$statistic.'");';
+                $query = 'CALL get_reporting_ratio("' . $survey . '","' . $survey_category . '","' . $county . '","' . $statistic . '");';
                 $myData = $this->db->query($query);
                 $finalData = $myData->result_array();
                 

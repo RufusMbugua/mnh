@@ -453,6 +453,9 @@ h4{
 }
 .breadcrumb{
     border-color: #e7e7e7 !important;
+    .label{
+        font-size:10px !important;
+    }
 
 }
 #page_sidebar{
@@ -735,6 +738,10 @@ h6.table-header{
             a{
                 text-decoration: none !important;
             }
+            i{
+                color:inherit;
+                padding-left:10px;
+            }
         }
     }
     .panel-collapse{
@@ -744,4 +751,21 @@ h6.table-header{
         }
     }
 
+}
+//Activity
+.activity{
+    float:right;
+    font-size:12px !important;
+    .activity-text{
+        font-style: italic;
+        font-weight: bold;
+    }
+}
+#district_progress{
+    display:inline-block;
+    vertical-align: middle;
+    width:10%;
+    margin-bottom:0;
+    height:20px !important;
+    padding:3px;
 }

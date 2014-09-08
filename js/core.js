@@ -139,6 +139,7 @@ function runGraph(container, chart_title, chart_stacking, chart_type, chart_cate
             series: chart_drilldown
         }
     });
+
 }
 
 /**
@@ -675,40 +676,43 @@ $(document).ready(function() {
     //Handling Collapses
     $('.panel-collapse').on('show.bs.collapse', function() {
         $(this).parent().find('.panel-heading h4 a i').attr('class', 'fa fa-chevron-down');
+        $(this).parent().find('.panel-heading h4 a span .txt').text('Click to Mimimize');
+        $('.chart div').width( $('.chart div').parent().width());
         //$('.panel-collapse collapse in').collapse('hide');
         //$(this).collapse('show');
 
     })
     $('.panel-collapse').on('hide.bs.collapse', function() {
         $(this).parent().find('.panel-heading h4 a i').attr('class', 'fa fa-chevron-right');
+        $(this).parent().find('.panel-heading h4 a span .txt').text('Click to Expand');
         //$('.panel-collapse collapse in').collapse('hide');
         //$(this).collapse('show');
 
-    })
+    });
 
-    // $('.dataTable').on('load',function(){
-    //     $('.dataTable').dataTable({
-    //             "sPaginationType": "full_numbers"
-    //         });
-    //     });
-    // $.fn.editable.defaults.mode = 'inline';
-    // $.fn.editableform.buttons =
-    //     '<button type="submit" class="btn btn-success editable-submit btn-mini"><i class="fa fa-check-circle"></i></button>' +
-    //     '<button type="button" class="btn btn-danger editable-cancel btn-mini"><i class="fa fa-ban"></i></button>';
 
-    // cheet('ctrl m f l', function() {
-    //     showMasterFacilityList(base_url, 'table');
-    // });
 
-    // cheet('ctrl e d i t m f l', function() {
-    //     showMasterFacilityList(base_url, 'editable');
-    // });
-    // cheet('ctrl h e l p', function() {
-    //     showHelp(base_url);
-    // });
-    // cheet('g r a p h', function() {
-    //     showAnalytics(base_url);
-    // });
+    
+
+
+    $.fn.editable.defaults.mode = 'inline';
+    $.fn.editableform.buttons =
+        '<button type="submit" class="btn btn-success editable-submit btn-mini"><i class="fa fa-check-circle"></i></button>' +
+        '<button type="button" class="btn btn-danger editable-cancel btn-mini"><i class="fa fa-ban"></i></button>';
+
+    cheet('ctrl m f l', function() {
+        showMasterFacilityList(base_url, 'table');
+    });
+
+    cheet('ctrl e d i t m f l', function() {
+        showMasterFacilityList(base_url, 'editable');
+    });
+    cheet('ctrl h e l p', function() {
+        showHelp(base_url);
+    });
+    cheet('g r a p h', function() {
+        showAnalytics(base_url);
+    });
 
     $('.dataTable').on('load', function() {
         $('.dataTable').dataTable({
