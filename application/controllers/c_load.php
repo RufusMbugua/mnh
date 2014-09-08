@@ -92,6 +92,8 @@ class C_Load extends MY_Controller {
         $result =$this->db->get_where('facilities',array('fac_mfl'=>$fac_mfl));
         $result = $result->result_array();
 
+        // print_r($result);die;
+
         echo json_encode($result);
 
     }
@@ -299,51 +301,7 @@ class C_Load extends MY_Controller {
 
     <thead>
     <th colspan="7" >INDICATE THE NUMBER OF DELIVERIES CONDUCTED IN THE FOLLOWING PERIODS </th></thead>
-        <th> MONTH</th><th><div style="width: 50px"> JANUARY</div></th> <th>FEBRUARY</th><th>MARCH</th><th> APRIL</th><th> MAY</th><th>JUNE</th>
-        <tr>
-            <td>' . date("Y") . '</td>
-            <td style ="text-align:center;">
-            <input type="text" id="january" name="dnmonth[january]"  size="8" class="cloned numbers"/>
-            </td>
-            <td style ="text-align:center;">
-            <input type="text" id="february" name="dnmonth[february]" size="8" class="cloned numbers"/>
-            </td>
-            <td style ="text-align:center;">
-            <input type="text" id="march" size="8" name="dnmonth[march]" class="cloned numbers"/>
-            </td>
-            <td style ="text-align:center;">
-            <input type="text" id="april" size="8" name="dnmonth[april]" class="cloned numbers"/>
-            </td>
-            <td style ="text-align:center;">
-            <input type="text" id="may" size="8" name="dnmonth[may]" class="cloned numbers"/>
-            </td>
-            <td style ="text-align:center;">
-            <input type="text" id="june" size="8" name="dnmonth[june]" class="cloned numbers"/>
-            </td>
-
-
-        </tr>
-        <th> MONTH</th><th> JULY</th><th> AUGUST</th><th> SEPTEMBER</th><th> OCTOBER</th><th> NOVEMBER</th><th> DECEMBER</th>
-        <tr>
-        <td>' . 2013 . '</td>
-            <td style ="text-align:center;">
-            <input type="text" id="july" size="8" name="dnmonth[july]" class="cloned numbers"/>
-            </td>
-            <td style ="text-align:center;">
-            <input type="text" id="august" size="8" name="dnmonth[august]" class="cloned numbers"/>
-            </td>
-            <td  style ="text-align:center;">
-            <input type="text" id="september" size="8" name="dnmonth[september]" class="cloned numbers"/>
-            </td>
-            <td style ="text-align:center;">
-            <input type="text" id="october" size="8" name="dnmonth[october]" class="cloned numbers"/></td>
-            <td style ="text-align:center;" width="15">
-            <input type="text" id="november" size="8" name="dnmonth[november]" class="cloned numbers"/></td>
-
-            <td style ="text-align:center;">
-            <input type="text" id="december" size="8" name="dnmonth[december]" class="cloned numbers"/>
-            </td>
-        </tr>
+    '. $this -> monthlydeliveries. '
     </table>
 
     <table class="centre">
@@ -457,22 +415,22 @@ class C_Load extends MY_Controller {
 
 
 
-            ' . $this -> mnhGuidelinesAspectsSection . '
+            ' . $this -> question['guide'] . '
         </table>
         <table >
             <thead>
                 <tr>
-                    <th colspan="12" >JOB AIDS</th>
+                    <th colspan="11" >JOB AIDS</th>
                 </tr>
             </thead>
                 <tr>
-                    <th style="width:35%">ASPECTS</th>
-                    <th style="width:35%;text-align:left">RESPONSE</th>
-                    <th style="width:30%;text-align:left">QUANTITY</th>
+                    <th colspan="6">ASPECTS</th>
+                    <th colspan="3">RESPONSE</th>
+                    <th colspan="3">QUANTITY</th>
 
                 </tr>
 
-            ' . $this -> mnhJobAidsAspectsSection . '
+            ' . $this -> question['job'] . '
         </table>
         <table class="centre">
 
