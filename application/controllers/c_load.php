@@ -2404,8 +2404,9 @@ If YES to all, consider HCW for TOT and Mentorship Training
             <th>#</th>
             <th>MFL CODE</th>
             <th> FACILITY NAME </th>
-            <th>SURVEY STATUS</th>
-            <th>ACTION</th>
+            <th>REPORTING PROGRESS</th>
+            <th style="width:100px">ACTIVITY</th>
+            <th>LINK</th>
 </thead>
         </tr>' . $this -> districtFacilityListSection . '
         </table>';

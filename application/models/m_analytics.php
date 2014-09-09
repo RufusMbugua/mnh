@@ -31,8 +31,8 @@ class M_Analytics extends MY_Model
         /* using CI database active record*/
         try {
             $query = "SELECT 
-                        f.fac_mfl AS facility_mfl,f.fac_name AS Name,f.fac_ownership AS onwership,f.fac_type AS type,f.fac_level AS level,
-                        f.fac_district AS district,f.fac_county AS county
+                        f.fac_mfl, f.fac_name ,f.fac_ownership ,f.fac_type ,f.fac_level ,
+                        f.fac_district ,f.fac_county 
                         FROM
                         assessment_tracker ast
                             JOIN
@@ -2605,14 +2605,14 @@ ORDER BY f.fac_county ASC;";
         /**
          * Run County Maps
          */
-        public function runMap($survey, $survey_category) {
+        public function runMap($survey, $survey_category,$statistic) {
             $myData = array();
             $counties = $this->getAllCountyNames();
             foreach ($counties as $county) {
                 $countyName = $county['countyName'];
                 
                 //$countyName=str_replace("'","", $countyName);
-                $myData[$countyName] = array($this->getReportingRatio($survey, $survey_category, $countyName), $county['countyFusionMapId'], $countyName);
+                $myData[$countyName] = array($this->getReportingRatio($survey, $survey_category, $countyName,$statistic), $county['countyFusionMapId'], $countyName);
             }
             
             return $myData;

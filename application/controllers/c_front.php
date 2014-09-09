@@ -29,8 +29,8 @@ class C_Front extends MY_Controller
 
     //End of index file
 
-    public function runMap($survey,$survey_category) {
-        $counties = $this->m_analytics->runMap($survey,$survey_category);
+    public function runMap($survey,$survey_category,$statistic) {
+        $counties = $this->m_analytics->runMap($survey,$survey_category,$statistic);
         $map = array();
         $datas = array();
         $status = '';

@@ -113,18 +113,21 @@ function startSurvey(base_url, survey, survey_category, district) {
 		// facilityMFL=12864;
 		//loadGlobalScript();//renderFacilityInfo(facilityMFL);
 
-		$('.dataTable').dataTable({
-			"sPaginationType": "full_numbers"
-		});
-		$('.activity-text').live
+		
+		// $('.dataTables_length').addClass('breadcrumb');
+		
 		$('.activity-text').each(function() {
 			time = $(this).text();
 			if (time != 'not started yet') {
-				newTime = moment(time, 'Y-m-d H:i:s').fromNow();
-				$(this).text(newTime);
+				newTime = moment(time, 'YYYY-MM-DD H:i:s').fromNow();
+				$(this).text(newTime.toLowerCase());
 			}
 			//alert(moment().fromNow());
 		});
+		$('.dataTable').dataTable({
+			"sPaginationType": "full_numbers"
+		});
+		$('.dataTables_info').addClass('breadcrumb');
 		//so which link was clicked?
 		$('.action').live('click', function() {
 			link_id = '#' + $(this).attr('data-mfl');

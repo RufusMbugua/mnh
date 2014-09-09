@@ -1278,7 +1278,7 @@ ORDER BY fac_level;");
     public function getCountyReportingSummary($county, $survey, $survey_category) {
         $results = $this->m_analytics->getCountyReportingSummary($county, $survey, $survey_category);
         
-        // echo "<pre>"; print_r($results);echo "</pre>";die;
+         // echo "<pre>"; print_r($results);echo "</pre>";die;
         $this->generateData($results, 'Summary of Facilities Reporting for' . ' ' . strtoupper($survey) . ' : ' . strtoupper($survey_category) . $value, 'excel');
     }
     
