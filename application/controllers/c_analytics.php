@@ -1276,6 +1276,7 @@ ORDER BY fac_level;");
     }
     
     public function getCountyReportingSummary($county, $survey, $survey_category) {
+        $county = urldecode($county);
         $results = $this->m_analytics->getCountyReportingSummary($county, $survey, $survey_category);
         
          // echo "<pre>"; print_r($results);echo "</pre>";die;

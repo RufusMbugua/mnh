@@ -1551,8 +1551,8 @@ class MY_Model extends CI_Model
      * @param  [type] $facMFL          [description]
      * @return [type]                  [description]
      */
-    public function get_survey_info($survey_type, $survey_category, $facMFL) {
-        $query = 'CALL get_survey_info("' . $survey_type . '","' . $survey_category . '",' . $facMFL . ');';
+    public function get_survey_info($survey_type, $survey_category,$statistic, $facMFL) {
+        $query = 'CALL get_survey_info("' . $survey_type . '","' . $survey_category . '","' . $statistic .  '",' . $facMFL . ');';
         
         try {
             $myData = $this->db->query($query);

@@ -44,6 +44,7 @@ class M_Analytics extends MY_Model
                            JOIN
                         survey_categories sc ON sc.sc_id = ss.sc_id AND sc.sc_name = '" . $survey_category . "'
                         WHERE ast.ast_section = 'section-6'
+                        GROUP BY f.fac_mfl
                     ORDER BY f.fac_county , f.fac_district";
             
             $this->dataSet = $this->db->query($query, array($survey));

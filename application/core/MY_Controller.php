@@ -4347,7 +4347,7 @@ GROUP BY st_name,sc_name,facilityCode;";
                 } else {
                     $total = 5;
                 }
-                $dataFound = $this->m_analytics->get_survey_info($survey, $survey_category, $fac_mfl);
+                $dataFound = $this->m_analytics->get_survey_info($survey, $survey_category,'facility', $fac_mfl);
                 
                 // print_r($dataFound);die;
                 $current = trim($dataFound[0]['section'], 'section-');
