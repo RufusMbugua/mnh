@@ -624,8 +624,8 @@ ORDER BY fac_level;");
                 $gData[$name]['working'][] = (int)$data['working'];
             }
         }
-        
-        $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#a6c96a');
+		
+       $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#a6c96a');
         
         //echo '<pre>';print_r($gData);echo '</pre>'; exit;
         $colorCount = 0;

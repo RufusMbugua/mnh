@@ -78,11 +78,7 @@ class M_Analytics extends MY_Model
             } else {
                 return $this->dataSet = false;
             }
-            
-            //die(var_dump($this->dataSet));
-            
-            
-        }
+         }
         catch(exception $ex) {
             
             //ignore
@@ -92,9 +88,7 @@ class M_Analytics extends MY_Model
         }
     }
     
-    /**
-     * Community Strategy
-     */
+    //community strategy
     public function getCommunityStrategy($criteria, $value, $survey, $survey_category, $for) {
         
         /*using CI Database Active Record*/
