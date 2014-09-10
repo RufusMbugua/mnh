@@ -217,7 +217,7 @@ class C_Front extends MY_Controller
         echo $this->session->userdata('survey_status');
         $this->load->model('m_retrieve');
         $data = $this->m_retrieve->retrieveData($table_name,$identifier);
-        echo '<pre>';print_r($data);echo '</pre>';
+        //echo '<pre>';print_r($data);echo '</pre>';
     }
 
 }

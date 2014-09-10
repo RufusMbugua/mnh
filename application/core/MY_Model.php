@@ -1557,7 +1557,7 @@ class MY_Model extends CI_Model
         try {
             $myData = $this->db->query($query);
             $finalData = $myData->result_array();
-            // print($this->db->last_query());die;
+            //print($this->db->last_query());die;
             $myData->next_result();
             
             // Dump the extra resultset.
