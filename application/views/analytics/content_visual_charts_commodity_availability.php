@@ -80,7 +80,7 @@
                     </div>
                     <div class="portlet-body">
 
-                        <div class="chart" id="facility_type">
+                        <div class="chart" id="facility_type"f>
                         </div>
                     </div>
                 </div>
@@ -190,7 +190,8 @@
                         <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Assessment</span><span class="sizer">Click to Enlarge</span></h6>
                     </div>
                     <div class="portlet-body">
-						<div class="chart" id="u5_register">
+
+                        <div class="chart" id="u5_register">
                         </div>
                     </div>
                     </div>
@@ -268,6 +269,7 @@
                         <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Commodity Availability</span><span class="sizer">Click to Enlarge</span></h6>
                     </div>
                     <div class="portlet-body">
+
                         <div class="chart" id="commodity_availability">
                         </div>
                     </div>
@@ -287,6 +289,7 @@
                         <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Commodity Location</span><span class="sizer">Click to Enlarge</span></h6>
                     </div>
                     <div class="portlet-body">
+
                         <div class="chart"id="commodity_location">
                         </div>
                     </div>
@@ -515,11 +518,11 @@
     
     <div class="panel panel-default analytics_row section" data-survey='ch' id="ch-section-9">
         <div class="panel-heading">
-            <h6 class="panel-title">
+            <h4 class="panel-title">
                 <a data-toggle="collapse" data-parent="#accordion" href="#collapseNine">
-                    Section 9: Community Strategy <span class="show-collapse">Click to Expand</span>
+                    Section 9 : Community Strategy <span class="show-collapse"><span class="txt">Click to Expand</span><i class="fa fa-chevron-right"></i></span>
                 </a>
-            </h6>
+            </h4>
         </div>
       <div id="collapseNine" class="panel-collapse collapse">
             <div class="panel-body">
@@ -559,6 +562,7 @@
             <h4 class="panel-title">
                 <a data-toggle="collapse" data-parent="#accordion" href="#collapseTen">
                     Section 1 : Facility Information <span class="show-collapse"><span class="txt">Click to Expand</span><i class="fa fa-chevron-right"></i></span>
+
                 </a>
             </h4>
         </div>
@@ -636,6 +640,7 @@
             <h4 class="panel-title">
                 <a data-toggle="collapse" data-parent="#accordion" href="#collapseEleven">
                     Section 2 : Facility Data And Maternal And Neotanal Service Delivery <span class="show-collapse"><span class="txt">Click to Expand</span><i class="fa fa-chevron-right"></i></span>
+
                 </a>
             </h4>
         </div>
@@ -858,6 +863,7 @@
             <h4 class="panel-title">
                 <a data-toggle="collapse" data-parent="#accordion" href="#collapseFourteen">
                     Section 5 : Commodity Availability<span class="show-collapse"><span class="txt">Click to Expand</span><i class="fa fa-chevron-right"></i></span>
+
                 </a>
             </h4>
         </div>
@@ -954,7 +960,6 @@
             <h4 class="panel-title">
                 <a data-toggle="collapse" data-parent="#accordion" href="#collapseSixteen">
                     Section 7 :Equipment Availability and Functionality<span class="show-collapse"><span class="txt">Click to Expand</span><i class="fa fa-chevron-right"></i></span>
-
                 </a>
             </h4>
         </div>
@@ -998,7 +1003,6 @@
             <h4 class="panel-title">
                 <a data-toggle="collapse" data-parent="#accordion" href="#collapseSeventeen">
                     Section 8: Supplies<span class="show-collapse"><span class="txt">Click to Expand</span><i class="fa fa-chevron-right"></i></span>
-
                 </a>
             </h4>
         </div>

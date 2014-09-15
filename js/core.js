@@ -425,13 +425,18 @@ function loadMasterFacilityList(base_url, container, form) {
         },
         success: function(data) {
             $(container.empty);
-            $(container).append(data);
-            $('.dataTable').on('load', function() {
-                $('.dataTable').dataTable({
-                    "sPaginationType": "full_numbers"
-                });
+            // obj = jQuery.parseJSON(data);
+            //  $.each(obj, function(k, v) {
 
-            });
+            //  });
+            $(container).append(data);
+            $(document).trigger('datatable_loaded');
+            // $('.dataTable').on('load', function() {
+            //     $('.dataTable').dataTable({
+            //         "sPaginationType": "full_numbers"
+            //     });
+
+            // });
         }
     });
 }
@@ -463,11 +468,11 @@ function submitForm(base_url, function_url) {
  * @return {[type]}              [description]
  */
 function loadModalForm(base_url, function_url, modal_title, modal_width, contents) {
-    $('#universalModal .modal-title').text(modal_title);
-    $('#universalModal .modal-dialog').css('width', modal_width);
+    $('#universalModal .header').text(modal_title);
+    $('#universalModal').css('width', modal_width);
 
-    $('#universalModal .modal-body').empty();
-    $('#universalModal .modal-body').append(contents);
+    $('#universalModal .content').empty();
+    $('#universalModal .content').append(contents);
     $('#universalModal form').attr('action', base_url + function_url);
 }
 /**
@@ -482,6 +487,7 @@ function loadHelpForm(base_url) {
         '<label>Facility</label><input name=""type="text" id="facility">' +
         '<label>Question / Complaint</label><textarea rows="4" placeholder="Please Enter Query Here..."></textarea>' +
         '</form>';
+    $('#form-submit').show();
     loadModalForm(base_url, 'c_analytics/submit_help', 'Help', '60%', helpform);
 
     $('#county').select2({
@@ -594,11 +600,10 @@ function getSpecificFacilityData(district) {
  * @return {[type]}          [description]
  */
 function showMasterFacilityList(base_url, form) {
-    $('#universalModal').modal('show');
+    $('#universalModal').modal('setting', 'closable', false).modal('show');
     $('#universalModal').delay(2000, function(nxt) {
-        $('#universalModal .modal-title').text('Master Facility List');
-        loadMasterFacilityList(base_url, '#universalModal .modal-body', form);
-        $('.dataTable').dataTable();
+        $('#universalModal .header').text('Master Facility List');
+        loadMasterFacilityList(base_url, '#universalModal .content', form);
         nxt();
     });
 }
@@ -668,27 +673,72 @@ function startIntro() {
 
     intro.start();
 }
+/**
+ * [trim description]
+ * @param  {[type]} str      [description]
+ * @param  {[type]} charlist [description]
+ * @return {[type]}          [description]
+ */
+function trim(str, charlist) {
+  //  discuss at: http://phpjs.org/functions/trim/
+  // original by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
+  // improved by: mdsjack (http://www.mdsjack.bo.it)
+  // improved by: Alexander Ermolaev (http://snippets.dzone.com/user/AlexanderErmolaev)
+  // improved by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
+  // improved by: Steven Levithan (http://blog.stevenlevithan.com)
+  // improved by: Jack
+  //    input by: Erkekjetter
+  //    input by: DxGx
+  // bugfixed by: Onno Marsman
+  //   example 1: trim('    Kevin van Zonneveld    ');
+  //   returns 1: 'Kevin van Zonneveld'
+  //   example 2: trim('Hello World', 'Hdle');
+  //   returns 2: 'o Wor'
+  //   example 3: trim(16, 1);
+  //   returns 3: 6
+
+  var whitespace, l = 0,
+    i = 0;
+  str += '';
+
+  if (!charlist) {
+    // default list
+    whitespace =
+      ' \n\r\t\f\x0b\xa0\u2000\u2001\u2002\u2003\u2004\u2005\u2006\u2007\u2008\u2009\u200a\u200b\u2028\u2029\u3000';
+  } else {
+    // preg_quote custom list
+    charlist += '';
+    whitespace = charlist.replace(/([\[\]\(\)\.\?\/\*\{\}\+\$\^\:])/g, '$1');
+  }
+
+  l = str.length;
+  for (i = 0; i < l; i++) {
+    if (whitespace.indexOf(str.charAt(i)) === -1) {
+      str = str.substring(i);
+      break;
+    }
+  }
+
+  l = str.length;
+  for (i = l - 1; i >= 0; i--) {
+    if (whitespace.indexOf(str.charAt(i)) === -1) {
+      str = str.substring(0, i + 1);
+      break;
+    }
+  }
+
+  return whitespace.indexOf(str.charAt(0)) === -1 ? str : '';
+}
+
+/**
+ * [description]
+ * @return {[type]} [description]
+ */
 $(document).ready(function() {
     var theclass;
 
     //startIntro();
-    $('.panel-collapse.collapse.in').parent().find('.panel-heading h4 a i').attr('class', 'fa fa-chevron-down');
-    //Handling Collapses
-    $('.panel-collapse').on('show.bs.collapse', function() {
-        $(this).parent().find('.panel-heading h4 a i').attr('class', 'fa fa-chevron-down');
-        $(this).parent().find('.panel-heading h4 a span .txt').text('Click to Mimimize');
-        $('.chart div').width( $('.chart div').parent().width());
-        //$('.panel-collapse collapse in').collapse('hide');
-        //$(this).collapse('show');
-
-    })
-    $('.panel-collapse').on('hide.bs.collapse', function() {
-        $(this).parent().find('.panel-heading h4 a i').attr('class', 'fa fa-chevron-right');
-        $(this).parent().find('.panel-heading h4 a span .txt').text('Click to Expand');
-        //$('.panel-collapse collapse in').collapse('hide');
-        //$(this).collapse('show');
-
-    });
+    
 
 
 

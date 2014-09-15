@@ -459,10 +459,15 @@ h4{
 }
 .breadcrumb{
     border-color: #e7e7e7 !important;
-    .label{
+    .ui.button{
+        font-size:10px !important;
+        a{
+            color:#555 !important;
+        }
+    }
+.ui.label{
         font-size:10px !important;
     }
-
 }
 #page_sidebar{
     @extend .col-md-3;
@@ -698,7 +703,7 @@ a.disabled:hover{
     cursor: hand !important;
 }
 .modal{
-    //z-index:2000000000000000000000000;
+    z-index:2000000000000000000000000;
 }
 //Resize Icons
 .sizer, .show-collapse{

@@ -68,7 +68,7 @@ class M_Analytics extends MY_Model
     	$this->dataSet = $this->db->query($query, array($survey));
             $this->dataSet = $this->dataSet->result_array();
             if ($this->dataSet) {
-            	echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
+            	//echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
                 return $this->dataSet;
             } 
      }
@@ -2422,7 +2422,7 @@ ORDER BY f.fac_county ASC;";
         /**
          * List of Counties that have reported
          */
-        public function getReportingCounties($survey, $survey_category) {
+        public function getReportingCounties() {
             
             /*using CI Database Active Record*/
             try {

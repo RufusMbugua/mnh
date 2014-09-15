@@ -15,7 +15,7 @@ $mfacilityMFL = $this -> session -> userdata('facilityMFL');
         survey='<?php echo $this->session->userdata("survey"); ?>';
         survey_category='<?php echo $this->session->userdata("survey_category");  ?>';
         district='<?php echo $this->session->userdata("dName");  ?>';
-         $(document).ready(startSurvey(base_url, survey, survey_category, district));
+        $(document).ready(startSurvey(base_url, survey, survey_category, district));
     });
 
 </script>

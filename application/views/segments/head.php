@@ -26,7 +26,7 @@
 <link rel="stylesheet" href="<?php echo base_url();?>assets/bower_components/select2/select2.css">
 <link rel="stylesheet" href="<?php echo base_url();?>assets/bower_components/x-editable/dist/bootstrap3-editable/css/bootstrap-editable.css">
 
-<link rel="stylesheet" href="<?php echo base_url();?>assets/bower_components/semantic-ui/packaged/css/semantic.css">
+<link rel="stylesheet" href="<?php echo base_url();?>assets/bower_components/semantic-ui/build/packaged/css/semantic.css">
 <!--
 <link rel="stylesheet" href="<?php echo base_url();?>assets/bower_components/qunit/qunit/qunit.css">
 <link rel="stylesheet" href="<?php echo base_url();?>assets/bower_components/tablesaw/dist/tablesaw.css">
@@ -67,7 +67,7 @@
 <script src="<?php echo base_url();?>assets/bower_components/numeraljs/numeral.js"></script>
 <script src="<?php echo base_url()?>js/jquery.quickfit.js"></script>
 <!-- Semantic UI -->
-<script src="<?php echo base_url();?>assets/bower_components/semantic-ui/packaged/javascript/semantic.js"></script>
+<script src="<?php echo base_url();?>assets/bower_components/semantic-ui/build/packaged/javascript/semantic.js"></script>
 <!-- Scripts for Editable and Searchable Tables -->
 <script src="<?php echo base_url();?>assets/bower_components/x-editable/dist/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
 <script src="<?php echo base_url();?>assets/bower_components/list.js/dist/list.js"></script

@@ -1551,22 +1551,36 @@ class MY_Model extends CI_Model
      * @param  [type] $facMFL          [description]
      * @return [type]                  [description]
      */
-    public function get_survey_info($survey_type, $survey_category, $statistic, $facMFL) {
-    	$query = 'CALL get_survey_info("' . $survey_type . '","' . $survey_category . '","' . $statistic .  '",' . $facMFL . ');';
-       	//echo $query;die;
-	    try {
+    public function get_survey_info($survey_type, $survey_category,$statistic, $facMFL) {
+        $query = 'CALL get_survey_info("' . $survey_type . '","' . $survey_category . '","' . $statistic .  '",' . $facMFL . ');';
+        
+        try {
             $myData = $this->db->query($query);
             $finalData = $myData->result_array();
-            //print($this->db->last_query());die;
+//            print($this->db->last_query());die;
             $myData->next_result();
             
             // Dump the extra resultset.
             $myData->free_result();
             
             // Does what it says.
-          }
+            
+            
+        }
         catch(exception $ex) {
         }
         return $finalData;
     }
+
+    public function getFacilityInfo()
+    {
+        $results = $this->db->get_where('facilities', array('fac_mfl' => $this->session->userdata('facilityMFL')));
+        $results = $results->result_array();
+        foreach ($results as $result) {
+            $data[$result['fac_mfl']] = $result;
+        }
+        return $data;
+
+        // var_dump($this->dataSet);
     }
+}
