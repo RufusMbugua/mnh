@@ -63,6 +63,15 @@ class M_Analytics extends MY_Model
         }
     }
     
+    public function getReportingList($survey,$survey_category){
+    	$query = "CALL get_reporting_list('".$survey."','".$survey_category."');";
+    	$this->dataSet = $this->db->query($query, array($survey));
+            $this->dataSet = $this->dataSet->result_array();
+            if ($this->dataSet) {
+            	echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
+                return $this->dataSet;
+            } 
+     }
     public function get_facility_reporting_summary($survey) {
         
         /*using CI Database Active Record*/

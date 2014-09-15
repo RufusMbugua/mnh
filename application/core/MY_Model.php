@@ -1551,10 +1551,10 @@ class MY_Model extends CI_Model
      * @param  [type] $facMFL          [description]
      * @return [type]                  [description]
      */
-    public function get_survey_info($survey_type, $survey_category,$statistic, $facMFL) {
-        $query = 'CALL get_survey_info("' . $survey_type . '","' . $survey_category . '","' . $statistic .  '",' . $facMFL . ');';
-        
-        try {
+    public function get_survey_info($survey_type, $survey_category, $statistic, $facMFL) {
+    	$query = 'CALL get_survey_info("' . $survey_type . '","' . $survey_category . '","' . $statistic .  '",' . $facMFL . ');';
+       	//echo $query;die;
+	    try {
             $myData = $this->db->query($query);
             $finalData = $myData->result_array();
             //print($this->db->last_query());die;
@@ -1564,11 +1564,9 @@ class MY_Model extends CI_Model
             $myData->free_result();
             
             // Does what it says.
-            
-            
-        }
+          }
         catch(exception $ex) {
         }
         return $finalData;
     }
-}
+    }

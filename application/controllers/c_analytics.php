@@ -1282,7 +1282,12 @@ ORDER BY fac_level;");
          // echo "<pre>"; print_r($results);echo "</pre>";die;
         $this->generateData($results, 'Summary of Facilities Reporting for' . ' ' . strtoupper($survey) . ' : ' . strtoupper($survey_category) . $value, 'excel');
     }
-    
+    public function getReportingList($survey,$survey_category){
+    	$result = $this->m_analytics->getReportingList($survey,$survey_category);
+		//echo "<pre>";print_r($result);echo "</pre>";die;
+		$this->generateData($result, 'Reporting List for'.' '.strtoupper($survey).':'.strtoupper($survey_category). $value,'excel');
+	}
+	
     /**
      * [getSectionsChosen description]
      * @param  [type] $survey [description]
