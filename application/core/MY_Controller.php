@@ -338,7 +338,7 @@ $this->write_counties();
         // echo $owner;die;
         foreach ($this->data_found as $value) {
             if ($owner == $value['foName']) {
-                echo $value['foName'];
+                //echo $value['foName'];
             }
             $this->selectFacilityOwner.= '<option value="' . $value['foId'] . '">' . $value['foName'] . '</option>' . '<br />';
         }
