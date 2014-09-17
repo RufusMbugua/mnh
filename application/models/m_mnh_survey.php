@@ -336,7 +336,7 @@ class M_MNH_Survey extends MY_Model
         catch(exception $ex) {
             
             //ignore
-            die($ex->getMessage());
+            //die($ex->getMessage());
             return false;
         }
         

@@ -1396,15 +1396,15 @@ Indicate the total # of children that received the following treatment. </br>
 
         </thead>
         <tr>
-            <th rowspan="2" >Commodity Name</th>
-            <th rowspan="2" >Commodity Unit</th>
+            <th rowspan="2">Commodity Name</th>
+            <th rowspan="2">Commodity Unit</th>
             <th colspan="2" style="text-align:center"> Availability <strong></br> (One Selection Allowed) </strong></th>
-            <th rowspan="1"> Main Reason For  Unavailability </th>
+            <th rowspan="2"> Main Reason For  Unavailability </th>
             <th colspan="7" style="text-align:center"> Location of Availability </br><strong> (Multiple Selections Allowed)</strong></th>
-            <th rowspan="1" colspan="2" >Available Quantities</th>
+            <th rowspan="1" colspan="2">Available Quantities</th>
         </tr>
         <tr>
-            <th >Available</th>
+            <th>Available</th>
             <th>Not Available</th>
             <th>OPD</th>
             <th>MCH</th>
@@ -1438,7 +1438,7 @@ Indicate the total # of children that received the following treatment. </br>
             <th rowspan="2" >Commodity Name</th>
             <th rowspan="2" >Commodity Unit</th>
             <th colspan="2" style="text-align:center"> Availability <strong></br> (One Selection Allowed) </strong></th>
-            <th rowspan="1"> Main Reason For  Unavailability </th>
+            <th rowspan="2"> Main Reason For  Unavailability </th>
             <th colspan="7" style="text-align:center"> Location of Availability </br><strong> (Multiple Selections Allowed)</strong></th>
             <th rowspan="1" colspan="2">Available Quantities</th>
         </tr>

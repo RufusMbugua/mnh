@@ -17,7 +17,7 @@ class C_Auth extends MY_Controller {
 
             // $this->facilityInDistrict=$this->m_mnh_survey->districtFacilities;
 
-            // $this->createFacilitiesListSection();
+            // $this->createFacilitiesListSection();get
 
 $assessment = $this->input->post('assessment');
 $category = $this->input->post('term');

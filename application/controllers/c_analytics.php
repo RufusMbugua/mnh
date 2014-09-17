@@ -2874,7 +2874,7 @@ ORDER BY fac_level;");
         
         $data = $this->generateData($results->result_array(), 'Master List', $form);
         
-        echo $data;
+        echo $data; 
         
         //die;
         
