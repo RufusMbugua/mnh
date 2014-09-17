@@ -585,7 +585,7 @@ $this->write_counties();
 
             case 'ch':
                 
-                $locations = array('OPD', 'MCH', 'U5 Clinic', 'Ward', 'Other', 'Not Applicable');
+                $locations = array('OPD', 'MCH', 'U5 Clinic', 'Ward','Pharmacy', 'Other', 'Not Applicable');
                 break;
         }
         $supplier_names = $this->selectCommoditySuppliers;
@@ -1586,10 +1586,9 @@ $this->write_counties();
             <input type="text"  name="mnhceocReasonOther_' . $counter . '" id="mnhceocReasonOther_' . $counter . '" value="" size="64" class="cloned" />
             </td>
             </tr>';
-            } elseif ($value['questionCode'] == 'QMNH06b' || $value['questionCode'] == 'QMNH06c') {
-                $follow_up_question = '';
-            } else {
-                $follow_up_question = '<tr id="csdone_n" style="display:none">
+            } 
+            elseif($value['questionCode'] == 'QMNH06c'){
+ $follow_up_question = '<tr id="csdone_n" style="display:none">
             <td colspan="7">Give a main reason for <strong>not</strong> conducting Caeserian Section</td>
             <td>
             <select name="mnhceocReason_' . $counter . '" id="mnhceocReason_' . $counter . '" class="cloned" >
@@ -1604,6 +1603,12 @@ $this->write_counties();
             <input type="text"  name="mnhceocReasonOther_' . $counter . '" id="mnhceocReasonOther_' . $counter . '" value="" size="64" class="cloned" />
             </td>
             </tr>';
+}
+                else {
+                    $follow_up_question = '';
+
+                    
+               
             }
             
             $this->mnhCEOCAspectsSection.= '<tr>
@@ -3119,9 +3124,9 @@ $this->write_counties();
                     </tr>';
                 } else {
                     if ($questionResponse == 'Yes') {
-                        $questionRow = '<td>Yes <input name="questionResponse_' . $counter . '" checked="checked" value="Yes" type="radio"> No <input value="No" name="questionResponse_' . $counter . '"  type="radio"></td>';
+                        $questionRow = '<td>Yes <input name="questionResponse_' . $counter . '" checked="checked" value="Yes" type="radio"> No <input value="No" name="questionResponse_' . $counter . '"  type="radio"><input type="text" style="display:none" name="questionReason_' . $counter . '"></td>';
                     } else if ($questionResponse == 'No') {
-                        $questionRow = '<td>Yes <input name="questionResponse_' . $counter . '" value="Yes" type="radio"> No <input value="No" checked="checked" name="questionResponse_' . $counter . '"  type="radio"></td>';
+                        $questionRow = '<td>Yes <input name="questionResponse_' . $counter . '" value="Yes" type="radio"> No <input value="No" checked="checked" name="questionResponse_' . $counter . '"  type="radio"><input type="text" name="questionReason_' . $counter . '"></td>';
                     } else {
                         $questionRow = '<td>Yes <input name="questionResponse_' . $counter . '" value="Yes" type="radio"> No <input value="No" name="questionResponse_' . $counter . '"  type="radio"></td>';
                     }
@@ -3286,7 +3291,36 @@ $this->write_counties();
             ' . $quantity . '
             <input type="hidden"  name="sqsupplyCode_' . $counter . '" id="sqsupplyCode_' . $counter . '" value="' . $value['supplyCode'] . '" />
         </tr>';
-            }else{
+            }
+else if($section=='tes'){
+    $data[$section][] = '<tr>
+            <td  style="width:200px;">' . $value['supplyName'] . '</td>
+            <td style="vertical-align: middle; margin: 0px;text-align:center;">
+            <input name="sqAvailability_' . $counter . '" id="sqAvailability_' . $counter . '" type="radio" value="Available" style="vertical-align: middle; margin: 0px;" class="cloned"/>
+            </td>
+            <td style ="text-align:center;">
+            <input name="sqAvailability_' . $counter . '" type="radio" value="Never Available" />
+            </td>
+            <td style ="text-align:center;">
+            <input name="sqLocation_' . $counter . '[]" type="checkbox" value="OPD" />
+            </td>
+            <td style ="text-align:center;">
+            <input name="sqLocation_' . $counter . '[]" type="checkbox" value="MCH" />
+            </td>
+            <td style ="text-align:center;">
+            <input name="sqLocation_' . $counter . '[]" type="checkbox" value="U5 Clinic" />
+            </td>
+            <td style ="text-align:center;">
+            <input name="sqLocation_' . $counter . '[]" type="checkbox" value="Ward" />
+            </td>
+            <td style ="text-align:center;">
+            <input name="sqLocation_' . $counter . '[]" id="sqLocOther_' . $counter . '" type="checkbox" value="Other" />
+            </td>
+            ' . $quantity . '
+            <input type="hidden"  name="sqsupplyCode_' . $counter . '" id="sqsupplyCode_' . $counter . '" value="' . $value['supplyCode'] . '" />
+        </tr>';
+}
+            else{
                 $suppliesRow = '<tr><td  style="width:200px;">' . $value['supplyName'] .'</td>';
 
             if ($supplyAvailability == 'Available') {

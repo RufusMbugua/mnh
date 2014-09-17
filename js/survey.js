@@ -335,7 +335,7 @@ function startSurvey(base_url, survey, survey_category, district) {
 				$('#transfusion_n').show();
 			}
 
-			if ($(this).attr('id') == 'mnhceocAspectResponse_2' && $(this).val() == 'Yes') {
+			if ($(this).attr('id') == 'mnhceocAspectResponse_4' && $(this).val() == 'Yes') {
 				//CS conduction
 				//hide follow up qn
 				$('#csdone_n').hide();
@@ -347,7 +347,7 @@ function startSurvey(base_url, survey, survey_category, district) {
 
 
 			}
-			if ($(this).attr('id') == 'mnhceocAspectResponse_2' && $(this).val() == 'No') {
+			if ($(this).attr('id') == 'mnhceocAspectResponse_4' && $(this).val() == 'No') {
 				//show no follow up qn
 				$('#csdone_n').prop('disabled', false);
 				$('#csdone_n').show();
@@ -388,7 +388,7 @@ function startSurvey(base_url, survey, survey_category, district) {
 				$('#label_reason_other_1').hide();
 			}
 
-			if ($(this).attr('id') == 'mnhceocReason_2' && $(this).val() == 'Other') {
+			if ($(this).attr('id') == 'mnhceocReason_4' && $(this).val() == 'Other') {
 				//show input field on other
 
 				$('#mnhceocReasonOther_2').prop('disabled', false);
@@ -397,7 +397,7 @@ function startSurvey(base_url, survey, survey_category, district) {
 
 			}
 
-			if ($(this).attr('id') == 'mnhceocReason_2' && $(this).val() != 'Other') {
+			if ($(this).attr('id') == 'mnhceocReason_4' && $(this).val() != 'Other') {
 
 				//hide other input field
 				$('#mnhceocReasonOther_2').prop('disabled', true);
