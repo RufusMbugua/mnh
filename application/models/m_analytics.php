@@ -1126,11 +1126,11 @@ WHERE
                     // }
                     
                     foreach ($this->dataSet as $value) {
-                        
+                       
                         $indicator = $value['indicator_name'];
                         
                         //echo $value['indicator'];die;
-                        $data['response'][$indicator][$value['response']] = (int)$value['count(il.li_response)'];
+                        $data['response'][$indicator][$value['response']] = (int)$value['total_response'];
                         
                         $data['categories'] = array_keys($data['response']);
                     }
@@ -1142,7 +1142,7 @@ WHERE
                     return $this->dataSet = null;
                 }
                 
-                die(var_dump($this->dataSet));
+                //die(var_dump($this->dataSet));
             }
             catch(exception $ex) {
                 
@@ -1190,7 +1190,7 @@ WHERE
                     return $this->dataSet = null;
                 }
                 
-                die(var_dump($this->dataSet));
+                //die(var_dump($this->dataSet));
             }
             catch(exception $ex) {
                 
@@ -3922,6 +3922,7 @@ ORDER BY question_code";
                     // // if ($question == 'Does this Facility have a designated location for oral rehydration?') {
                     // // }
                     //echo $question;
+                  //echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
                     switch ($statistics) {
                         case 'response':
                             $yes = $value_['yes_values'];
@@ -3937,12 +3938,15 @@ ORDER BY question_code";
                             //echo $question;
                             $data[$question] = (int)$value_['total'];
                             break;
-
                         case 'reason':
                             $question = $this->getQuestionName($value_['questions']);
                             $data[$question][$value_['reason']] = $value_['total_response'];
                             break;
-
+							
+						case 'healthservice':
+							$data[$question][$value_['response']]=(int)$value_['total_response'];
+							
+							break;
                         case 'reason_raw':
                         case 'response_raw':
                         case 'total_raw':
@@ -4271,7 +4275,7 @@ ORDER BY question_code";
                 $this->dataSet = $queryData->result_array();
                 $queryData->next_result();
                 
-                echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
+                //echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
                 // Dump the extra resultset.
                 $queryData->free_result();
                 $pharmacyvalue = 0;

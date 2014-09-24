@@ -114,8 +114,26 @@
                         </div>
                     </div>
                 </div>
-
-            </div>
+                <div class="medium-graph">
+                    <div class="portlet-title">
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">IMCI Consultation Room</span><span class="sizer">Click to Enlarge</span></h6>
+                    </div>
+                    <div class="portlet-body">
+					<div class="chart" id="imci">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="medium-graph">
+                    <div class="portlet-title">
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Health Service</span><span class="sizer">Click to Enlarge</span></h6>
+                    </div>
+                    <div class="portlet-body">
+						<div class="chart" id="chhealth_service">
+                        </div>
+                    </div>
+                </div>
+            
         </div>
     </div>
     <div class="panel panel-default analytics_row section" data-survey='ch' id="ch-section-2">

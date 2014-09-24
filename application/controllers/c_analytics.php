@@ -1757,6 +1757,32 @@ ORDER BY fac_level;");
         $category = $q;
         $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 70, 'bar', '', $for, 'question', $statistics);
     }
+	public function getHSQuestions($criteria,$value,$survey,$survey_category,$for,$statistics){
+		$value = urldecode($value);
+		$category[] = array();
+		$results = $this->m_analytics->getQuestionStatistics($criteria,$value,$survey,$survey_category,$for,$statistics);
+		
+		$result = $q= $resultArray= array();
+		$count=0;
+		foreach ($results as $key => $value) {
+			if($count==1){
+				$category[] = $key;
+				$data = $value;
+			}
+			$count++;
+		}
+		// echo"<pre>";print_r($category);echo"<pre>";die;
+		foreach ($data as $key => $value_) {
+			
+			$gData[]= array('name'=>$key, 'y' => $value_);
+		}
+		 $resultArray[]=array('name'=>'Values','data'=>$gData);
+		 $this->populateGraph($resultArray, '',  $category[1], $criteria, '', 70, 'pie', '', $for, 'question', $statistics);
+		
+	}
+	public function getHS($criteria,$value,$survey,$survey_category,$for,$statistics){
+		$this->getHSQuestions($criteria, $value, $survey, $survey_category, 'hs', 'healthservice');
+	}
     /**
      * [getQuestionRaw description]
      * @param  [type] $criteria        [description]
@@ -1828,7 +1854,7 @@ ORDER BY fac_level;");
      */
     public function getHIV($criteria, $value, $survey, $survey_category) {
         
-        $this->getQuestionStatistics($criteria, $value, $survey, $survey_category, 'hiv', 'response');
+      $this->getQuestionStatistics($criteria, $value, $survey, $survey_category, 'hiv', 'response');
     }
     
     /**
@@ -1840,7 +1866,9 @@ ORDER BY fac_level;");
     public function getCEOC($criteria, $value, $survey, $survey_category) {
         $this->getQuestionStatistics($criteria, $value, $survey, $survey_category, 'ceoc', 'response');
     }
-    
+    public function getIMCI($criteria, $value, $survey, $survey_category) {
+        $this->getQuestionStatistics($criteria, $value, $survey, $survey_category, 'imci', 'response');
+    }
     // public function getWaste($criteria, $value, $survey, $survey_category) {
     //   $this->getQuestionStatistics($criteria, $value, $survey, $survey_category, 'waste');
     //}
@@ -2637,7 +2665,7 @@ ORDER BY fac_level;");
             
             $name = $value['facilityOwner'];
             
-            //echo '<pre>';print_r($name);echo '</pre>';die;
+           //echo '<pre>';print_r($name);echo '</pre>';die;
             //$gData[] = (int)$value['level_total'];
             $gData[] = array('name' => $name, 'y' => (int)$value['ownership_total']);
             
