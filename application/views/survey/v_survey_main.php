@@ -21,8 +21,12 @@ $mfacilityMFL = $this -> session -> userdata('facilityMFL');
         var devices='';
         var fac_mfl = fac_county = fac_district = '';
         var base_url = '<?php echo base_url(); ?>';
+        var survey = '<?php echo $this->session->userdata("survey"); ?>';
+        var survey_category = '<?php echo $this->session->userdata("survey_category"); ?>';
+        var county = '<?php echo $this->session->userdata("county"); ?>';
+        var district = '<?php echo $this->session->userdata("district"); ?>';
 
-
+        getDistrictData(base_url, district, survey, survey_category);
         //start of close_opened_form click event
         $("#close_opened_form").click(function() {
 
@@ -34,7 +38,8 @@ $mfacilityMFL = $this -> session -> userdata('facilityMFL');
             });
         });/*end of close_opened_form click event
 
-                    /*----------------------------------------------------------------------------------------------------------------*/
+        
+        /*----------------------------------------------------------------------------------------------------------------*/
 
         /*start of loadGlobalJS*/
         var onload_queue = [];
@@ -117,7 +122,7 @@ $mfacilityMFL = $this -> session -> userdata('facilityMFL');
                 //linkSub=$(link_id).attr('class');
                 //linkIdUrl=link_id.substr(link_id.indexOf('#')+1,(link_id.indexOf('_li')-1));
                 facilityMFL=link_id;
-                the_url='<?php echo base_url();?>c_load/startSurvey/<?php echo $this->session->userdata("survey");?>/mid-term/'+facilityMFL+'/2013-2014';
+                the_url='<?php echo base_url();?>c_load/startSurvey/<?php echo $this->session->userdata("survey");?>/<?php echo $this->session->userdata("survey_category");?>/'+facilityMFL+'/2013-2014';
                 $.ajax({
                     type:'POST',
                     data: '',
@@ -901,7 +906,7 @@ $mfacilityMFL = $this -> session -> userdata('facilityMFL');
                                         if(fdata.currentStep=='section-8'){
 
                                             $(".form-container").load('<?php echo base_url();?>c_load/survey_complete',function(){
-                                                window.location='<?php echo base_url().$this -> session -> userdata('survey');?>/assessment'; });
+                                                window.location='<?php echo base_url();?>/assessment'; });
 
                                             message = fac_name +' in ' +fac_district+ ' District, ' +fac_county+ ' County, has completed the <?php echo strtoupper($this->session->userdata("survey"));?> Survey.' ;
                                             console.log(message);
@@ -916,7 +921,7 @@ $mfacilityMFL = $this -> session -> userdata('facilityMFL');
                                             //$(form_id).formwizard('show','No');
                                             // console.log($(form_id).formwizard('state'));
                                             $(".form-container").load('<?php echo base_url();?>c_load/survey_complete',function(){
-                                                window.location='<?php echo base_url().$this -> session -> userdata('survey');?>/assessment'; });
+                                                window.location='<?php echo base_url();?>/assessment'; });
 
                                             message = fac_name +' in ' +fac_district+ ' District, ' +fac_county+ ' County, has completed the <?php echo strtoupper($this->session->userdata("survey"));?> Survey.' ;
                                             console.log(message);
@@ -930,7 +935,7 @@ $mfacilityMFL = $this -> session -> userdata('facilityMFL');
                                             //$(form_id).formwizard('show','No');
                                             // console.log($(form_id).formwizard('state'));
                                             $(".form-container").load('<?php echo base_url();?>c_load/survey_complete',function(){
-                                                window.location='<?php echo base_url().$this -> session -> userdata('survey');?>/assessment'; });
+                                                window.location='<?php echo base_url()?>/assessment'; });
 
                                             message = fac_name +' in ' +fac_district+ ' District, ' +fac_county+ ' County, has completed the <?php echo strtoupper($this->session->userdata("survey"));?> Survey.' ;
                                             console.log(message);
@@ -982,7 +987,7 @@ $mfacilityMFL = $this -> session -> userdata('facilityMFL');
                                 $("#data").fadeTo(5000,0);
                                 //$('#sectionNavigation').hide();
                                 $(".form-container").load('<?php echo base_url();?>c_load/survey_complete',function(){
-                                    window.location='<?php echo base_url();?>commodity/assessment'; });
+                                    window.location='<?php echo base_url();?>/assessment'; });
 
                             }
                         }else if(data.currentStep=='section-6'){
@@ -1056,7 +1061,7 @@ $mfacilityMFL = $this -> session -> userdata('facilityMFL');
                                   */
                 //$(form_id).formwizard('show','section-2');
 
-                the_url='<?php echo base_url();?>c_load/getFacilitySection/<?php echo $this->session->userdata("survey");?>/'+facilityMFL+'/mid-term';
+                the_url='<?php echo base_url();?>c_load/getFacilitySection/<?php echo $this->session->userdata("survey");?>/'+facilityMFL+'/<?php echo $this->session->userdata("survey_category");?>';
                 $.ajax({
                     type:'GET',
                     url:the_url,
@@ -1077,8 +1082,26 @@ $mfacilityMFL = $this -> session -> userdata('facilityMFL');
                       );
 
             }//--end of function break_form_to_steps(form_id)
-
-
+            function getDistrictData(base_url, county, survey_type, survey_category) {
+            $.ajax({
+                url: base_url + 'c_analytics/getCountyData/' + county + '/' + survey_type + '/' + survey_category + '/table',
+                beforeSend: function(xhr) {
+                    xhr.overrideMimeType("text/plain; charset=x-user-defined");
+                },
+                success: function(data) {
+                    obj = jQuery.parseJSON(data);
+                    console.log(obj);
+                    $('#targeted').text(obj[0].actual);
+                    $('#finished').text(obj[0].reported);
+                    $('#not-finished').text((obj[0].actual)-(obj[0].reported));
+                    $('#not-started').text(obj[0].notstarted);
+                    var percentage = Math.round((obj[0].reported / obj[0].actual * 100), 2);
+                    $('#county_progress .progress-bar').text(percentage + '%');
+                    $('#county_progress .progress-bar').attr('aria-valuenow', percentage);
+                    $('#county_progress .progress-bar').css('width', percentage + '%');
+                }
+            });
+        }
 
             function check(el)
             {

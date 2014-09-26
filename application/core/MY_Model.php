@@ -311,6 +311,25 @@ class MY_Model extends CI_Model
         }
         return $this->equipment;
     }
+    function getSpecificEquipmentNames($for) {
+        
+        /*using DQL*/
+        try {
+            $this->equipment = $this->em->createQuery('SELECT e.eqId, e.eqCode, e.eqName, e.eqUnit, e.eqFor FROM models\Entities\Equipments e WHERE e.eqFor= :for ORDER BY e.eqCode ASC');
+            $this->equipment->setParameter('for', $for);
+            $this->equipment = $this->equipment->getResult();
+            
+            //die(var_dump($this->equipment));
+            
+        }
+        catch(exception $ex) {
+            
+            //ignore
+            //$ex->getMessage();
+            
+        }
+        return $this->equipment;
+    }
      /*end of getAllEquipmentNames*/
     
     function getAllCommoditySupplierNames($surveyName) {

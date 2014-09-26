@@ -44,7 +44,7 @@ $route['404_override'] = '';
 
 $route['takesurvey']='c_front/active_survey';#active survey url
 $route['assessment']='c_front/inventory'; #active survey home page url
-$route['analytics']='c_analytics/active_results/mnh';#active results url
+$route['analytics']='c_analytics/active_results/';#active results url
 
 $route['session/new']='c_auth/go';#log in url
 $route['session/close']='c_auth/logout';#log out url

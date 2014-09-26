@@ -59,7 +59,7 @@ $category = $this->input->post('term');
 
    public function doCheckFacilityCode(){/**from the session data*/
     if(!$this -> session -> userdata('dName')){
-        redirect(base_url() . $this -> session -> userdata('survey'). '/assessment', 'refresh');
+        redirect(base_url() . '/assessment', 'refresh');
         return true;
 
         }else{
