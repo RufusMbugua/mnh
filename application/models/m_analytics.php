@@ -1801,15 +1801,24 @@ ORDER BY oa.question_code ASC";
                                 $data[$value['commodity_name']][$place]+= (int)$value['total_response'];
                             }
                         } else if (array_key_exists('reason', $value)) {
-                            $data[$value['commodity_name']][$value['reason']] = (int)$value['total_response'];
+                                 $reason = $value['reason'];
+                                 $reason = trim($reason , "1. ");
+                                 $reason = trim($reason , "2. ");
+                                 $reason = trim($reason , "3. ");
+                                 if($reason!='' && $reason!='Select One'){
+$data[$value['commodity_name']][$reason]+= (int)$value['total_response'];
+                                 }
+                                 
+
                         } else if (array_key_exists('unit', $value)) {
                             $data[$value['commodity_name']][$value['unit']] = (int)$value['total_response'];
                         } else if (array_key_exists('supplier_code', $value)) {
                             $data[$value['commodity_name']][$value['supplier_code']] = (int)$value['supplier_name'];
                         }
                     }
-                    
-                    //echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
+                    // unset($data['']);
+                    // unset($data['Select One']);
+                    // echo "<pre>";print_r($data);echo "</pre>";
                     
                     
                     
