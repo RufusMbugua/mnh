@@ -886,8 +886,7 @@ ORDER BY fac_level;");
         $results = $this->m_analytics->getSuppliesStatistics($criteria, $value, $survey, $survey_category, $for, $statistic);
         
         //echo '<pre>';print_r($results);echo '</pre>';die;
-        if (($statistic == 'location' && $for == 'mh') || ($statistic == 'availability' && $for == 'mh') || ($statistic == 'availability' && $for == 'mh') 
-        || ($statistic == 'supplier' && $for == 'mh') || ($statistic == 'supplier' && $for == 'mch')) {
+        if (($statistic == 'location' && $for == 'mh') || ($statistic == 'supplier' && $for == 'mh') || ($statistic == 'supplier' && $for == 'mch')) {
             foreach ($results as $key => $result) {
                 foreach ($result as $k => $value) {
                     $gData[] = array('name' => $k, 'y' => (int)$value);
@@ -1017,6 +1016,9 @@ ORDER BY fac_level;");
      */
     public function getRunningWaterLocation($criteria, $value, $survey, $survey_category) {
         $this->getSuppliesStatistics($criteria, $value, $survey, $survey_category, 'mh', 'location');
+    }
+	public function getRunningWaterStorage($criteria, $value, $survey, $survey_category) {
+        $this->getSuppliesStatistics($criteria, $value, $survey, $survey_category, 'mh', 'supplier');
     }
     
     /*public function getORTReason($criteria, $value, $survey, $survey_category) {
@@ -1674,6 +1676,9 @@ ORDER BY fac_level;");
 	public function getCHTestingSupplies($criteria,$value,$survey,$survey_category,$for,$statistic){
 		$this->getSuppliesStatistics($criteria, $value, $survey, $survey_category, 'tst', 'location');
 	}
+	public function getCHTestingSuppliesAvailability($criteria,$value,$survey,$survey_category,$for,$statistic){
+		$this->getSuppliesStatistics($criteria, $value, $survey, $survey_category, 'tst', 'availability');
+	}
 	public function getMNHTestingSuppliesLocation($criteria,$value,$survey,$survey_category,$for,$statistic){
 		$this->getSuppliesStatistics($criteria, $value, $survey, $survey_category, 'tes', 'location');
 	}
@@ -1815,12 +1820,15 @@ ORDER BY fac_level;");
         $category = $q;
         $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 70, 'bar', '', $for, 'question', $statistics);
     }
+	
 	public function getHSQuestions($criteria,$value,$survey,$survey_category,$for,$statistics){
+		
 		$value = urldecode($value);
 		$category[] = array();
 		$results = $this->m_analytics->getQuestionStatistics($criteria,$value,$survey,$survey_category,$for,$statistics);
 		
 		$result = $q= $resultArray= array();
+		
 		$count=0;
 		foreach ($results as $key => $value) {
 			if($count==1){
@@ -1841,6 +1849,7 @@ ORDER BY fac_level;");
 	public function getHS($criteria,$value,$survey,$survey_category,$for,$statistics){
 		$this->getHSQuestions($criteria, $value, $survey, $survey_category, 'hs', 'healthservice');
 	}
+	
     /**
      * [getQuestionRaw description]
      * @param  [type] $criteria        [description]
@@ -1937,7 +1946,9 @@ ORDER BY fac_level;");
     public function getNewborn($criteria, $value, $survey, $survey_category) {
         $this->getQuestionStatisticsSingle($criteria, $value, $survey, $survey_category, 'newb', 'response');
     }
-    
+    public function getmnhWaterStorage($criteria,$value,$survey,$survey_category){
+    	$this->getQuestionStatistics($criteria, $value, $survey, $survey_category, 'mnhw', 'response');
+    }
     public function getCSReasons($criteria, $value, $survey, $survey_category, $option) {
         $results = $this->m_analytics->getQuestionStatisticsSingle($criteria, $value, $survey, $survey_category, 'ceoc', 'reason');
         $count = 0;
