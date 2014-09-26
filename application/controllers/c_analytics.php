@@ -478,42 +478,42 @@ ORDER BY fac_level;");
      * @param  [type] $survey   [description]
      * @return [type]           [description]
      */
-   public function getCommunityStrategyMNH($criteria, $value, $survey, $survey_category, $option) {
-        $results = $this->m_analytics->getCommunityStatstics($criteria, $value, $survey, $survey_category, 'cms');
-        //ksort($results);
-        //array()=$val;
-       //echo "<pre>";print_r($results);echo "</pre>";die;
-        $count = 0;
+   // public function getCommunityStrategyMNH($criteria, $value, $survey, $survey_category, $option) {
+   //      $results = $this->m_analytics->getCommunityStatstics($criteria, $value, $survey, $survey_category, 'cms');
+   //      //ksort($results);
+   //      //array()=$val;
+   //     //echo "<pre>";print_r($results);echo "</pre>";die;
+   //      $count = 0;
         
-        foreach ($results as $key => $result) {
-            $category[] = $key;
-          foreach ($result as $code => $val) {
-            if ($code="QMNH29") {
-                 //echo "<pre>";print_r($key);echo "</pre>";die;
-                $data['trained'][] = $val;
-            } if ($code="QMNH31") {
-                $data['referral'][] = $val;
-            } if($code="QMNH27"||$code="QMNH28"||$code="QMNH30") {
-                $data['community'][] = $val;
-            }
-          }
-            $count++;
+   //      foreach ($results as $key => $result) {
+   //          $category[] = $key;
+   //        foreach ($result as $code => $val) {
+   //          if ($code="QMNH29") {
+   //               //echo "<pre>";print_r($key);echo "</pre>";die;
+   //              $data['trained'][] = $val;
+   //          } if ($code="QMNH31") {
+   //              $data['referral'][] = $val;
+   //          } if($code="QMNH27"||$code="QMNH28"||$code="QMNH30") {
+   //              $data['community'][] = $val;
+   //          }
+   //        }
+   //          $count++;
 
-        }
+   //      }
         
-        // echo "<pre>";
-        // print_r($data);
-        // echo "</pre>";
-        // die; 
+   //      // echo "<pre>";
+   //      // print_r($data);
+   //      // echo "</pre>";
+   //      // die; 
 
-        foreach ($data[$option] as $key => $value) {
-            $category[] = $key;
-            $gData[] = $value;
-        }
-        $resultArray[] = array('name' => 'Numbers', 'data' => $data);
-        //echo "<pre>";print_r($resultArray);echo "</pre>";die;
-        $this->populateGraph($resultArray, '', $category, $criteria, '', 70, 'bar');
-    }
+   //      foreach ($data[$option] as $key => $value) {
+   //          $category[] = $key;
+   //          $gData[] = $value;
+   //      }
+   //      $resultArray[] = array('name' => 'Numbers', 'data' => $data);
+   //      //echo "<pre>";print_r($resultArray);echo "</pre>";die;
+   //      $this->populateGraph($resultArray, '', $category, $criteria, '', 70, 'bar');
+   //  }
     
     /**
      * [getCommunityStrategyCH description]
@@ -545,7 +545,7 @@ ORDER BY fac_level;");
           }
             $count++;
 
-        }
+        
 
 		foreach($data[$option] as $key => $value) {
 			$category[] = $key;
@@ -1738,6 +1738,30 @@ ORDER BY fac_level;");
         
         //echo "<pre>";print_r($gData);echo "</pre>";die;
         $resultArray[] = array('name' => 'Supply Location', 'data' => $gData);
+        
+        //echo "<pre>";print_r($resultArray);echo "</pre>";die;
+        $category = $q;
+        
+        //echo "<pre>";print_r($resultArray);echo "</pre>";die;
+        $this->populateGraph($resultArray, '', $category, $criteria, '', 70, 'pie');
+    }
+
+    public function getDeliveryReason($criteria, $value, $survey, $survey_category) {
+        $results = $this->m_analytics->getDeliveryReason($criteria, $value, $survey, $survey_category);
+        $number = $resultArray = $q = $skillvalue = $staffvalue = $infrastructurevalue = $equipmentvalue = $commoditiesvalue = $other = array();
+        $number = $resultArray = $q = array();
+        $count = 0;
+        
+        //echo "<pre>";print_r($results);echo "</pre>";die;
+        foreach ($results as $key => $value) {
+            foreach ($value as $location => $val) {
+                $getData[] = array(ucwords($location), (int)$val);
+            }
+        }
+        $category[] = "Delivery Reasons";
+        
+        //echo "<pre>";print_r($gData);echo "</pre>";die;
+        $resultArray[] = array('name' => 'Reasons', 'data' => $getData);
         
         //echo "<pre>";print_r($resultArray);echo "</pre>";die;
         $category = $q;

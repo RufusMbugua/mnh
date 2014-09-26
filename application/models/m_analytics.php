@@ -4186,6 +4186,81 @@ ORDER BY question_code";
             
             return $data;
         }
+
+
+        public function getDeliveryReason($criteria, $value, $survey, $survey_category) {
+            $value = urldecode($value);
+            
+            /*using CI Database Active Record*/
+            $data = $data_set = $data_series = $analytic_var = $data_categories = array();
+            
+            //data to hold the final data to relayed to the view,data_set to hold sets of data, analytic_var to hold the analytic variables to be used in the data_series,data_series to hold the title and the json encoded sets of the data_set
+            
+            $query = "CALL get_delivery_reasons('" . $criteria . "','" . $value . "','" . $survey . "','" . $survey_category . "');";
+            try {
+                $queryData = $this->db->query($query, array($value));
+                $this->dataSet = $queryData->result_array();
+                $queryData->next_result();
+                
+                // Dump the extra resultset.
+                $queryData->free_result();
+                $pharmacyvalue = 0;
+                if ($this->dataSet !== NULL) {
+                    foreach ($this->dataSet as $key => $value) {
+                        
+                        if (array_key_exists('skill', $value)) {
+                            $skillvalue+= $value['skill'];
+                        }
+                        
+                        if (array_key_exists('staff', $value)) {
+                            $staffvalue+= $value['staff'];
+                        }
+                        if (array_key_exists('infrastructure', $value)) {
+                            $infrastructurevalue+= $value['infrastructure'];
+                        }
+                        if (array_key_exists('equipment', $value)) {
+                            $equipmentvalue+= $value['equipment'];
+                        }
+                        if (array_key_exists('commodities', $value)) {
+                            $commoditiesvalue+= $value['commodities'];
+                        }
+                        if (array_key_exists('other', $value)) {
+                            $othervalue+= $value['other'];
+                        }
+                    }
+                    
+                   
+                    
+                    //1. collect the categories
+                    $data[$question]['skill'] = $skillvalue;
+                    $data[$question]['staff'] = $staffvalue;
+                    $data[$question]['infrastructure'] = $infrastructurevalue;
+                    $data[$question]['equipment'] = $equipmentvalue;
+                    $data[$question]['commodities'] = $commoditiesvalue;
+                    $data[$question]['other'] = $othervalue;
+                } else {
+                    return null;
+                }
+                //echo "<pre>";print_r($infrastructurevalue);echo "</pre>";die;
+                //echo "<pre>";print_r($other);echo "</pre>";die;
+                
+                
+            }
+            catch(exception $ex) {
+                
+                //ignore
+                //die($ex->getMessage());//exit;
+                
+                
+            }
+            
+            //echo "<pre>";print_r($data);echo "</pre>";die;
+            
+            return $data;
+        }
+
+
+
             public function getCommodityUsage($criteria, $value, $survey, $survey_category, $for, $statistic) {
             $value = urldecode($value);
             $newData = array();
