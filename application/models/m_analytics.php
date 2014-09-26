@@ -1746,7 +1746,7 @@ ORDER BY oa.question_code ASC";
                         } else if (array_key_exists('location', $value)) {
                             $location = explode(',', $value['location']);
                             foreach ($location as $place) {
-                                $data[$value['location']][$place]+= (int)$value['total_response'];
+                                $data[$value['commodity_name']][$place]+= (int)$value['total_response'];
                             }
                         } else if (array_key_exists('reason', $value)) {
                             $data[$value['commodity_name']][$value['reason']] = (int)$value['total_response'];
@@ -1839,11 +1839,12 @@ ORDER BY oa.question_code ASC";
                     foreach ($this->dataSet as $value) {
                         if (array_key_exists('frequency', $value)) {
                             $data[$value['supply_name']][$value['frequency']] = (int)$value['total_response'];
-                        } else if (array_key_exists('locations', $value)) {
-                            $location = explode(',', $value['locations']);
-                            foreach ($location as $place) {
+                        } else if (array_key_exists('location', $value)) {
+                            $location = explode(',', $value['location']);
+                           foreach ($location as $place) {
                                 $data[$value['supply_name']][$place]+= (int)$value['total_response'];
                             }
+                           //$data[$value['supply_name']][$value['location']]=(int)$value['total_response'];
                         } else if (array_key_exists('total_functional', $value)) {
                             $data[$value['supply_name']]['functional']+= (int)$value['total_functional'];
                             $data[$value['supply_name']]['non_functional']+= (int)$value['total_non_functional'];
