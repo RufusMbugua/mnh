@@ -6,8 +6,8 @@ ini_set('memory_limit', '-1');
 
 class MY_Controller extends CI_Controller
 {
-    
-    public $em, $response, $theForm, $rowsInserted, $executionTime, $data, $data_found, $facilityInDistrict, $selectReportingCounties, $selectCommodityType, $facilities, $facility, $selectCounties, $global_counter, $selectDistricts, $selectFacilityType, $selectFacilityLevel, $selectFacilityOwner, $selectProvince, $selectCommoditySuppliers, $selectMCHOtherSuppliers, $selectMNHOtherSuppliers, $selectMCHCommoditySuppliers, $selectFacility, $commodityAvailabilitySection, $mchCommodityAvailabilitySection, $mchIndicatorsSection, $signalFunctionsSection, $ortCornerAspectsSection, $mchCommunityStrategySection, $mnhWaterAspectsSection, $mnhCEOCAspectsSection, $mchGuidelineAvailabilitySection, $trainingGuidelineSection, $mchTrainingGuidelineSection, $districtFacilityListSection, $suppliesUsageAndOutageSection, $commodityUsageAndOutageSection, $suppliesSection, $suppliesMCHSection, $suppliesMNHOtherSection, $equipmentsSection, $deliveryEquipmentSection, $hardwareMCHSection, $equipmentsMCHSection, $severediatreatmentMCHSection, $hcwProfileSection, $hcwCaseManagementSection, $mchConsultationSection, $totalsRows;
+    public $facilityMFL;    
+    public $em, $response, $theForm, $rowsInserted, $executionTime, $data, $data_found, $facilityInDistrict, $selectReportingCounties, $selectCommodityType, $facilities, $facility, $selectCounties, $global_counter, $selectDistricts, $selectFacilityType, $selectFacilityLevel, $selectFacilityOwner, $selectProvince, $selectCommoditySuppliers, $selectMCHOtherSuppliers, $selectMNHOtherSuppliers, $selectMCHCommoditySuppliers, $selectFacility, $commodityAvailabilitySection, $mchCommodityAvailabilitySection, $mchIndicatorsSection, $signalFunctionsSection, $ortCornerAspectsSection, $mchCommunityStrategySection, $mnhWaterAspectsSection, $mnhCEOCAspectsSection, $mchGuidelineAvailabilitySection, $trainingGuidelineSection, $mchTrainingGuidelineSection, $districtFacilityListSection, $suppliesUsageAndOutageSection, $commodityUsageAndOutageSection, $suppliesSection, $suppliesMCHSection, $suppliesMNHOtherSection, $equipmentsSection, $deliveryEquipmentSection, $hardwareMCHSection, $equipmentsMCHSection, $severediatreatmentMCHSection, $hcwProfileSection, $hcwCaseManagementSection, $mchConsultationSection, $totalsRows, $monthlydeliveries;
     
     //new sections
     
@@ -181,6 +181,7 @@ class MY_Controller extends CI_Controller
         
         //Define Survey Session Variables
         $this->session_survey_category = $this->session->userdata('survey_category');
+        $this->facilityMFL = $this->session->userdata('facilityMFL');
         
         $this->getTreatments();
         $this->getSections();
@@ -191,6 +192,7 @@ $this->write_counties();
         //functions by Chris
         $this->createmchassessorinformation();
         $this->createTotalRows();
+        $this->createmonthlydeliveriessection();
 
     }
     
@@ -241,8 +243,16 @@ $this->write_counties();
         
         /*obtained from the session data*/
         $this->data_found = $this->m_mnh_survey->getDistrictNames();
+        $district = $this->session->userdata('dName');
         foreach ($this->data_found as $value) {
-            $this->selectDistricts.= '<option value="' . $value['districtId'] . '">' . $value['districtName'] . '</option>' . '<br />';
+            if($value['districtName'] == $district)
+            {            
+                $this->selectDistricts.= '<option value="' . $value['districtId'] . '" selected = "selected">' . $value['districtName'] . '</option>' . '<br />';
+            }
+            else
+            {
+                $this->selectDistricts.= '<option value="' . $value['districtId'] . '">' . $value['districtName'] . '</option>' . '<br />';
+            }      
         }
         
         //var_dump($this -> session -> userdata('allDistricts')); exit;
@@ -253,11 +263,12 @@ $this->write_counties();
         
         /*obtained from the session data*/
         $this->data_found = $this->m_mnh_survey->getCountyNames();
+       // print_r($this->session->userdata);
         foreach ($this->data_found as $value) {
             $this->selectCounties.= '<option value="' . $value['countyId'] . '">' . $value['countyName'] . '</option>' . '<br />';
         }
         
-        //var_dump($this -> session -> userdata('allCounties')); exit;
+        // var_dump($this -> session -> userdata('allCounties')); exit;
         return $this->selectCounties;
     }
     
@@ -320,7 +331,15 @@ $this->write_counties();
         /*obtained from the session data*/
         
         $this->data_found = $this->m_mnh_survey->getFacilityOwnerNames();
+        $retrieved = $this->m_mch_survey->getFacilityInfo();
+        $owner = $retrieved[$this->session->userdata('facilityMFL')]['fac_ownership'];
+        // echo "<pre>";print_r($retrieved);die;
+        // print_r($this->data_found);
+        // echo $owner;die;
         foreach ($this->data_found as $value) {
+            if ($owner == $value['foName']) {
+                //echo $value['foName'];
+            }
             $this->selectFacilityOwner.= '<option value="' . $value['foId'] . '">' . $value['foName'] . '</option>' . '<br />';
         }
         
@@ -561,12 +580,12 @@ $this->write_counties();
         $survey = $this->session->userdata('survey');
         switch ($survey) {
             case 'mnh':
-                $locations = array('OPD', 'MCH', 'U5 Clinic', 'Ward', 'Pharmacy', 'Other');
+                $locations = array('OPD', 'MCH', 'U5 Clinic', 'Ward', 'Pharmacy', 'Other', 'Not Applicable');
                 break;
 
             case 'ch':
                 
-                $locations = array('OPD', 'MCH', 'U5 Clinic', 'Ward', 'Other', 'Not Applicable');
+                $locations = array('OPD', 'MCH', 'U5 Clinic', 'Ward','Pharmacy', 'Other', 'Not Applicable');
                 break;
         }
         $supplier_names = $this->selectCommoditySuppliers;
@@ -574,7 +593,7 @@ $this->write_counties();
         $availabilities = array('Available', 'Never Available');
         $reasons = array('Select One', '1. Not Ordered', '2. Ordered but not yet Received', '3. Expired');
         // echo "<pre>";print_r($reasons);die;
-        
+        $reasonUnavailable = '';
         foreach ($this->data_found as $value) {
             $counter++;
             $availabilityRow = $locationRow = $expiryRow = $quantityRow = $reasonUnavailableRow = '';
@@ -582,10 +601,11 @@ $this->write_counties();
                 $availability = ($retrieved[$value['commCode']]['ac_availability'] != 'N/A') ? $retrieved[$value['commCode']]['ac_availability'] : '';
                 $location = ($retrieved[$value['commCode']]['ac_location'] != 'N/A') ? $retrieved[$value['commCode']]['ac_location'] : '';
                 $expiryDate = ($retrieved[$value['commCode']]['ac_expiry_date'] != 'N/A') ? $retrieved[$value['commCode']]['ac_expiry_date'] : '';
-                $reasonUnavailable = ($retrieved[$value['commCode']]['ac_reason_unavailable'] != 'N/A') ? $retrieved[$value['commCode']]['ac_reason_unavailable'] : '';
+                // $reasonUnavailable = ($retrieved[$value['commCode']]['ac_reason_unavailable'] != 'N/A') ? $retrieved[$value['commCode']]['ac_reason_unavailable'] : '';
+                $reasonUnavailable = $retrieved[$value['commCode']]['ac_reason_unavailable'];
                 $quantity = ($retrieved[$value['commCode']]['ac_quantity'] != 'N/A') ? $retrieved[$value['commCode']]['ac_quantity'] : '';
             }
-            
+            $location = explode(',', $location);
             foreach ($availabilities as $aval) {
                 if ($availability == $aval) {
                     $availabilityRow.= '<td style="vertical-align: middle; margin: 0px;text-align:center;">
@@ -598,7 +618,7 @@ $this->write_counties();
                 }
             }
             foreach ($locations as $loc) {
-                if ($location == $loc) {
+                if (in_array($loc, $location)) {
                     $locationRow.= '<td style ="text-align:center;">
             <input checked="checked" name="cqLocation_' . $counter . '[]" type="checkbox" value="' . $loc . '" class="cloned"/>
             </td>';
@@ -610,7 +630,7 @@ $this->write_counties();
             }
             if ($expiryDate != '') {
                 $expiryRow = '<td style ="text-align:center;">
-            <input name="cqExpiryDate_' . $counter . '" id="cqExpiryDate_' . $counter . '" type="text" size="350" class="cloned expiryDate" value="' . $expiry . '"/>
+            <input name="cqExpiryDate_' . $counter . '" id="cqExpiryDate_' . $counter . '" type="text" size="350" class="cloned expiryDate" value="' . $expiryDate . '"/>
             </td>';
             } else {
                 $expiryRow = '<td style ="text-align:center;">
@@ -626,10 +646,13 @@ $this->write_counties();
             <input name="cqNumberOfUnits_' . $counter . '" id="cqNumberOfUnits_' . $counter . '" type="text" size="100" class="cloned numbers"/>
             </td>';
             }
+            // echo '<li>' . $reasonUnavailable .'</li>';
             foreach ($reasons as $reason) {
                 if ($reasonUnavailable == $reason) {
+                    // echo 'Found: ' . $reason;
                     $reasonUnavailableRow.= '<option selected="selected" value="' . $reason . '">' . $reason . '</option>';
                 } else {
+                    // echo 'Could not Find: ' . $reason . '<br/>';
                     $reasonUnavailableRow.= '<option value="' . $reason . '">' . $reason . '</option>';
                 }
             }
@@ -640,12 +663,7 @@ $this->write_counties();
                ' . $reasonUnavailableRow . '
 
             </select></td>
-            ' . $locationRow . '
-            <td style ="text-align:center;">
-            <input name="cqLocation_' . $counter . '[]" id="cqLocNA_' . $counter . '" type="checkbox" value="Not Applicable" />
-            </td>
-            ' . $quantityRow . '
-            ' . $expiryRow . '
+            ' . $locationRow  . $quantityRow . $expiryRow . '
             <input type="hidden"  name="cqCommCode_' . $counter . '" id="cqCommCode_' . $counter . '" value="' . $value['commCode'] . '" />
     </tr>';
         }
@@ -972,35 +990,63 @@ $this->write_counties();
      * */
     public function createBemoncSignalFunctionsSection() {
         $this->data_found = $this->m_mnh_survey->getSignalFunctions();
+        $retrieved = $this->m_mch_survey->retrieveData('bemonc_functions', 'sf_code');
+        $challenges = array('Select One', 'Inadequate Drugs', 'Inadequate Skill', 'Inadequate Supplies', 'No Job aids', 'Inadequate equipment', 'Case never presented', 'No Challenge Experienced');
+        // echo "<pre>";print_r($retrieved);die;
         
-        //var_dump($this->data_found);die;
+        // echo"<pre>";var_dump($this->data_found);die;
         $counter = 0;
         foreach ($this->data_found as $value) {
             $counter++;
+            $bemoncconducted = '';
+            $bemoncchallenge = '';
+            if (array_key_exists($value['sfacilityMFL'], $retrieved)) {
+                $bemoncconducted = $retrieved[$value['sfacilityMFL']]['bem_conducted'];
+                $bemoncchallenge = $retrieved[$value['sfacilityMFL']]['challenge_code'];
+            }
             $this->signalFunctionsSection.= '<tr>
             <td colspan="7">' . $value['sfName'] . '</td><td colspan="4">
-            <select name="bmsfSignalFunctionConducted_' . $counter . '" id="bmsfSignalFunctionConducted_' . $counter . '" class="cloned">
-                <option value="" selected="selected">Select One</option>
-                <option value="Yes">Yes</option>
-                <option value="No">No</option>
+            <select name="bmsfSignalFunctionConducted_' . $counter . '" id="bmsfSignalFunctionConducted_' . $counter . '" class="cloned">';
+                if ($bemoncconducted == 'Yes') {
+                    $this->signalFunctionsSection.= '<option value="">Select One</option>
+                    <option value="Yes" selected="selected">Yes</option>
+                    <option value="No">No</option>';
+                }
+                else if($bemoncconducted == 'No')
+                {
+                    $this->signalFunctionsSection.= '<option value="">Select One</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No" selected="selected">No</option>';
+                }
+                else
+                {
+                    $this->signalFunctionsSection.= '<option value="" selected="selected">Select One</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>';
+                }
+            $this->signalFunctionsSection.= '</select></td><td colspan="5">';
+            $this->signalFunctionsSection .= '<select name="bmsfChallenge_' . $counter . '" id="bmsfChallenge_' . $counter . '" class="cloned">';
+            $challenge_counter=0;
+            foreach ($challenges as $challenge) {
+                $challenge_counter++;
+                if ($bemoncchallenge == '') {
+                    $bemoncchallenge == "Select One";
+                }
+                if ($challenge == $bemoncchallenge) {
+                    $this->signalFunctionsSection .= '<option value="'.$challenge.'" selected = "selected">'.$challenge_counter . '. '. $challenge.'</option>';
+                }
+                else
+                {
+                    $this->signalFunctionsSection .= '<option value="'.$challenge.'">'.$challenge_counter . '. '. $challenge.'</option>';
+                }
+            }
 
-            </select></td><td colspan="5">
-            <select name="bmsfChallenge_' . $counter . '" id="bmsfChallenge_' . $counter . '" class="cloned">
-                <option value="" selected="selected">Select Challenge</option>
-                <option value="Inadequate Drugs">1.Inadequate Drugs</option>
-                <option value="Inadequate Skill">2.Inadequate Skill</option>
-                <option value="Inadequate Supplies">3.Inadequate Supplies</option>
-                <option value="No Job aids">4.No Job aids</option>
-                <option value="Inadequate equipment">5.Inadequate Equipment</option>
-                <option value="Case never presented">6.Case never presented</option>
-                <option value="No Challenge Experienced">7.No Challenge Experienced</option>
-
-            </select></td>
+            $this->signalFunctionsSection .= '</select></td>
             <input type="hidden"  name="bmsfSignalCode_' . $counter . '" id="bmsfSignalCode_' . $counter . '" value="' . $value['sfacilityMFL'] . '" />
         </tr>';
         }
         
-        //echo $this->signalFunctionsSection;die;
+        // echo $this->signalFunctionsSection;die;
         return $this->signalFunctionsSection;
     }
     
@@ -1542,10 +1588,9 @@ $this->write_counties();
             <input type="text"  name="mnhceocReasonOther_' . $counter . '" id="mnhceocReasonOther_' . $counter . '" value="" size="64" class="cloned" />
             </td>
             </tr>';
-            } elseif ($value['questionCode'] == 'QMNH06b' || $value['questionCode'] == 'QMNH06c') {
-                $follow_up_question = '';
-            } else {
-                $follow_up_question = '<tr id="csdone_n" style="display:none">
+            } 
+            elseif($value['questionCode'] == 'QMNH06c'){
+ $follow_up_question = '<tr id="csdone_n" style="display:none">
             <td colspan="7">Give a main reason for <strong>not</strong> conducting Caeserian Section</td>
             <td>
             <select name="mnhceocReason_' . $counter . '" id="mnhceocReason_' . $counter . '" class="cloned" >
@@ -1560,6 +1605,12 @@ $this->write_counties();
             <input type="text"  name="mnhceocReasonOther_' . $counter . '" id="mnhceocReasonOther_' . $counter . '" value="" size="64" class="cloned" />
             </td>
             </tr>';
+}
+                else {
+                    $follow_up_question = '';
+
+                    
+               
             }
             
             $this->mnhCEOCAspectsSection.= '<tr>
@@ -1575,7 +1626,7 @@ $this->write_counties();
     </tr>';
         }
         
-        //echo $this->mnhCEOCAspectsSection;die;
+        // echo $this->mnhCEOCAspectsSection;die;
         return $this->mnhCEOCAspectsSection;
     }
     
@@ -1646,27 +1697,47 @@ $this->write_counties();
     /**Function to create the section: mnh CEOC service provision in Section 2 of 7 iii  * */
     public function createMNHHIVTestingAspectsSection() {
         $this->data_found = $this->m_mnh_survey->getMnhHIVTestingAspectQuestions();
+        $retrieved = $this->m_mch_survey->retrieveData('log_questions', 'question_code');
+        // echo"<pre>";print_r($retrieved);die;
         
-        //var_dump($this->data_found);die;
+        // var_dump($this->data_found);die;
         $counter = 0;
         $aspect = '';
         foreach ($this->data_found as $value) {
             $counter++;
+            $questionResponse = '';
+            if (array_key_exists($value['questionCode'], $retrieved)) {
+                $questionResponse = $retrieved[$value['questionCode']]['lq_response'];
+            }
             $this->mnhHIVTestingAspectsSection.= '<tr>
             <td colspan="7">' . $value['questionName'] . '</td>
             <td colspan="5">
-            <select name="mnhHIVAspectResponse_' . $counter . '" id="mnhHIVAspectResponse_' . $counter . '" class="cloned is-guideline">
-                <option value="" selected="selected">Select One</option>
+            <select name="mnhHIVAspectResponse_' . $counter . '" id="mnhHIVAspectResponse_' . $counter . '" class="cloned is-guideline">';
+            if ($questionResponse == "Yes") {
+                $this->mnhHIVTestingAspectsSection.= '<option value="">Select One</option>
+                <option value="Yes" selected="selected">Yes</option>
+                <option value="No">No</option>';
+            }
+            else if ($questionResponse == "No")
+            {
+                $this->mnhHIVTestingAspectsSection.= '<option value="">Select One</option>
                 <option value="Yes">Yes</option>
-                <option value="No">No</option>
+                <option value="No" selected="selected">No</option>';
+            }
+            else
+            {
+                $this->mnhHIVTestingAspectsSection.= '<option value="" selected="selected">Select One</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>';
+            }
 
-            </select>
+            $this->mnhHIVTestingAspectsSection.= '</select>
             </td>
             <input type="hidden"  name="mnhHIVAspectCode_' . $counter . '" id="mnhHIVAspectCode_' . $counter . '" value="' . $value['questionCode'] . '" />
         </tr>';
         }
         
-        //echo $this->mnhCEOCAspectsSection;die;
+        // echo $this->mnhHIVTestingAspectsSection;die;
         return $this->mnhHIVTestingAspectsSection;
     }
     
@@ -2066,28 +2137,45 @@ $this->write_counties();
     
     public function createMNHNewbornCareAspectsSection() {
         $this->data_found = $this->m_mnh_survey->getMnhNewbornAspectQuestions();
-        
+        $retrieved = $this->m_mch_survey->retrieveData('log_questions', 'question_code');
         //var_dump($this->data_found);die;
         $counter = 0;
         $aspect = '';
         foreach ($this->data_found as $value) {
             $counter++;
-            
+            $questionResponse = '';
+            if (array_key_exists($value['questionCode'], $retrieved)) {
+                $questionResponse = $retrieved[$value['questionCode']]['lq_response'];
+            }
+
             $this->mnhNewbornCareAspectsSection.= '<tr>
             <td >' . $value['questionName'] . '</td>
             <td >
-            <select name="newbornAspectResponse_' . $counter . '" id="newbornAspectResponse_' . $counter . '" class="cloned" >
-            <option value="" selected="selected">Select One</option>
+            <select name="newbornAspectResponse_' . $counter . '" id="newbornAspectResponse_' . $counter . '" class="cloned" >';
+            if ($questionResponse == 'Yes') {
+                $this->mnhNewbornCareAspectsSection.= '<option value="">Select One</option>
+            <option value="Yes" selected="selected">Yes</option>
+            <option value="No">No</option>';
+            }
+            else if ($questionResponse == 'No') {
+                $this->mnhNewbornCareAspectsSection.= '<option value="">Select One</option>
             <option value="Yes">Yes</option>
-            <option value="No">No</option>
-            </select><br/>
+            <option value="No" selected="selected">No</option>';
+            }
+            else
+            {
+                $this->mnhNewbornCareAspectsSection.= '<option value="" selected="selected">Select One</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>';
+            }
+            $this->mnhNewbornCareAspectsSection.= '</select><br/>
 
             </td>
             <input type="hidden"  name="newbornAspectCode_' . $counter . '" id="newbornAspectCode_' . $counter . '" value="' . $value['questionCode'] . '" />
         </tr>';
         }
         
-        //echo $this->mnhCEOCAspectsSection;die;
+        // echo $this->mnhNewbornCareAspectsSection;die;
         return $this->mnhNewbornCareAspectsSection;
     }
     
@@ -2117,27 +2205,46 @@ $this->write_counties();
     /**Function to create the section: mnh CEOC service provision in Section 2 of 7 iii  * */
     public function createMNHPreparednessAspectsSection() {
         $this->data_found = $this->m_mnh_survey->getMnhPreparednessTestingAspectQuestions();
+        $retrieved = $this->m_mch_survey->retrieveData('log_questions', 'question_code');
         
         //var_dump($this->data_found);die;
         $counter = 0;
         $aspect = '';
         foreach ($this->data_found as $value) {
             $counter++;
-            
+            $questionResponse = '';
+            if (array_key_exists($value['questionCode'], $retrieved)) {
+                $questionResponse = $retrieved[$value['questionCode']]['lq_response'];
+            }
             $this->mnhPreparednessAspectsSection.= '<tr>
         <td colspan="7"><strong>(' . $counter . ').</strong> ' . $value['questionName'] . '</td>
         <td colspan="5">
-        <select name="mnhPreparednessAspectResponse_' . $counter . '" id="mnhPreparednessAspectResponse_' . $counter . '" class="cloned ceoc">
-            <option value="" selected="selected">Select One</option>
+        <select name="mnhPreparednessAspectResponse_' . $counter . '" id="mnhPreparednessAspectResponse_' . $counter . '" class="cloned ceoc">';
+        if($questionResponse == 'Yes')
+        {
+            $this->mnhPreparednessAspectsSection.= '<option value="">Select One</option>
+            <option value="Yes" selected="selected">Yes</option>
+            <option value="No">No</option>';
+        }
+        else if($questionResponse == 'No')
+        {
+            $this->mnhPreparednessAspectsSection.= '<option value="">Select One</option>
             <option value="Yes">Yes</option>
-            <option value="No">No</option>
-        </select>
+            <option value="No" selected="selected">No</option>';
+        }
+        else
+        {
+            $this->mnhPreparednessAspectsSection.= '<option value="" selected="selected">Select One</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>';
+        }
+        $this->mnhPreparednessAspectsSection.= '</select>
         </td>
         <input type="hidden"  name="mnhPreparednessAspectCode_' . $counter . '" id="mnhPreparednessAspectCode_' . $counter . '" value="' . $value['questionCode'] . '" />
     </tr>';
         }
         
-        //echo $this->mnhCEOCAspectsSection;die;
+        // echo $this->mnhPreparednessAspectsSection;die;
         return $this->mnhPreparednessAspectsSection;
     }
     
@@ -2166,28 +2273,53 @@ $this->write_counties();
     /**Function to create the section: mnh CEOC service provision in Section 2 of 7 iii  * */
     public function createMNHGuidelinesAspectsSection() {
         $this->data_found = $this->m_mnh_survey->getMnhGuidelinesAspectQuestions();
+        $retrieved = $this->m_mch_survey->retrieveData('log_questions', 'question_code');
         
-        //var_dump($this->data_found);die;
+        // var_dump($this->data_found);die;
         $counter = 0;
         $aspect = '';
         foreach ($this->data_found as $value) {
             $counter++;
+            $questionResponse = '';
+            $questionCount = 0;
+
+            if(array_key_exists($value['questionCode'], $retrieved))
+            {
+                // echo $value['questionCode'];
+                $questionResponse = $retrieved[$value['questionCode']]['lq_response'];
+                $questionCount = $retrieved[$value['questionCode']]['lq_response_count'];
+            }
             $this->mnhGuidelinesAspectsSection.= '<tr>
             <td colspan="6">' . $value['questionName'] . '</td>
             <td colspan="3">
-            <select name="questionResponse_' . $counter . '" id="questionResponse_' . $counter . '" class="cloned is-guideline">
-                <option value="" selected="selected">Select One</option>
-                <option value="Yes">Yes</option>
-                <option value="No">No</option>
+            <select name="questionResponse_' . $counter . '" id="questionResponse_' . $counter . '" class="cloned is-guideline">';
+            if($questionResponse == 'Yes')
+            {
+                $this->mnhGuidelinesAspectsSection.= '<option value="">Select One</option>
+                <option value="Yes" selected="selected">Yes</option>
+                <option value="No">No</option>';
+            }
 
-            </select>
+            else if($questionResponse == 'No')
+            {
+                $this->mnhGuidelinesAspectsSection.= '<option value="">Select One</option>
+                <option value="Yes">Yes</option>
+                <option value="No" selected="selected">No</option>';
+            }
+            else
+            {
+                $this->mnhGuidelinesAspectsSection.= '<option value="" selected="selected">Select One</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>';
+            }
+            $this->mnhGuidelinesAspectsSection.= '</select>
             </td>
-            <td colspan="3"><input type="text" name="questionCount_' . $counter . '" id="questionCount_' . $counter . '" size="6" class="numbers" disabled/></td>
+            <td colspan="3"><input type="text" name="questionCount_' . $counter . '" id="questionCount_' . $counter . '" size="6" class="numbers" value = "'.$questionCount.'" disabled/></td>
             <input type="hidden"  name="questionCode_' . $counter . '" id="questionCode_' . $counter . '" value="' . $value['questionCode'] . '" />
         </tr>';
         }
         
-        //echo $this->mnhGuidelinesAspectsSection;die;
+        // echo $this->mnhGuidelinesAspectsSection;die;
         return $this->mnhGuidelinesAspectsSection;
     }
     
@@ -2434,23 +2566,43 @@ $this->write_counties();
      * */
     public function createKangaroo() {
         $this->data_found = $this->m_mnh_survey->getMnhKangarooAspectQuestions();
+        $retrieved = $this->m_mch_survey->retrieveData('log_questions', 'question_code');
         
         //var_dump($this->data_found);die;
         $counter = 0;
         foreach ($this->data_found as $value) {
             $counter++;
+            if (array_key_exists($value['questionCode'], $retrieved)) {
+                $questionResponse = $retrieved[$value['questionCode']]['lq_response'];
+            }
             $this->mnhKangarooMotherCare.= '<tr>
             <td colspan="1">' . $value['questionName'] . '</td>
             <td colspan="1">
-            <select name="kangarooAspect_' . $counter . '" id="kangarooAspect_' . $counter . '" class="cloned is-guideline">
-                <option value="" selected="selected">Select One</option>
-                <option value="Yes">Yes</option>
-                <option value="No">No</option>
+            <select name="kangarooAspect_' . $counter . '" id="kangarooAspect_' . $counter . '" class="cloned is-guideline">';
 
-            </select>
+            if ($questionResponse == 'Yes') {
+                $this->mnhKangarooMotherCare.= '<option value="">Select One</option>
+                <option value="Yes" selected="selected">Yes</option>
+                <option value="No">No</option>';
+            }
+
+            else if ($questionResponse == 'No') {
+                $this->mnhKangarooMotherCare.= '<option value="">Select One</option>
+                <option value="Yes">Yes</option>
+                <option value="No" selected="selected">No</option>';
+            }
+
+            else
+            {
+                $this->mnhKangarooMotherCare.= '<option value="" selected="selected">Select One</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>';
+            }
+            $this->mnhKangarooMotherCare.= '</select>
             <input type="hidden"  name="kangarooAspectCode_' . $counter . '" id="kangarooAspectCode_' . $counter . '" value="' . $value['questionCode'] . '" />
         </tr>';
         }
+        // echo $this->mnhKangarooMotherCare;die;
         return $this->mnhKangarooMotherCare;
     }
     
@@ -2885,7 +3037,7 @@ $this->write_counties();
         $retrieved = $this->m_mch_survey->retrieveData('log_questions', 'question_code');
         // echo "<pre>";print_r($this->data_found);die;
         
-        //var_dump($this->data_found);die;
+        // var_dump($this->data_found);die;
         $counter = 0;
         $section = '';
         $numbering = array_merge(range('A', 'Z'), range('a', 'z'));
@@ -2897,7 +3049,7 @@ $this->write_counties();
             $current = ($base == 0) ? $section : $current;
             $base = ($current != $section) ? 0 : $base;
             $current = ($base == 0) ? $section : $current;
-            
+            $questionResponse = '';
             if (array_key_exists($value['questionCode'], $retrieved)) {
                 $questionResponse = ($retrieved[$value['questionCode']]['lq_response'] != 'n/a') ? $retrieved[$value['questionCode']]['lq_response'] : '';
                 $questionCount = ($retrieved[$value['questionCode']]['lq_response_count'] != 'n/a') ? $retrieved[$value['questionCode']]['lq_response_count'] : '';
@@ -2930,6 +3082,38 @@ $this->write_counties();
                     <input type="hidden"  name="questionCode_' . $counter . '" id="questionCode_' . $counter . '" value="' . $value['questionCode'] . '" />
                 </tr>';
             }
+            else if($section == 'guide' || $section == 'job')
+            {
+                $guidelinequestions = '<tr>
+            <td colspan="6">' . $value['questionName'] . '</td>
+            <td colspan="3">
+            <select name="questionResponse_' . $counter . '" id="questionResponse_' . $counter . '" class="cloned is-guideline">';
+            if($questionResponse == 'Yes')
+            {
+                $guidelinequestions.= '<option value="">Select One</option>
+                <option value="Yes" selected="selected">Yes</option>
+                <option value="No">No</option>';
+            }
+
+            else if($questionResponse == 'No')
+            {
+                $guidelinequestions.= '<option value="">Select One</option>
+                <option value="Yes">Yes</option>
+                <option value="No" selected="selected">No</option>';
+            }
+            else
+            {
+                $guidelinequestions.= '<option value="" selected="selected">Select One</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>';
+            }
+            $guidelinequestions.= '</select>
+            </td>
+            <td colspan="3"><input type="text" name="questionCount_' . $counter . '" id="questionCount_' . $counter . '" size="6" class="numbers" value = "'.$questionCount.'" disabled/></td>
+            <input type="hidden"  name="questionCode_' . $counter . '" id="questionCode_' . $counter . '" value="' . $value['questionCode'] . '" />
+        </tr>';
+            $data[$section][] = $guidelinequestions;
+            }
             else {
                 if ($value['questionName'] == 'Document cases seen over 3 months') {
                     $numbers = explode(',', $questionResponse);
@@ -2942,9 +3126,9 @@ $this->write_counties();
                     </tr>';
                 } else {
                     if ($questionResponse == 'Yes') {
-                        $questionRow = '<td>Yes <input name="questionResponse_' . $counter . '" checked="checked" value="Yes" type="radio"> No <input value="No" name="questionResponse_' . $counter . '"  type="radio"></td>';
+                        $questionRow = '<td>Yes <input name="questionResponse_' . $counter . '" checked="checked" value="Yes" type="radio"> No <input value="No" name="questionResponse_' . $counter . '"  type="radio"><input type="text" style="display:none" name="questionReason_' . $counter . '"></td>';
                     } else if ($questionResponse == 'No') {
-                        $questionRow = '<td>Yes <input name="questionResponse_' . $counter . '" value="Yes" type="radio"> No <input value="No" checked="checked" name="questionResponse_' . $counter . '"  type="radio"></td>';
+                        $questionRow = '<td>Yes <input name="questionResponse_' . $counter . '" value="Yes" type="radio"> No <input value="No" checked="checked" name="questionResponse_' . $counter . '"  type="radio"><input type="text" name="questionReason_' . $counter . '"></td>';
                     } else {
                         $questionRow = '<td>Yes <input name="questionResponse_' . $counter . '" value="Yes" type="radio"> No <input value="No" name="questionResponse_' . $counter . '"  type="radio"></td>';
                     }
@@ -2966,7 +3150,7 @@ $this->write_counties();
             }
         }
         
-        // var_dump($this->question['hs']);die;
+        // var_dump($this->question['job']);die;
         return $this->question;
     }
     public function createSuppliesSectionPDF() {
@@ -3034,8 +3218,17 @@ $this->write_counties();
     public function createSuppliesSection() {
     $this->data_found = $this->m_mch_survey->getEverySupplyName();
     $retrieved = $this->m_mch_survey->retrieveData('available_supplies', 'supply_code');
-    $locations = array('OPD', 'MCH', 'U5 Clinic', 'Ward', 'Other');
-        
+
+        $survey = $this->session->userdata('survey');
+        // echo $survey;die;
+        switch ($survey) {
+            case 'ch':
+                $locations = array('OPD', 'MCH', 'U5 Clinic', 'Ward', 'Other');
+                break;
+            case 'mnh':
+                $locations = array('Delivery Room', 'Pharmacy', 'Store', 'Other');
+                break;
+        }
         //echo '<pre>';print_r($this->data_found);echo '</pre>';die;
         $counter = 0;
         $section = '';
@@ -3100,7 +3293,36 @@ $this->write_counties();
             ' . $quantity . '
             <input type="hidden"  name="sqsupplyCode_' . $counter . '" id="sqsupplyCode_' . $counter . '" value="' . $value['supplyCode'] . '" />
         </tr>';
-            }else{
+            }
+else if($section=='tes'){
+    $data[$section][] = '<tr>
+            <td  style="width:200px;">' . $value['supplyName'] . '</td>
+            <td style="vertical-align: middle; margin: 0px;text-align:center;">
+            <input name="sqAvailability_' . $counter . '" id="sqAvailability_' . $counter . '" type="radio" value="Available" style="vertical-align: middle; margin: 0px;" class="cloned"/>
+            </td>
+            <td style ="text-align:center;">
+            <input name="sqAvailability_' . $counter . '" type="radio" value="Never Available" />
+            </td>
+            <td style ="text-align:center;">
+            <input name="sqLocation_' . $counter . '[]" type="checkbox" value="OPD" />
+            </td>
+            <td style ="text-align:center;">
+            <input name="sqLocation_' . $counter . '[]" type="checkbox" value="MCH" />
+            </td>
+            <td style ="text-align:center;">
+            <input name="sqLocation_' . $counter . '[]" type="checkbox" value="U5 Clinic" />
+            </td>
+            <td style ="text-align:center;">
+            <input name="sqLocation_' . $counter . '[]" type="checkbox" value="Ward" />
+            </td>
+            <td style ="text-align:center;">
+            <input name="sqLocation_' . $counter . '[]" id="sqLocOther_' . $counter . '" type="checkbox" value="Other" />
+            </td>
+            ' . $quantity . '
+            <input type="hidden"  name="sqsupplyCode_' . $counter . '" id="sqsupplyCode_' . $counter . '" value="' . $value['supplyCode'] . '" />
+        </tr>';
+}
+            else{
                 $suppliesRow = '<tr><td  style="width:200px;">' . $value['supplyName'] .'</td>';
 
             if ($supplyAvailability == 'Available') {
@@ -3154,7 +3376,7 @@ $this->write_counties();
             }
         }
         
-        // var_dump($this->mchSupplies);die;
+        // var_dump($this->mchSupplies['mnh']);die;
         return $this->mchSupplies;
     }
     
@@ -3294,52 +3516,64 @@ $this->write_counties();
      * */
     public function createCommodityUsageAndOutageSection() {
         $this->data_found = $this->m_mnh_survey->getCommodityNames();
+        $retrieved = $this->m_mch_survey->retrieveData('log_commodity_stock_outs', 'comm_id');
+        $OutageOptions = array('1', '2', '3', '4', '5');
+        $UnavailabilityTimes = array('' => 'Select One','Once' => 'a. 1 Week', '2-3' => 'b. 2 weeks', '5-5' => 'c. 1 month', 'more than 5' => 'd. more than 1 month');
+        // echo "<pre>";print_r($retrieved);die;
         
-        //var_dump($this->data_found);die;
+        // var_dump($this->data_found);die;
         $unit = "";
         $counter = 0;
         foreach ($this->data_found as $value) {
             $counter++;
-            
+
+            $commodityUsage = $unavailableTimes = $optionsOnOutage = '';
+
+            if(array_key_exists($value['commCode'], $retrieved))
+            {
+                $commodityUsage = $retrieved[$value['commCode']]['lcso_usage'];
+                $unavailableTimes = $retrieved[$value['commCode']]['lcso_unavailable_times'];
+                $optionsOnOutage = $retrieved[$value['commCode']]['lcso_option_on_outage'];
+                // echo $unavailableTimes;
+
+            }
             if ($value['commUnit'] != null) {
                 $unit = $value['commUnit'];
             } else {
                 $unit = '';
             }
-            $this->commodityUsageAndOutageSection[$value["commFor"]].= '<tr>
+            $lsocrow = '<tr>
             <td style="width:200px;">' . $value['commName'] . ' </td><td >' . $unit . ' </td>
             <td >
-            <input name="usocUsage_' . $counter . '" type="text" size="5" class="cloned numbers"/>
-            </td>
-            <td>
-            <select name="usocTimesUnavailable_' . $counter . '" id="usocTimesUnavailable_' . $counter . '" class="cloned">
-                <option value="" selected="selected">Select One</option>
-                <option value="Once">a. 1 week</option>
-                <option value="2-3">b. 2 weeks</option>
-                <option value="5-5">c. 1 month</option>
-                <option value="more than 5">d. more than 1 month</option>
+            <input name="usocUsage_' . $counter . '" type="text" size="5" class="cloned numbers" value = "'.$commodityUsage.'" />
+            </td>';
+            $lsocrow .= '<td>
+            <select name="usocTimesUnavailable_' . $counter . '" id="usocTimesUnavailable_' . $counter . '" class="cloned">';
 
-            </select></td>
+            foreach ($UnavailabilityTimes as $k => $Unavailable) {
+                if($k == $unavailableTimes)
+                {
+                    $lsocrow .= '<option value="'.$k.'" selected="selected">'.$Unavailable.'</option>';
+                }
+                else
+                {
+                    $lsocrow .= '<option value="'.$k.'">'.$Unavailable.'</option>';
+                }
+            }
 
-
-            <td style ="text-align:center;">
-            <input name="usocWhatHappened_' . $counter . '[]" type="checkbox" value="1" class="cloned"/>
-            </td>
-            <td style ="text-align:center;">
-            <input name="usocWhatHappened_' . $counter . '[]" type="checkbox" value="2" />
-            </td>
-            <td style ="text-align:center;">
-            <input name="usocWhatHappened_' . $counter . '[]" type="checkbox" value="3" />
-            </td>
-            <td style ="text-align:center;">
-            <input name="usocWhatHappened_' . $counter . '[]" type="checkbox" value="4" />
-            </td>
-            <td style ="text-align:center;">
-            <input name="usocWhatHappened_' . $counter . '[]" type="checkbox" value="5" />
-            </td>
-
-            <input type="hidden"  name="usoccommCode_' . $counter . '" id="usoccommCode_' . $counter . '" value="' . $value['commCode'] . '" />
-        </tr>';
+            $lsocrow .= '</select></td>';
+            $optionsOnOutage = explode(',', $optionsOnOutage);
+            foreach ($OutageOptions as $option) {
+                if (in_array($option, $optionsOnOutage)) {
+                    $lsocrow .= '<td style ="text-align:center;"><input name="usocWhatHappened_' . $counter . '[]" type="checkbox" value="'.$option.'" class="cloned" checked/></td>';
+                }
+                else
+                {
+                    $lsocrow .= '<td style ="text-align:center;"><input name="usocWhatHappened_' . $counter . '[]" type="checkbox" value="'.$option.'" class="cloned"/></td>';
+                }
+            }
+            $lsocrow .= '<input type="hidden"  name="usoccommCode_' . $counter . '" id="usoccommCode_' . $counter . '" value="' . $value['commCode'] . '" /></tr>';
+        $this->commodityUsageAndOutageSection[$value["commFor"]] .= $lsocrow;
         }
         
         // echo $this->commodityUsageAndOutageSection['mnh'];die;
@@ -3992,7 +4226,7 @@ $this->write_counties();
         }
         }
         
-        // print_r ($this->equipmentsSection['hwr']);die;
+        // print_r ($this->equipmentsSection['dke']);die;
         return $this->equipmentsSection;
     }
     
@@ -4368,13 +4602,13 @@ GROUP BY st_name,sc_name,facilityCode;";
     }
     
     public function createFacilitiesListSection() {
-        
-        /*retrieve facility list*/
+    /*retrieve facility list*/
         $this->m_mnh_survey->getFacilitiesByDistrict($this->session->userdata('dName'));
         $counter = 0;
         $link = '';
         $surveyCompleteFlag = '';
         if (count($this->m_mnh_survey->districtFacilities) > 0) {
+
             
             //set session data
             $this->session->set_userdata(array('fCount' => count($this->m_mnh_survey->districtFacilities)));
@@ -4392,42 +4626,66 @@ GROUP BY st_name,sc_name,facilityCode;";
                 } else {
                     $total = 5;
                 }
-                $current = $this->getSection($survey, $fac_mfl, $survey_category);
+                $dataFound = $this->m_analytics->get_survey_info($survey, $survey_category,'facility', $fac_mfl);
+                
+//                print_r($dataFound);
+                $current = trim($dataFound[0]['max_section'], 'section-');
+//                 echo $current;
+                $last_activity = $dataFound[0]['last_activity'];
+                $label = $dataFound[0]['status'];
                 $progress = round(($current / $total) * 100);
                 if ($progress == 0) {
                     $linkText = 'Begin Survey';
                     $linkClass = 'action';
+                    $attr = 'begin';
+                   
                 } elseif ($progress == 100) {
-                    $linkText = 'Survey Completed';
-                    $linkClass = 'no-action';
+                    $linkText = 'Review Entries';
+                    $linkClass = 'action';
+                    $attr = 'review';
+                    
                 } else {
                     $linkText = 'Continue Survey';
                     $linkClass = 'action';
+                    $attr = 'continue';
+                    
+                }
+                switch ($label) {
+                	case 'complete':
+                	$label_class='green';
+                	break;
+                	
+                	case 'pending':
+                	$label_class='orange';
+                	break;
+                	default:
+                	$label = 'not started';
+                	 $label_class='red';
+                	break;
                 }
                 
-                $link = '<td><div class="progress"><div class="progress-bar" role="progressbar" aria-valuenow="' . $progress . '" aria-valuemin="0" aria-valuemax="100" style="width: ' . $progress . '%;">' . $progress . '%</div></div></td>';
-                $link.= '<td id="facility_1" class="' . $linkClass . '"><a id="' . $value['facMfl'] . '" class="begin">' . $linkText . '</a></td>';
+                $last_activity = ($last_activity != NULL) ? $last_activity : 'not started yet';
+                 // echo $last_activity;die;
+                // Get Survey Information
+                
+                $link = '<td><div class="progress"><div class="progress-bar" role="progressbar" aria-valuenow="' . $progress . '" aria-valuemin="0" aria-valuemax="100" style="width: ' . $progress . '%;">' . $progress . '%</div></div></div>';
+                
+                $link.= '<div class="ui label '.$label_class.' status">' . $label . '</div></td><td><div class="ui label activity"> Last Activity : <span class="activity-text">' . $last_activity . '</span></div></td><td><a class="' . $linkClass . '" id="facility_1" data-action="' . $attr . '" data-mfl ="' . $value['facMfl'] . '" data-section ="' . $current . '" href="#">' . $linkText . '</a></td>';
                 
                 $this->districtFacilityListSection.= '<tr>
+
         <td >' . $counter . '</td>
-            <td >' . $value['facMfl'] . '</td>
-            <td >' . $value['facName'] . '</td>
-
-
-            ' . $link . '
-            </tr>';
-            }
-            
-            //print 'fs: '.$this->districtFacilityListSection;die;
-            
-            
-        } else {
-            
-            //print 'false'; die;
-            $this->districtFacilityListSection.= '<tr><td colspan="22">No Facilities Found</td></tr>';
+        <td >' . $value['facMfl'] . '</td>
+        <td >' . $value['facName'] . '</td>
+        ' . $link . '
+        </tr>';
         }
-    }
-    
+        //print 'fs: '.$this->districtFacilityListSection;die;
+        } else {
+        //print 'false'; die;
+        $this->districtFacilityListSection.= '<tr><td colspan="22">No Facilities Found</td></tr>';
+        }
+}
     /**Function to create malaria treatment section**/
     public function createmalariaconfrimedtreatmentSection() {
         $this->data_found = $this->m_mch_survey->getTreatmentCommodities();
@@ -5344,6 +5602,42 @@ background: #ddd;
         $this->totalsRows = $data;
         // var_dump($this->totalsRows);
         return $this->totalsRows;
+    }
+
+    public function createmonthlydeliveriessection()
+    {
+        $retrieved = $this->m_mch_survey->retrieveData('log_diarrhoea', 'month');
+        // echo "<pre>";print_r($retrieved);die;
+        $months = array('january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december');
+        foreach ($months as $month) {
+            $monthldnumber = $retrieved[$month]['ld_number'];
+            
+            if($month !='july' && $month != 'august' && $month != 'september' && $month != 'october' && $month != 'november' && $month != 'december')
+            {
+                $upperrow .= '<td style ="text-align:center;">
+            <input type="text" id="'.$month.'" name="dnmonth['.$month.']"  size="8" class="cloned numbers" value = "'.$monthldnumber.'"/>
+            </td>';
+            }
+            else
+            {
+                $lowerrow .= '<td style ="text-align:center;">
+            <input type="text" id="'.$month.'" name="dnmonth['.$month.']"  size="8" class="cloned numbers" value = "'.$monthldnumber.'"/>
+            </td>';
+            }
+        }
+        
+        $this->monthlydeliveries .= '
+        <th> MONTH</th><th><div style="width: 50px"> JANUARY</div></th> <th>FEBRUARY</th><th>MARCH</th><th> APRIL</th><th> MAY</th><th>JUNE</th>
+        <tr>
+            <td>' . date("Y") . '</td>'.$upperrow.'
+            </tr>
+            <th> MONTH</th><th> JULY</th><th> AUGUST</th><th> SEPTEMBER</th><th> OCTOBER</th><th> NOVEMBER</th><th> DECEMBER</th>
+            <tr>
+            <td>' . 2013 . '</td>'.$lowerrow.'
+            </tr>';
+
+           // echo "<pre>"; var_dump($this->monthlydeliveries);
+        return $this->monthlydeliveries;
     }
 }
 

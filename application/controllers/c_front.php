@@ -29,8 +29,8 @@ class C_Front extends MY_Controller
 
     //End of index file
 
-    public function runMap($survey,$survey_category) {
-        $counties = $this->m_analytics->runMap($survey,$survey_category);
+    public function runMap($survey,$survey_category,$statistic) {
+        $counties = $this->m_analytics->runMap($survey,$survey_category,$statistic);
         $map = array();
         $datas = array();
         $status = '';
@@ -180,7 +180,7 @@ class C_Front extends MY_Controller
     }
 
     
-        function getReportingRatio($survey, $survey_category, $county) {
+        function getReportingRatio($survey, $survey_category, $county,$statistic) {
             
             /*using DQL*/
             
@@ -188,7 +188,7 @@ class C_Front extends MY_Controller
             
             try {
                 
-                $query = 'CALL get_reporting_ratio("' . $survey . '","' . $survey_category . '","' . $county . '");';
+                $query = 'CALL get_reporting_ratio("' . $survey . '","' . $survey_category . '","' . $county . '","' . $statistic . '");';
                 $myData = $this->db->query($query);
                 $finalData = $myData->result_array();
                 
@@ -217,7 +217,7 @@ class C_Front extends MY_Controller
         echo $this->session->userdata('survey_status');
         $this->load->model('m_retrieve');
         $data = $this->m_retrieve->retrieveData($table_name,$identifier);
-        echo '<pre>';print_r($data);echo '</pre>';
+        //echo '<pre>';print_r($data);echo '</pre>';
     }
 
 }

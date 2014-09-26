@@ -11,11 +11,11 @@
         <div class="panel-heading">
             <h4 class="panel-title">
                 <a data-toggle="collapse" data-parent="#accordion" href="#sectionNav">
-                    Section Navigation <span class="show-collapse">Click to Expand</span>
+                    Section Navigation <span class="show-collapse"><span class="txt">Click to Expand</span><i class="fa fa-chevron-right"></i></span>
                 </a>
             </h4>
         </div>
-        <div id="sectionNav" class="panel-collapse collapse in">
+        <div id="sectionNav" class="panel-collapse collapse">
             <div class="panel-body">
                 <div class="semi-large-graph">
                     <div class="portlet-title">
@@ -49,7 +49,7 @@
         <div class="panel-heading">
             <h4 class="panel-title">
                 <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                    Section 1 : Facility Information <span class="show-collapse">Click to Expand</span>
+                    Section 1 : Facility Information <span class="show-collapse"><span class="txt">Click to Expand</span><i class="fa fa-chevron-right"></i></span>
                 </a>
             </h4>
         </div>
@@ -115,15 +115,33 @@
                         </div>
                     </div>
                 </div>
-
-            </div>
+                <div class="medium-graph">
+                    <div class="portlet-title">
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">IMCI Consultation Room</span><span class="sizer">Click to Enlarge</span></h6>
+                    </div>
+                    <div class="portlet-body">
+					<div class="chart" id="imci">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="medium-graph">
+                    <div class="portlet-title">
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Health Service</span><span class="sizer">Click to Enlarge</span></h6>
+                    </div>
+                    <div class="portlet-body">
+						<div class="chart" id="chhealth_service">
+                        </div>
+                    </div>
+                </div>
+            
         </div>
     </div>
     <div class="panel panel-default analytics_row section" data-survey='ch' id="ch-section-2">
         <div class="panel-heading">
             <h4 class="panel-title">
                 <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-                    Section 2 : Guidelines, Job Aids and Tools <span class="show-collapse">Click to Expand</span>
+                    Section 2 : Guidelines, Job Aids and Tools <span class="show-collapse"><span class="txt">Click to Expand</span><i class="fa fa-chevron-right"></i></span>
                 </a>
             </h4>
         </div>
@@ -131,7 +149,7 @@
             <div class="panel-body">
                 <div class="medium-graph">
                     <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Guidelines</span><span class="sizer">Click to Enlarge</span></h6>
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Guidelines and Job Aids</span><span class="sizer">Click to Enlarge</span></h6>
                     </div>
                     <div class="portlet-body">
 
@@ -139,7 +157,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="medium-graph">
+              <!--<div class="medium-graph">
                     <div class="portlet-title">
                         <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Job Aids</span><span class="sizer">Click to Enlarge</span></h6>
                     </div>
@@ -148,7 +166,7 @@
                         <div class="chart" id="job_aids">
                         </div>
                     </div>
-                </div>
+              </div>-->
                 <div class="medium-graph">
                     <div class="portlet-title">
                         <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Tools</span><span class="sizer">Click to Enlarge</span></h6>
@@ -178,7 +196,7 @@
         <div class="panel-heading">
             <h4 class="panel-title">
                 <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-                    Section 3 : Case Management <span class="show-collapse">Click to Expand</span>
+                    Section 3 : Case Management <span class="show-collapse"><span class="txt">Click to Expand</span><i class="fa fa-chevron-right"></i></span>
                 </a>
             </h4>
         </div>
@@ -259,7 +277,7 @@
         <div class="panel-heading">
             <h4 class="panel-title">
                 <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
-                    Section 4 : Commodity & Bundling <span class="show-collapse">Click to Expand</span>
+                    Section 4 : Commodity & Bundling <span class="show-collapse"><span class="txt">Click to Expand</span><i class="fa fa-chevron-right"></i></span>
                 </a>
             </h4>
         </div>
@@ -344,7 +362,7 @@
         <div class="panel-heading">
             <h4 class="panel-title">
                 <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive">
-                    Section 5 : ORT Corner Assessment <span class="show-collapse">Click to Expand</span>
+                    Section 5 : ORT Corner Assessment <span class="show-collapse"><span class="txt">Click to Expand</span><i class="fa fa-chevron-right"></i></span>
                 </a>
             </h4>
         </div>
@@ -376,7 +394,7 @@
                     </div>
                     <div class="portlet-body">
 
-                        <div class="chart" id="ort_nonfunctional">
+                        <div class="chart" id="ort_reason">
                         </div>
                     </div>
                 </div>
@@ -388,7 +406,7 @@
         <div class="panel-heading">
             <h4 class="panel-title">
                 <a data-toggle="collapse" data-parent="#accordion" href="#collapseSix">
-                    Section 6 :Equipment <span class="show-collapse">Click to Expand</span>
+                    Section 6 :Equipment <span class="show-collapse"><span class="txt">Click to Expand</span><i class="fa fa-chevron-right"></i></span>
                 </a>
             </h4>
         </div>
@@ -432,7 +450,7 @@
         <div class="panel-heading">
             <h4 class="panel-title">
                 <a data-toggle="collapse" data-parent="#accordion" href="#collapseSeven">
-                    Section 7 : Supplies <span class="show-collapse">Click to Expand</span>
+                    Section 7 : Supplies <span class="show-collapse"><span class="txt">Click to Expand</span><i class="fa fa-chevron-right"></i></span>
                 </a>
             </h4>
         </div>
@@ -476,7 +494,7 @@
         <div class="panel-heading">
             <h4 class="panel-title">
                 <a data-toggle="collapse" data-parent="#accordion" href="#collapseEight">
-                    Section 8 : Resources <span class="show-collapse">Click to Expand</span>
+                    Section 8 : Resources <span class="show-collapse"><span class="txt">Click to Expand</span><i class="fa fa-chevron-right"></i></span>
                 </a>
             </h4>
         </div>
@@ -516,15 +534,58 @@
             </div>
         </div>
     </div>
-    <div class="panel panel-default analytics_row section" data-survey='mnh' id="mnh-section-1">
+    
+    <div class="panel panel-default analytics_row section" data-survey='ch' id="ch-section-9">
         <div class="panel-heading">
             <h4 class="panel-title">
                 <a data-toggle="collapse" data-parent="#accordion" href="#collapseNine">
-                    Section 1 : Facility Information <span class="show-collapse">Click to Expand</span>
+                    Section 9 : Community Strategy <span class="show-collapse"><span class="txt">Click to Expand</span><i class="fa fa-chevron-right"></i></span>
                 </a>
             </h4>
         </div>
-        <div id="collapseNine" class="panel-collapse collapse">
+      <div id="collapseNine" class="panel-collapse collapse">
+            <div class="panel-body">
+                <div class="medium-graph">
+                <div class="portlet-title">
+                    <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Community Units</span><span class="sizer">Click to Enlarge</span></h6>
+                </div>
+                <div class="portlet-body">
+
+                    <div class="chart" id="chcommunity_units">
+                    </div>
+                </div>
+            </div>
+         <div class="medium-graph">
+                <div class="portlet-title">
+                    <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Referred Cases</span><span class="sizer">Click to Enlarge</span></h6>
+                </div>
+                <div class="portlet-body">
+				<div class="chart" id="chCases">
+                    </div>
+                </div>
+            </div>
+       <div class="medium-graph">
+                <div class="portlet-title">
+                    <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">IMCI Trained</span><span class="sizer">Click to Enlarge</span></h6>
+                </div>
+                <div class="portlet-body">
+					<div class="chart" id="chIMCITraining">
+                    </div>
+                </div>
+            </div>
+           </div>
+           </div>
+           </div>
+    <div class="panel panel-default analytics_row section" data-survey='mnh' id="mnh-section-1">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapseTen">
+                    Section 1 : Facility Information <span class="show-collapse"><span class="txt">Click to Expand</span><i class="fa fa-chevron-right"></i></span>
+
+                </a>
+            </h4>
+        </div>
+        <div id="collapseTen" class="panel-collapse collapse">
             <div class="panel-body">
                 <div class="medium-graph" >
                     <div class="portlet-title">
@@ -596,12 +657,13 @@
     <div class="panel panel-default analytics_row section" data-survey='mnh' id="mnh-section-2">
         <div class="panel-heading">
             <h4 class="panel-title">
-                <a data-toggle="collapse" data-parent="#accordion" href="#collapseTen">
-                    Section 2 : Facility Data And Maternal And Neotanal Service Delivery <span class="show-collapse">Click to Expand</span>
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapseEleven">
+                    Section 2 : Facility Data And Maternal And Neotanal Service Delivery <span class="show-collapse"><span class="txt">Click to Expand</span><i class="fa fa-chevron-right"></i></span>
+
                 </a>
             </h4>
         </div>
-        <div id="collapseTen" class="panel-collapse collapse">
+        <div id="collapseEleven" class="panel-collapse collapse">
             <div class="panel-body">
                 <div class="medium-graph">
                     <div class="portlet-title">
@@ -717,7 +779,7 @@
 <div class="panel-heading">
 <h4 class="panel-title">
 <a data-toggle="collapse" data-parent="#accordion" href="#collapseTen">
-<span class="show-collapse">Click to Expand</span>
+<span class="show-collapse"><span class="txt">Click to Expand</span><i class="fa fa-chevron-right"></i></span>
 </a>
 </h4>
 </div>
@@ -731,12 +793,12 @@
     <div class="panel panel-default analytics_row section" data-survey='mnh' id="mnh-section-3">
         <div class="panel-heading">
             <h4 class="panel-title">
-                <a data-toggle="collapse" data-parent="#accordion" href="#collapseEleven">
-                    Section 3 : Guidelines, Job Aid and Tools Availability<span class="show-collapse">Click to Expand</span>
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwelve">
+                    Section 3 : Guidelines, Job Aid and Tools Availability<span class="show-collapse"><span class="txt">Click to Expand</span><i class="fa fa-chevron-right"></i></span>
                 </a>
             </h4>
         </div>
-        <div id="collapseEleven" class="panel-collapse collapse">
+        <div id="collapseTwelve" class="panel-collapse collapse">
             <div class="panel-body">
                 <div class="medium-graph">
                     <div class="portlet-title">
@@ -774,12 +836,12 @@
     <div class="panel panel-default analytics_row section" data-survey='mnh' id="mnh-section-4">
         <div class="panel-heading">
             <h4 class="panel-title">
-                <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwelve">
-                    Section 4: Staff Training<span class="show-collapse">Click to Expand</span>
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapseThirteen">
+                    Section 4: Staff Training<span class="show-collapse"><span class="txt">Click to Expand</span><i class="fa fa-chevron-right"></i></span>
                 </a>
             </h4>
         </div>
-        <div id="collapseTwelve" class="panel-collapse collapse">
+        <div id="collapseThirteen" class="panel-collapse collapse">
             <div class="panel-body">
 
                 <div class="medium-graph">
@@ -818,12 +880,13 @@
     <div class="panel panel-default analytics_row section" data-survey='mnh' id="mnh-section-5">
         <div class="panel-heading">
             <h4 class="panel-title">
-                <a data-toggle="collapse" data-parent="#accordion" href="#collapseThirteen">
-                    Section 5 : Commodity Availability<span class="show-collapse">Click to Expand</span>
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapseFourteen">
+                    Section 5 : Commodity Availability<span class="show-collapse"><span class="txt">Click to Expand</span><i class="fa fa-chevron-right"></i></span>
+
                 </a>
             </h4>
         </div>
-        <div id="collapseThirteen" class="panel-collapse collapse">
+        <div id="collapseFourteen" class="panel-collapse collapse">
             <div class="panel-body">
                 <div class="medium-graph">
                     <div class="portlet-title">
@@ -871,12 +934,12 @@
     <div class="panel panel-default analytics_row section" data-survey='mnh' id="mnh-section-6">
         <div class="panel-heading">
             <h4 class="panel-title">
-                <a data-toggle="collapse" data-parent="#accordion" href="#collapseFourteen">
-                    Section 6 : Commodity  Usage<span class="show-collapse">Click to Expand</span>
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapseFifteen">
+                    Section 6 : Commodity  Usage<span class="show-collapse"><span class="txt">Click to Expand</span><i class="fa fa-chevron-right"></i></span>
                 </a>
             </h4>
         </div>
-        <div id="collapseFourteen" class="panel-collapse collapse">
+        <div id="collapseFifteen" class="panel-collapse collapse">
             <div class="panel-body">
                 <div class="medium-graph">
                     <div class="portlet-title">
@@ -914,12 +977,12 @@
     <div class="panel panel-default analytics_row section" data-survey='mnh' id="mnh-section-7">
         <div class="panel-heading">
             <h4 class="panel-title">
-                <a data-toggle="collapse" data-parent="#accordion" href="#collapseFifteen">
-                    Section 7 :Equipment Availability and Functionality<span class="show-collapse">Click to Expand</span>
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapseSixteen">
+                    Section 7 :Equipment Availability and Functionality<span class="show-collapse"><span class="txt">Click to Expand</span><i class="fa fa-chevron-right"></i></span>
                 </a>
             </h4>
         </div>
-        <div id="collapseFifteen" class="panel-collapse collapse">
+        <div id="collapseSixteen" class="panel-collapse collapse">
             <div class="panel-body">
                 <div class="medium-graph">
                     <div class="portlet-title">
@@ -957,12 +1020,12 @@
     <div class="panel panel-default analytics_row section" data-survey='mnh' id="mnh-section-8">
         <div class="panel-heading">
             <h4 class="panel-title">
-                <a data-toggle="collapse" data-parent="#accordion" href="#collapseSixteen">
-                    Section 8: Supplies<span class="show-collapse">Click to Expand</span>
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapseSeventeen">
+                    Section 8: Supplies<span class="show-collapse"><span class="txt">Click to Expand</span><i class="fa fa-chevron-right"></i></span>
                 </a>
             </h4>
         </div>
-        <div id="collapseSixteen" class="panel-collapse collapse">
+        <div id="collapseSeventeen" class="panel-collapse collapse">
             <div class="panel-body">
                 <div class="medium-graph">
                     <div class="portlet-title">
@@ -1000,12 +1063,12 @@
     <div class="panel panel-default analytics_row section" data-survey='mnh' id="mnh-section-9">
         <div class="panel-heading">
             <h4 class="panel-title">
-                <a data-toggle="collapse" data-parent="#accordion" href="#collapseSeventeen">
-                    Section 9 : Resources<span class="show-collapse">Click to Expand</span>
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapseEighteen">
+                    Section 9 : Resources<span class="show-collapse"><span class="txt">Click to Expand</span><i class="fa fa-chevron-right"></i></span>
                 </a>
             </h4>
         </div>
-        <div id="collapseSeventeen" class="panel-collapse collapse">
+        <div id="collapseEighteen" class="panel-collapse collapse">
             <div class="panel-body">
                 <div class="medium-graph">
                     <div class="portlet-title">
@@ -1063,12 +1126,12 @@
     <div class="panel panel-default analytics_row section" data-survey='mnh' id="mnh-section-10">
         <div class="panel-heading">
             <h4 class="panel-title">
-                <a data-toggle="collapse" data-parent="#accordion" href="#collapseEighteen">
-                    Section 10 : Community Strategy<span class="show-collapse">Click to Expand</span>
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapseNineteen">
+                    Section 10 : Community Strategy<span class="show-collapse"><span class="txt">Click to Expand</span><i class="fa fa-chevron-right"></i></span>
                 </a>
             </h4>
         </div>
-        <div id="collapseEighteen" class="panel-collapse collapse">
+        <div id="collapseNineteen" class="panel-collapse collapse">
             <div class="panel-body">
                 <div class="medium-graph">
                 <div class="portlet-title">

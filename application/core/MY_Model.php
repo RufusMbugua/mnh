@@ -1,4 +1,5 @@
 <?php
+
 //# Extend CI_Model to include Doctrine Entity Manager
 date_default_timezone_set('Africa/Nairobi');
 
@@ -80,6 +81,7 @@ class MY_Model extends CI_Model
             //ignore
             //die($ex->getMessage());
             
+            
         }
         return $this->centre->getFacName();
     }
@@ -87,6 +89,7 @@ class MY_Model extends CI_Model
     /*utilized in several models*/
     public function getAllFacilitiesByDistrict($districtName) {
         try {
+            
             //Using DQL
             
             $this->districtFacilities = $this->em->createQuery('SELECT f.facMfl,f.facName FROM models\Entities\Facilities f WHERE f.facDistrict= :district ORDER BY f.facName ASC ');
@@ -96,17 +99,20 @@ class MY_Model extends CI_Model
             
             //var_dump($this -> districtFacilities);die;
             
+            
         }
         catch(exception $ex) {
             
             //ignore
             //die($ex->getMessage());
             
+            
         }
     }
     
     public function getAllFacilitiesByDistrictOptions($districtName) {
         try {
+            
             //Using DQL
             
             $this->districtFacilities = $this->em->createQuery('SELECT f.facMfl,f.facName,f.ss_id FROM models\Entities\Facilities f WHERE f.facDistrict= :district AND =:status ORDER BY f.facName ASC ');
@@ -120,6 +126,7 @@ class MY_Model extends CI_Model
             
             //ignore
             //die($ex->getMessage());
+            
             
         }
     }
@@ -143,11 +150,13 @@ class MY_Model extends CI_Model
             
             //die(var_dump($this->districtFacilities));
             
+            
         }
         catch(exception $ex) {
             
             //ignor
             //die($ex->getMessage());
+            
             
         }
     }
@@ -159,7 +168,7 @@ class MY_Model extends CI_Model
         
         $this->formRecords = $query->getArrayResult();
         
-        // die(var_dump($this->formRecords));
+       // die(var_dump($this->formRecords));
         return $this->formRecords;
     }
     
@@ -185,6 +194,7 @@ class MY_Model extends CI_Model
             //ignore
             //$ex->getMessage();
             
+            
         }
         return $this->treatmentCommodity;
     }
@@ -198,16 +208,19 @@ class MY_Model extends CI_Model
             
             //die(var_dump($this->commodity));
             
+            
         }
         catch(exception $ex) {
             
             //ignore
             //$ex->getMessage();
             
+            
         }
         return $this->commodity;
     }
-     /*end of getAllCommodityNames*/
+    
+    /*end of getAllCommodityNames*/
     
     function getCommodityUsageOptionsList() {
         
@@ -219,16 +232,19 @@ class MY_Model extends CI_Model
             
             //die(var_dump($this->commodity));
             
+            
         }
         catch(exception $ex) {
             
             //ignore
             //$ex->getMessage();
             
+            
         }
         return $this->commodityOptions;
     }
-     /*end of getAllCommodityNames*/
+    
+    /*end of getAllCommodityNames*/
     
     function getAllSupplyNames($surveyName) {
         
@@ -240,16 +256,19 @@ class MY_Model extends CI_Model
             
             // die(var_dump($this->supplies));
             
+            
         }
         catch(exception $ex) {
             
             //ignore
             //$ex->getMessage();
             
+            
         }
         return $this->supplies;
     }
-     /*end of getAllSupplyNames*/
+    
+    /*end of getAllSupplyNames*/
     
     function getTotalSupplyNames() {
         
@@ -261,16 +280,19 @@ class MY_Model extends CI_Model
             
             // die(var_dump($this->supplies));
             
+            
         }
         catch(exception $ex) {
             
             //ignore
             //$ex->getMessage();
             
+            
         }
         return $this->supplies;
     }
-     /*end of getAllSupplyNames*/
+    
+    /*end of getAllSupplyNames*/
     
     function getAllAccessChallenges() {
         
@@ -281,16 +303,19 @@ class MY_Model extends CI_Model
             
             // die(var_dump($this->supplies));
             
+            
         }
         catch(exception $ex) {
             
             //ignore
             //$ex->getMessage();
             
+            
         }
         return $this->challenges;
     }
-     /*end of getAllSupplyNames*/
+    
+    /*end of getAllSupplyNames*/
     
     function getAllEquipmentNames() {
         
@@ -302,11 +327,13 @@ class MY_Model extends CI_Model
             
             //die(var_dump($this->equipment));
             
+            
         }
         catch(exception $ex) {
             
             //ignore
             //$ex->getMessage();
+            
             
         }
         return $this->equipment;
@@ -321,16 +348,19 @@ class MY_Model extends CI_Model
             
             //die(var_dump($this->equipment));
             
+            
         }
         catch(exception $ex) {
             
             //ignore
             //$ex->getMessage();
             
+            
         }
         return $this->equipment;
     }
-     /*end of getAllEquipmentNames*/
+    
+    /*end of getAllEquipmentNames*/
     
     function getAllCommoditySupplierNames($surveyName) {
         
@@ -344,16 +374,19 @@ class MY_Model extends CI_Model
             
             //die(var_dump($this->supplier));
             
+            
         }
         catch(exception $ex) {
             
             //ignore
             //$ex->getMessage();
             
+            
         }
         return $this->supplier;
     }
-     /*end of getAllCommoditySupplierNames*/
+    
+    /*end of getAllCommoditySupplierNames*/
     
     function getAllSources($surveyName) {
         
@@ -367,16 +400,19 @@ class MY_Model extends CI_Model
             
             //die(var_dump($this->supplier));
             
+            
         }
         catch(exception $ex) {
             
             //ignore
             //$ex->getMessage();
             
+            
         }
         return $this->supplier;
     }
-     /*end of getAllCommoditySupplierNames*/
+    
+    /*end of getAllCommoditySupplierNames*/
     
     function getAllSignalFunctions() {
         
@@ -387,16 +423,19 @@ class MY_Model extends CI_Model
             
             //die(var_dump($this->signalFunction));
             
+            
         }
         catch(exception $ex) {
             
             //ignore
             //$ex->getMessage();
             
+            
         }
         return $this->signalFunction;
     }
-     /*end of getAllSignalFunctions*/
+    
+    /*end of getAllSignalFunctions*/
     
     function getAllOrtAspects($for) {
         
@@ -408,16 +447,19 @@ class MY_Model extends CI_Model
             
             //die(var_dump($this->ortAspect));
             
+            
         }
         catch(exception $ex) {
             
             //ignore
             //$ex->getMessage();
             
+            
         }
         return $this->ortAspect;
     }
-     /*end of getAllOrtAspects*/
+    
+    /*end of getAllOrtAspects*/
     
     function getQuestionsBySection($for, $code) {
         
@@ -430,16 +472,19 @@ class MY_Model extends CI_Model
             
             //die(var_dump($this -> questions));
             
+            
         }
         catch(exception $ex) {
             
             //ignore
             //$ex->getMessage();
             
+            
         }
         return $this->questions;
     }
-     /*end of getAllOrtAspects*/
+    
+    /*end of getAllOrtAspects*/
     
     function getAllQuestions() {
         
@@ -450,16 +495,19 @@ class MY_Model extends CI_Model
             
             //die(var_dump($this -> questions ));
             
+            
         }
         catch(exception $ex) {
             
             //ignore
             //$ex->getMessage();
             
+            
         }
         return $this->questions;
     }
-     /*end of getAllOrtAspects*/
+    
+    /*end of getAllOrtAspects*/
     
     function getAllMCHIndicators() {
         
@@ -470,16 +518,19 @@ class MY_Model extends CI_Model
             
             //die(var_dump($this->mchIndicator));
             
+            
         }
         catch(exception $ex) {
             
             //ignore
             //$ex->getMessage();
             
+            
         }
         return $this->mchIndicator;
     }
-     /*end of getAllMCHIndicators*/
+    
+    /*end of getAllMCHIndicators*/
     
     function getAllMCHTreatments() {
         
@@ -490,16 +541,19 @@ class MY_Model extends CI_Model
             
             //die(var_dump($this->mchTreatment));
             
+            
         }
         catch(exception $ex) {
             
             //ignore
             //$ex->getMessage();
             
+            
         }
         return $this->mchTreatment;
     }
-     /*end of getAllMCHTreatments*/
+    
+    /*end of getAllMCHTreatments*/
     
     function getTreatmentsByType($type) {
         try {
@@ -509,11 +563,13 @@ class MY_Model extends CI_Model
             
             //die(var_dump($this->treatmentbytype));
             
+            
         }
         catch(exception $ex) {
             
             //ignore
             //$ex->getMessage();
+            
             
         }
         return $this->treatmentbytype;
@@ -527,11 +583,13 @@ class MY_Model extends CI_Model
             
             //die(var_dump($this->treatmentbytype));
             
+            
         }
         catch(exception $ex) {
             
             //ignore
             //$ex->getMessage();
+            
             
         }
         return $this->treatmentbytype;
@@ -547,16 +605,19 @@ class MY_Model extends CI_Model
             
             //die(var_dump($this->trainingGuidelines));
             
+            
         }
         catch(exception $ex) {
             
             //ignore
             //$ex->getMessage();
             
+            
         }
         return $this->trainingGuidelines;
     }
-     /*end of getAllTrainingGuidelines*/
+    
+    /*end of getAllTrainingGuidelines*/
     
     function getAllDistrictNames() {
         
@@ -567,16 +628,19 @@ class MY_Model extends CI_Model
             
             //die(var_dump($this->district));
             
+            
         }
         catch(exception $ex) {
             
             //ignore
             //$ex->getMessage();
             
+            
         }
         return $this->district;
     }
-     /*end of getDistrictNames*/
+    
+    /*end of getDistrictNames*/
     
     function getAllCountyNames() {
         
@@ -587,6 +651,7 @@ class MY_Model extends CI_Model
             
             //var_dump($this -> county);
             
+            
         }
         catch(exception $ex) {
             
@@ -596,7 +661,8 @@ class MY_Model extends CI_Model
         }
         return $this->county;
     }
-     /*end of getAllCountyNames*/
+    
+    /*end of getAllCountyNames*/
     
     function getAllProvinceNames() {
         
@@ -607,16 +673,19 @@ class MY_Model extends CI_Model
             
             //die(var_dump($this->level));
             
+            
         }
         catch(exception $ex) {
             
             //ignore
             //$ex->getMessage();//exit;
             
+            
         }
         return $this->province;
     }
-     /*end of getAllProvinceNames*/
+    
+    /*end of getAllProvinceNames*/
     
     function getAllFacilityOwnerNames() {
         
@@ -627,16 +696,19 @@ class MY_Model extends CI_Model
             
             //die(var_dump($this->level));
             
+            
         }
         catch(exception $ex) {
             
             //ignore
             //$ex->getMessage();//exit;
             
+            
         }
         return $this->owner;
     }
-     /*end of getAllFacilityOwnerNames*/
+    
+    /*end of getAllFacilityOwnerNames*/
     
     function getAllGovernmentOwnedNames() {
         
@@ -656,16 +728,19 @@ class MY_Model extends CI_Model
             
             // die(var_dump($this->owner));
             
+            
         }
         catch(exception $ex) {
             
             //ignore
             //die($ex->getMessage());//exit;
             
+            
         }
         return $this->owner;
     }
-     /*end of getAllGovernmentOwnedNames*/
+    
+    /*end of getAllGovernmentOwnedNames*/
     
     function getAllFacilityTypes() {
         
@@ -676,16 +751,19 @@ class MY_Model extends CI_Model
             
             //die(var_dump($this->type));
             
+            
         }
         catch(exception $ex) {
             
             //ignore
             //$ex->getMessage();//exit;
             
+            
         }
         return $this->type;
     }
-     /*end of getAllFacilityTypes*/
+    
+    /*end of getAllFacilityTypes*/
     
     function getAllGovernmentFacilityTypes() {
         
@@ -700,16 +778,19 @@ class MY_Model extends CI_Model
             
             //die(var_dump($this->type));
             
+            
         }
         catch(exception $ex) {
             
             //ignore
             //die($ex->getMessage());//exit;
             
+            
         }
         return $this->type;
     }
-     /*end of getAllGovernmentFacilityTypes*/
+    
+    /*end of getAllGovernmentFacilityTypes*/
     
     function getAllFacilityLevels() {
         
@@ -720,6 +801,7 @@ class MY_Model extends CI_Model
             
             //die(var_dump($this->level));
             
+            
         }
         catch(exception $ex) {
             
@@ -728,10 +810,12 @@ class MY_Model extends CI_Model
             
             //exit;
             
+            
         }
         return $this->level;
     }
-     /*end of getAllFacilityLevels*/
+    
+    /*end of getAllFacilityLevels*/
     
     /*utilized in several models*/
     public function getDistrictName($id) {
@@ -743,9 +827,11 @@ class MY_Model extends CI_Model
             //ignore
             //die($ex->getMessage());
             
+            
         }
     }
-     //end of getDistrictName
+    
+    //end of getDistrictName
     
     /*utilized in several models*/
     public function getCountyName($id) {
@@ -756,6 +842,7 @@ class MY_Model extends CI_Model
             
             //ignore
             //die($ex->getMessage());
+            
             
         }
     }
@@ -775,6 +862,7 @@ class MY_Model extends CI_Model
             //ignore
             //die($ex->getMessage());
             
+            
         }
     }
     
@@ -793,6 +881,7 @@ class MY_Model extends CI_Model
             //ignore
             //die($ex->getMessage());
             
+            
         }
     }
     
@@ -810,6 +899,7 @@ class MY_Model extends CI_Model
             
             //ignore
             //die($ex->getMessage());
+            
             
         }
     }
@@ -830,6 +920,7 @@ class MY_Model extends CI_Model
             //ignore
             //die($ex->getMessage());
             
+            
         }
     }
     
@@ -846,6 +937,7 @@ class MY_Model extends CI_Model
             
             //ignore
             //die($ex->getMessage());
+            
             
         }
     }
@@ -867,6 +959,7 @@ class MY_Model extends CI_Model
             //ignore
             //die($ex->getMessage());
             
+            
         }
     }
     
@@ -886,6 +979,7 @@ class MY_Model extends CI_Model
             //ignore
             //die($ex->getMessage());
             
+            
         }
     }
     
@@ -904,6 +998,7 @@ class MY_Model extends CI_Model
             //ignore
             //die($ex->getMessage());
             
+            
         }
     }
     
@@ -920,6 +1015,7 @@ class MY_Model extends CI_Model
             
             //ignore
             //die($ex->getMessage());
+            
             
         }
     }
@@ -940,6 +1036,7 @@ class MY_Model extends CI_Model
             //ignore
             //die($ex->getMessage());
             
+            
         }
     }
     
@@ -952,6 +1049,7 @@ class MY_Model extends CI_Model
             
             //ignore
             //die($ex->getMessage());
+            
             
         }
     }
@@ -970,6 +1068,7 @@ class MY_Model extends CI_Model
             //ignore
             //die($ex->getMessage());
             
+            
         }
     }
     
@@ -986,6 +1085,7 @@ class MY_Model extends CI_Model
             
             //ignore
             //die($ex->getMessage());
+            
             
         }
     }
@@ -1004,6 +1104,7 @@ class MY_Model extends CI_Model
             //ignore
             //die($ex->getMessage());
             
+            
         }
     }
     
@@ -1017,6 +1118,7 @@ class MY_Model extends CI_Model
             //ignore
             //die($ex->getMessage());
             
+            
         }
     }
     
@@ -1029,6 +1131,7 @@ class MY_Model extends CI_Model
             
             //ignore
             //die($ex->getMessage());
+            
             
         }
     }
@@ -1046,10 +1149,12 @@ class MY_Model extends CI_Model
             //ignore
             //die($ex->getMessage());
             
+            
         }
         return $this->facility;
     }
-     /*close facilityExists($mfc)*/
+    
+    /*close facilityExists($mfc)*/
     
     //check if tracker entry has already been done
     public function sectionEntryExists($mfc, $section, $survey) {
@@ -1064,10 +1169,12 @@ class MY_Model extends CI_Model
             //ignore
             //die($ex->getMessage());
             
+            
         }
         return $this->section;
     }
-     /*close sectionEntryExists($mfc,$section,$survey)*/
+    
+    /*close sectionEntryExists($mfc,$section,$survey)*/
     
     //used in m_zinc_ors_inventory
     public function findOrtCodeByFacility($mfc) {
@@ -1082,7 +1189,8 @@ class MY_Model extends CI_Model
             return false;
         }
     }
-     /*close findOrtCodeByFacility($mfc)*/
+    
+    /*close findOrtCodeByFacility($mfc)*/
     
     //checks if commodity name exists
     public function commodityExists($cName) {
@@ -1094,10 +1202,12 @@ class MY_Model extends CI_Model
             //ignore
             //die($ex->getMessage());
             
+            
         }
         return $this->commodity;
     }
-     /*close commodityExists($cName)*/
+    
+    /*close commodityExists($cName)*/
     
     /*update the MFL data*/
     protected function updateFacilityInfo() {
@@ -1114,10 +1224,12 @@ class MY_Model extends CI_Model
         
         //analyse all posted vals and collect them
         foreach ($this->input->post() as $key => $val) {
-             //For every posted values
+            
+            //For every posted values
             
             if (strpos($key, 'fac') !== FALSE) {
-                 //get the fields carrying facility info only
+                
+                //get the fields carrying facility info only
                 
                 $this->attr = $key;
                 
@@ -1139,14 +1251,17 @@ class MY_Model extends CI_Model
                 
                 // print $this->attr.' val='.$val.' id='.$this->id.' <br />';
                 
+                
             }
-             //end of cadre fields only-filter
+            
+            //end of cadre fields only-filter
             
             // print $key.' val='.$val.' <br />';
             
             
         }
-         //close foreach ($this -> input -> post() as $key => $val)
+        
+        //close foreach ($this -> input -> post() as $key => $val)
         
         //print var_dump($this->elements);
         //exit;
@@ -1231,7 +1346,8 @@ class MY_Model extends CI_Model
             
             $this->theForm->setDeliveriesDone($this->elements['facDeliveriesDone']);
         }
-         //close if statement
+        
+        //close if statement
         
         $this->em->persist($this->theForm);
         
@@ -1245,6 +1361,7 @@ class MY_Model extends CI_Model
             
             //print 'true';
             
+            
         }
         catch(Exception $ex) {
             
@@ -1254,11 +1371,13 @@ class MY_Model extends CI_Model
             
             /*display user friendly message*/
         }
-         //end of catch
+        
+        //end of catch
         
         
     }
-     //close updateFacilityInfo
+    
+    //close updateFacilityInfo
     
     //assuming mnh/mch assessment is taken, every facility has exactly 6 and 7 entries respectively, for each active survey
     protected function writeAssessmentTrackerLog() {
@@ -1287,6 +1406,7 @@ class MY_Model extends CI_Model
             
             //obtain facility code from current temp session val
             
+            
         } else {
             
             // die('Update log');
@@ -1297,6 +1417,7 @@ class MY_Model extends CI_Model
                 
                 //ignore
                 //die($ex->getMessage());
+                
                 
             }
         }
@@ -1315,6 +1436,7 @@ class MY_Model extends CI_Model
             //detaches all objects from doctrine
             //print 'true';
             
+            
         }
         catch(Exception $ex) {
             
@@ -1322,7 +1444,8 @@ class MY_Model extends CI_Model
             //print 'false';
             /*display user friendly message*/
         }
-         //end of catch
+        
+        //end of catch
         
         
     }
@@ -1336,15 +1459,18 @@ class MY_Model extends CI_Model
             //ignore
             //die($ex->getMessage());
             
+            
         }
         
         if ($this->session->userdata('survey') == 'mnh') {
             
             //$this -> theForm -> setss_id('complete');
             
+            
         } else {
             
             //$this -> theForm -> setFacilityCHSurveyStatus('complete');
+            
             
         }
         
@@ -1358,6 +1484,7 @@ class MY_Model extends CI_Model
             //detaches all objects from doctrine
             //print 'true';
             
+            
         }
         catch(Exception $ex) {
             
@@ -1365,7 +1492,8 @@ class MY_Model extends CI_Model
             //print 'false';
             /*display user friendly message*/
         }
-         //end of catch
+        
+        //end of catch
         
         
     }
@@ -1390,10 +1518,20 @@ class MY_Model extends CI_Model
         }
         return $data;
     }
+    
+    /**
+     * [universalEditor description]
+     * @param  [type] $table       [description]
+     * @param  [type] $column      [description]
+     * @param  [type] $value       [description]
+     * @param  [type] $primary_key [description]
+     * @param  [type] $pk_value    [description]
+     * @return [type]              [description]
+     */
     public function universalEditor($table, $column, $value, $primary_key, $pk_value) {
         $query = "UPDATE $table SET $column = '$value' WHERE $primary_key=$pk_value";
         try {
-           $this->dataSet = $this->db->query($query);
+            $this->dataSet = $this->db->query($query);
             $this->dataSet = $this->dataSet->result_array();
             if ($this->dataSet) {
                 return $this->dataSet;
@@ -1401,9 +1539,48 @@ class MY_Model extends CI_Model
                 return $this->dataSet = false;
             }
         }
-         catch(Exception $ex) {
+        catch(Exception $ex) {
             echo $ex->getMessage();
         }
     }
-}
     
+    /**
+     * [get_survey_info description]
+     * @param  [type] $survey_type     [description]
+     * @param  [type] $survey_category [description]
+     * @param  [type] $facMFL          [description]
+     * @return [type]                  [description]
+     */
+    public function get_survey_info($survey_type, $survey_category,$statistic, $facMFL) {
+        $query = 'CALL get_survey_info("' . $survey_type . '","' . $survey_category . '","' . $statistic .  '",' . $facMFL . ');';
+        
+        try {
+            $myData = $this->db->query($query);
+            $finalData = $myData->result_array();
+//            print($this->db->last_query());die;
+            $myData->next_result();
+            
+            // Dump the extra resultset.
+            $myData->free_result();
+            
+            // Does what it says.
+            
+            
+        }
+        catch(exception $ex) {
+        }
+        return $finalData;
+    }
+
+    public function getFacilityInfo()
+    {
+        $results = $this->db->get_where('facilities', array('fac_mfl' => $this->session->userdata('facilityMFL')));
+        $results = $results->result_array();
+        foreach ($results as $result) {
+            $data[$result['fac_mfl']] = $result;
+        }
+        return $data;
+
+        // var_dump($this->dataSet);
+    }
+}

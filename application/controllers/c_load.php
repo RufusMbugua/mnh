@@ -91,6 +91,8 @@ class C_Load extends MY_Controller {
         $result =$this->db->get_where('facilities',array('fac_mfl'=>$fac_mfl));
         $result = $result->result_array();
 
+        // print_r($result);die;
+
         echo json_encode($result);
 
     }
@@ -298,51 +300,7 @@ class C_Load extends MY_Controller {
 
     <thead>
     <th colspan="7" >INDICATE THE NUMBER OF DELIVERIES CONDUCTED IN THE FOLLOWING PERIODS </th></thead>
-        <th> MONTH</th><th><div style="width: 50px"> JANUARY</div></th> <th>FEBRUARY</th><th>MARCH</th><th> APRIL</th><th> MAY</th><th>JUNE</th>
-        <tr>
-            <td>' . date("Y") . '</td>
-            <td style ="text-align:center;">
-            <input type="text" id="january" name="dnmonth[january]"  size="8" class="cloned numbers"/>
-            </td>
-            <td style ="text-align:center;">
-            <input type="text" id="february" name="dnmonth[february]" size="8" class="cloned numbers"/>
-            </td>
-            <td style ="text-align:center;">
-            <input type="text" id="march" size="8" name="dnmonth[march]" class="cloned numbers"/>
-            </td>
-            <td style ="text-align:center;">
-            <input type="text" id="april" size="8" name="dnmonth[april]" class="cloned numbers"/>
-            </td>
-            <td style ="text-align:center;">
-            <input type="text" id="may" size="8" name="dnmonth[may]" class="cloned numbers"/>
-            </td>
-            <td style ="text-align:center;">
-            <input type="text" id="june" size="8" name="dnmonth[june]" class="cloned numbers"/>
-            </td>
-
-
-        </tr>
-        <th> MONTH</th><th> JULY</th><th> AUGUST</th><th> SEPTEMBER</th><th> OCTOBER</th><th> NOVEMBER</th><th> DECEMBER</th>
-        <tr>
-        <td>' . 2013 . '</td>
-            <td style ="text-align:center;">
-            <input type="text" id="july" size="8" name="dnmonth[july]" class="cloned numbers"/>
-            </td>
-            <td style ="text-align:center;">
-            <input type="text" id="august" size="8" name="dnmonth[august]" class="cloned numbers"/>
-            </td>
-            <td  style ="text-align:center;">
-            <input type="text" id="september" size="8" name="dnmonth[september]" class="cloned numbers"/>
-            </td>
-            <td style ="text-align:center;">
-            <input type="text" id="october" size="8" name="dnmonth[october]" class="cloned numbers"/></td>
-            <td style ="text-align:center;" width="15">
-            <input type="text" id="november" size="8" name="dnmonth[november]" class="cloned numbers"/></td>
-
-            <td style ="text-align:center;">
-            <input type="text" id="december" size="8" name="dnmonth[december]" class="cloned numbers"/>
-            </td>
-        </tr>
+    '. $this -> monthlydeliveries. '
     </table>
 
     <table class="centre">
@@ -456,22 +414,22 @@ class C_Load extends MY_Controller {
 
 
 
-            ' . $this -> mnhGuidelinesAspectsSection . '
+            ' . $this -> question['guide'] . '
         </table>
         <table >
             <thead>
                 <tr>
-                    <th colspan="12" >JOB AIDS</th>
+                    <th colspan="11" >JOB AIDS</th>
                 </tr>
             </thead>
                 <tr>
-                    <th style="width:35%">ASPECTS</th>
-                    <th style="width:35%;text-align:left">RESPONSE</th>
-                    <th style="width:30%;text-align:left">QUANTITY</th>
+                    <th colspan="6">ASPECTS</th>
+                    <th colspan="3">RESPONSE</th>
+                    <th colspan="3">QUANTITY</th>
 
                 </tr>
 
-            ' . $this -> mnhJobAidsAspectsSection . '
+            ' . $this -> question['job'] . '
         </table>
         <table class="centre">
 
@@ -1437,16 +1395,21 @@ Indicate the total # of children that received the following treatment. </br>
 
         </thead>
         <tr>
-            <th rowspan="2" >Commodity Name</th>
-            <th rowspan="2" >Commodity Unit</th>
+            <th rowspan="2">Commodity Name</th>
+            <th rowspan="2">Commodity Unit</th>
             <th colspan="2" style="text-align:center"> Availability <strong></br> (One Selection Allowed) </strong></th>
             <th rowspan="2"> Main Reason For Unavailability </th>
             <th colspan="7" style="text-align:center"> Location of Availability </br><strong> (Multiple Selections Allowed)</strong></th>
-            <th rowspan="1" colspan="2" >Available Quantities</th>
+            <th rowspan="1" colspan="2">Available Quantities</th>
         </tr>
         <tr>
+<<<<<<< HEAD
             <th>Available </th>
             <th>Not Available </th>
+=======
+            <th>Available</th>
+            <th>Not Available</th>
+>>>>>>> 03845a196c9a232a4253dde1a24143df21ec5a1d
             <th>OPD</th>
             <th>MCH</th>
             <th>U5 Clinic</th>
@@ -1481,7 +1444,7 @@ Indicate the total # of children that received the following treatment. </br>
             <th colspan="2" style="text-align:center"> Availability <strong></br> (One Selection Allowed) </strong></th>
             <th rowspan="2"> Main Reason For  Unavailability </th>
             <th colspan="7" style="text-align:center"> Location of Availability </br><strong> (Multiple Selections Allowed)</strong></th>
-            <th rowspan="1" colspan="2" >Available Quantities</th>
+            <th rowspan="1" colspan="2">Available Quantities</th>
         </tr>
         <tr>
             <th >Available</th>
@@ -2441,18 +2404,19 @@ If YES to all, consider HCW for TOT and Mentorship Training
     }
 
     public function get_facility_list() {
-
+//<div class="breadcrumb">
+        //     <th colspan="22" >' . strtoupper($this -> session -> userdata('dName')) . ' DISTRICT/SUB-COUNTY FACILITIES</th>
+        //     <div>
         $this -> facilityList .= '
-        <p class="message success">
-            <th colspan="22" >' . strtoupper($this -> session -> userdata('dName')) . ' DISTRICT/SUB-COUNTY FACILITIES</th>
-            <p><table class="centre dataTable">
+        <table class="centre dataTable">
 
 <thead>
             <th>#</th>
             <th>MFL CODE</th>
             <th> FACILITY NAME </th>
-            <th>SURVEY STATUS</th>
-            <th>ACTION</th>
+            <th>REPORTING PROGRESS</th>
+            <th style="width:100px">ACTIVITY</th>
+            <th>LINK</th>
 </thead>
         </tr>' . $this -> districtFacilityListSection . '
         </table>';

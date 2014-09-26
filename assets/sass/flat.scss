@@ -237,6 +237,12 @@ table{
         }
     }
     td{
+        .progress{
+            width:150px;
+            display:inline-block;
+            vertical-align: top;
+        }
+
         max-width:200px !important;
         word-wrap: break-word;
         overflow-wrap: break-word;
@@ -453,7 +459,15 @@ h4{
 }
 .breadcrumb{
     border-color: #e7e7e7 !important;
-
+    .ui.button{
+        font-size:10px !important;
+        a{
+            color:#555 !important;
+        }
+    }
+.ui.label{
+        font-size:10px !important;
+    }
 }
 #page_sidebar{
     @extend .col-md-3;
@@ -689,7 +703,7 @@ a.disabled:hover{
     cursor: hand !important;
 }
 .modal{
-    //z-index:2000000000000000000000000;
+    z-index:2000000000000000000000000;
 }
 //Resize Icons
 .sizer, .show-collapse{
@@ -735,6 +749,10 @@ h6.table-header{
             a{
                 text-decoration: none !important;
             }
+            i{
+                color:inherit;
+                padding-left:10px;
+            }
         }
     }
     .panel-collapse{
@@ -744,4 +762,24 @@ h6.table-header{
         }
     }
 
+}
+//Activity
+.activity{
+    font-size:10px !important;
+    .activity-text{
+        font-style: italic;
+        font-weight: bold;
+    }
+}
+.status{
+    @extend .activity;
+    float:right;
+}
+#district_progress{
+    display:inline-block;
+    vertical-align: middle;
+    width:5%;
+    margin-bottom:0;
+    height:20px !important;
+    padding:3px;
 }

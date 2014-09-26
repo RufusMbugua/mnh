@@ -8728,63 +8728,69 @@ table td {
   word-wrap: break-word;
   overflow-wrap: break-word;
 }
+/* line 240, ../sass/flat.scss */
+table td .progress {
+  width: 150px;
+  display: inline-block;
+  vertical-align: top;
+}
 
-/* line 245, ../sass/flat.scss */
+/* line 251, ../sass/flat.scss */
 .begin:hover {
   cursor: hand;
 }
 
-/* line 248, ../sass/flat.scss */
+/* line 254, ../sass/flat.scss */
 .instruction {
   background: #ffeacc;
 }
 
-/* line 251, ../sass/flat.scss */
+/* line 257, ../sass/flat.scss */
 .message.success {
   padding: 0.5%;
   background: #ecf0f1;
 }
 
-/* line 255, ../sass/flat.scss */
+/* line 261, ../sass/flat.scss */
 #sectionNavigation {
   width: 40%;
   margin: auto;
 }
-/* line 258, ../sass/flat.scss */
+/* line 264, ../sass/flat.scss */
 #sectionNavigation input {
   width: 45%;
   display: inline-block;
 }
 
-/* line 268, ../sass/flat.scss */
+/* line 274, ../sass/flat.scss */
 .x-large-graph .portlet-body {
   height: 500px;
   overflow-y: auto;
 }
 
-/* line 276, ../sass/flat.scss */
+/* line 282, ../sass/flat.scss */
 .large-graph .portlet-body {
   height: 500px;
   overflow-y: auto;
 }
 
-/* line 284, ../sass/flat.scss */
+/* line 290, ../sass/flat.scss */
 .medium-graph .portlet-body {
   height: 300px;
   overflow-y: auto;
 }
 
-/* line 292, ../sass/flat.scss */
+/* line 298, ../sass/flat.scss */
 .small-graph .portlet-body {
   height: 300px;
 }
 
-/* line 300, ../sass/flat.scss */
+/* line 306, ../sass/flat.scss */
 .semi-large-graph .portlet-body {
   height: 300px;
 }
 
-/* line 308, ../sass/flat.scss */
+/* line 314, ../sass/flat.scss */
 .standard-graph .portlet-title h6, .x-large-graph .portlet-title h6, .large-graph .portlet-title h6, .medium-graph .portlet-title h6, .small-graph .portlet-title h6, .semi-large-graph .portlet-title h6 {
   margin-bottom: 0;
   padding: 5px 7.5px;
@@ -8792,43 +8798,43 @@ table td {
   background-color: whitesmoke;
   border-color: #e7e7e7;
 }
-/* line 314, ../sass/flat.scss */
+/* line 320, ../sass/flat.scss */
 .standard-graph .portlet-title h6 .statistic, .x-large-graph .portlet-title h6 .statistic, .large-graph .portlet-title h6 .statistic, .medium-graph .portlet-title h6 .statistic, .small-graph .portlet-title h6 .statistic, .semi-large-graph .portlet-title h6 .statistic {
   display: inline-block;
   font-weight: normal;
 }
-/* line 318, ../sass/flat.scss */
+/* line 324, ../sass/flat.scss */
 .standard-graph .portlet-title h6 i, .x-large-graph .portlet-title h6 i, .large-graph .portlet-title h6 i, .medium-graph .portlet-title h6 i, .small-graph .portlet-title h6 i, .semi-large-graph .portlet-title h6 i {
   padding-right: 5px;
 }
-/* line 321, ../sass/flat.scss */
+/* line 327, ../sass/flat.scss */
 .standard-graph .portlet-title h6 .statistic-free, .x-large-graph .portlet-title h6 .statistic-free, .large-graph .portlet-title h6 .statistic-free, .medium-graph .portlet-title h6 .statistic-free, .small-graph .portlet-title h6 .statistic-free, .semi-large-graph .portlet-title h6 .statistic-free {
   font-weight: normal;
   padding-right: 2%;
 }
-/* line 325, ../sass/flat.scss */
+/* line 331, ../sass/flat.scss */
 .standard-graph .portlet-title h6 .compare, .x-large-graph .portlet-title h6 .compare, .large-graph .portlet-title h6 .compare, .medium-graph .portlet-title h6 .compare, .small-graph .portlet-title h6 .compare, .semi-large-graph .portlet-title h6 .compare {
   width: 30%;
   float: right;
   color: #999;
   cursor: pointer;
 }
-/* line 331, ../sass/flat.scss */
+/* line 337, ../sass/flat.scss */
 .standard-graph .portlet-title h6 .compare:hover, .x-large-graph .portlet-title h6 .compare:hover, .large-graph .portlet-title h6 .compare:hover, .medium-graph .portlet-title h6 .compare:hover, .small-graph .portlet-title h6 .compare:hover, .semi-large-graph .portlet-title h6 .compare:hover {
   color: #333333;
   cursor: hand;
 }
-/* line 338, ../sass/flat.scss */
+/* line 344, ../sass/flat.scss */
 .standard-graph .portlet-body, .x-large-graph .portlet-body, .large-graph .portlet-body, .medium-graph .portlet-body, .small-graph .portlet-body, .semi-large-graph .portlet-body {
   overflow-y: auto;
 }
 
-/* line 344, ../sass/flat.scss */
+/* line 350, ../sass/flat.scss */
 #sectionList li a {
   padding: 5px 7.5px !important;
 }
 
-/* line 349, ../sass/flat.scss */
+/* line 355, ../sass/flat.scss */
 #reporting {
   overflow-y: auto;
   height: 300px;
@@ -8836,81 +8842,81 @@ table td {
   padding: 10px;
 }
 
-/* line 356, ../sass/flat.scss */
+/* line 362, ../sass/flat.scss */
 #countyHeader {
   width: 35%;
 }
 
-/* line 359, ../sass/flat.scss */
+/* line 365, ../sass/flat.scss */
 #countyHeader, #progressHeader {
   display: inline-block;
   vertical-align: top;
 }
 
-/* line 363, ../sass/flat.scss */
+/* line 369, ../sass/flat.scss */
 #progressHeader {
   width: 64%;
 }
 
-/* line 366, ../sass/flat.scss */
+/* line 372, ../sass/flat.scss */
 .progressRow {
   padding-top: 10px;
   border-bottom: 1px solid #ddd;
 }
-/* line 369, ../sass/flat.scss */
+/* line 375, ../sass/flat.scss */
 .progressRow label, .progressRow div {
   display: inline-block;
   vertical-align: top;
 }
-/* line 373, ../sass/flat.scss */
+/* line 379, ../sass/flat.scss */
 .progressRow label {
   width: 40%;
   line-height: 10px;
   margin-bottom: 5px;
 }
-/* line 378, ../sass/flat.scss */
+/* line 384, ../sass/flat.scss */
 .progressRow .progress {
   margin-bottom: 0;
   width: 55%;
 }
 
-/* line 384, ../sass/flat.scss */
+/* line 390, ../sass/flat.scss */
 #reportingLabel {
   width: 30%;
   margin-bottom: 0 !important;
 }
 
-/* line 388, ../sass/flat.scss */
+/* line 394, ../sass/flat.scss */
 #reportingLabel #reportingBar {
   width: 60%;
   margin-bottom: 0 !important;
 }
 
-/* line 392, ../sass/flat.scss */
+/* line 398, ../sass/flat.scss */
 #reportingLabel #reportingBar .progressRow {
   border-bottom: none;
 }
 
-/* line 396, ../sass/flat.scss */
+/* line 402, ../sass/flat.scss */
 #county_select_label select {
   max-width: 55% !important;
   height: auto;
   margin-bottom: 0 !important;
 }
 
-/* line 402, ../sass/flat.scss */
+/* line 408, ../sass/flat.scss */
 #reportingBar {
   display: inline-block;
   max-width: 70% !important;
   margin-bottom: 0 !important;
 }
 
-/* line 408, ../sass/flat.scss */
+/* line 414, ../sass/flat.scss */
 .statistic {
   display: block;
   margin-bottom: 5px;
 }
-/* line 411, ../sass/flat.scss */
+/* line 417, ../sass/flat.scss */
 .statistic .icon {
   vertical-align: top;
   display: inline-block;
@@ -8918,7 +8924,7 @@ table td {
   background: #16a085;
   color: white;
 }
-/* line 419, ../sass/flat.scss */
+/* line 425, ../sass/flat.scss */
 .statistic .icon span {
   display: table-cell;
   width: 50px;
@@ -8926,150 +8932,162 @@ table td {
   vertical-align: middle;
   text-align: center;
 }
-/* line 424, ../sass/flat.scss */
+/* line 430, ../sass/flat.scss */
 .statistic .icon span i {
   font-size: 1.5em;
 }
-/* line 430, ../sass/flat.scss */
+/* line 436, ../sass/flat.scss */
 .statistic .data {
   margin-left: 10px;
   display: inline-block;
   vertical-align: top;
 }
-/* line 433, ../sass/flat.scss */
+/* line 439, ../sass/flat.scss */
 .statistic .data .text, .statistic .data .data {
   display: block;
   text-align: center;
 }
-/* line 440, ../sass/flat.scss */
+/* line 446, ../sass/flat.scss */
 .statistic #county_name {
   margin-top: 10%;
 }
 
-/* line 446, ../sass/flat.scss */
+/* line 452, ../sass/flat.scss */
 h4.page-title {
   padding-left: 15px;
 }
 
-/* line 450, ../sass/flat.scss */
+/* line 456, ../sass/flat.scss */
 h4 {
   padding-left: 15px;
 }
 
-/* line 454, ../sass/flat.scss */
+/* line 460, ../sass/flat.scss */
 .breadcrumb, #network {
   border-color: #e7e7e7 !important;
 }
+/* line 462, ../sass/flat.scss */
+.breadcrumb .ui.button, #network .ui.button {
+  font-size: 10px !important;
+}
+/* line 464, ../sass/flat.scss */
+.breadcrumb .ui.button a, #network .ui.button a {
+  color: #555 !important;
+}
+/* line 468, ../sass/flat.scss */
+.breadcrumb .ui.label, #network .ui.label {
+  font-size: 10px !important;
+}
 
-/* line 458, ../sass/flat.scss */
+/* line 472, ../sass/flat.scss */
 #page_sidebar {
   border-right: 1px solid #e7e7e7;
   height: 100%;
   padding: 0;
   padding-left: 15px;
 }
-/* line 464, ../sass/flat.scss */
+/* line 478, ../sass/flat.scss */
 #page_sidebar h6 {
   padding: 10px 15px;
   background: #e7e7e7;
   margin-bottom: 0;
 }
 
-/* line 470, ../sass/flat.scss */
+/* line 484, ../sass/flat.scss */
 .analytics_row {
   margin-top: 10px;
   padding-top: 10px;
   border-top: 1px solid #ddd;
 }
 
-/* line 476, ../sass/flat.scss */
+/* line 490, ../sass/flat.scss */
 .container-fluid {
   padding: 0 !important;
 }
 
-/* line 479, ../sass/flat.scss */
+/* line 493, ../sass/flat.scss */
 h6 {
   font-size: 16px;
 }
 
-/* line 483, ../sass/flat.scss */
+/* line 497, ../sass/flat.scss */
 .panel {
   border: none !important;
 }
 
-/* line 491, ../sass/flat.scss */
+/* line 505, ../sass/flat.scss */
 ul.sub li a {
   border-radius: 0 !important;
 }
-/* line 496, ../sass/flat.scss */
+/* line 510, ../sass/flat.scss */
 ul.sub li.active a {
   background: whitesmoke !important;
   color: #333;
 }
 
-/* line 506, ../sass/flat.scss */
+/* line 520, ../sass/flat.scss */
 .panel-heading h4 a i {
   float: right;
   color: #333;
 }
 
-/* line 513, ../sass/flat.scss */
+/* line 527, ../sass/flat.scss */
 .panel-heading.active {
   background-color: #16a085;
   color: white;
 }
-/* line 516, ../sass/flat.scss */
+/* line 530, ../sass/flat.scss */
 .panel-heading.active i {
   color: white;
 }
 
-/* line 521, ../sass/flat.scss */
+/* line 535, ../sass/flat.scss */
 .panel-body {
   padding: 0 !important;
 }
-/* line 524, ../sass/flat.scss */
+/* line 538, ../sass/flat.scss */
 .panel-body li a {
   color: #16a085 !important;
 }
-/* line 526, ../sass/flat.scss */
+/* line 540, ../sass/flat.scss */
 .panel-body li a i {
   float: right;
   color: #999;
 }
 
-/* line 542, ../sass/flat.scss */
+/* line 556, ../sass/flat.scss */
 .btn-primary, .map-info button, #sectionNavigation input, h6.table-header span button {
   background: #16a085 !important;
   border-color: #27ae60 !important;
 }
 
-/* line 546, ../sass/flat.scss */
+/* line 560, ../sass/flat.scss */
 .select .btn .filter-option, .select .map-header .btn-group button .filter-option, .map-header .btn-group .select button .filter-option, .select .map-info button .filter-option, .map-info .select button .filter-option, .select form button .filter-option, form .select button .filter-option, .select #logout .filter-option, .select #sectionNavigation input .filter-option, #sectionNavigation .select input .filter-option, .select h6.table-header span button .filter-option, h6.table-header span .select button .filter-option {
   top: 5px !important;
 }
 
-/* line 549, ../sass/flat.scss */
+/* line 563, ../sass/flat.scss */
 .open > .dropdown-arrow {
   display: none !important;
 }
 
-/* line 553, ../sass/flat.scss */
+/* line 567, ../sass/flat.scss */
 .breadcrumb .dropdown-menu, #network .dropdown-menu {
   width: 100% !important;
   top: 100% !important;
   font-size: 14px !important;
 }
-/* line 558, ../sass/flat.scss */
+/* line 572, ../sass/flat.scss */
 .breadcrumb .dropdown-toggle, #network .dropdown-toggle {
   font-size: 14px;
   width: 200px !important;
 }
-/* line 562, ../sass/flat.scss */
+/* line 576, ../sass/flat.scss */
 .breadcrumb li.selected, #network li.selected {
   color: white !important;
 }
 
-/* line 569, ../sass/flat.scss */
+/* line 583, ../sass/flat.scss */
 .loader,
 .loader:before,
 .loader:after {
@@ -9080,7 +9098,7 @@ ul.sub li.active a {
   height: 4em;
 }
 
-/* line 577, ../sass/flat.scss */
+/* line 591, ../sass/flat.scss */
 .loader:before,
 .loader:after {
   position: absolute;
@@ -9088,12 +9106,12 @@ ul.sub li.active a {
   content: '';
 }
 
-/* line 582, ../sass/flat.scss */
+/* line 596, ../sass/flat.scss */
 .loader:before {
   left: -1.5em;
 }
 
-/* line 585, ../sass/flat.scss */
+/* line 599, ../sass/flat.scss */
 .loader {
   text-indent: -9999em;
   margin: 8em auto;
@@ -9103,7 +9121,7 @@ ul.sub li.active a {
   animation-delay: -0.16s;
 }
 
-/* line 593, ../sass/flat.scss */
+/* line 607, ../sass/flat.scss */
 .loader:after {
   left: 1.5em;
   -webkit-animation-delay: -0.32s;
@@ -9111,7 +9129,7 @@ ul.sub li.active a {
 }
 
 @-webkit-keyframes load1 {
-  /* line 601, ../sass/flat.scss */
+  /* line 615, ../sass/flat.scss */
   0%,
   80%,
   100% {
@@ -9119,7 +9137,7 @@ ul.sub li.active a {
     height: 4em;
   }
 
-  /* line 605, ../sass/flat.scss */
+  /* line 619, ../sass/flat.scss */
   40% {
     box-shadow: 0 -2em #ddd;
     height: 5em;
@@ -9127,7 +9145,7 @@ ul.sub li.active a {
 }
 
 @keyframes load1 {
-  /* line 613, ../sass/flat.scss */
+  /* line 627, ../sass/flat.scss */
   0%,
   80%,
   100% {
@@ -9135,35 +9153,35 @@ ul.sub li.active a {
     height: 4em;
   }
 
-  /* line 617, ../sass/flat.scss */
+  /* line 631, ../sass/flat.scss */
   40% {
     box-shadow: 0 -2em #ddd;
     height: 5em;
   }
 }
 
-/* line 624, ../sass/flat.scss */
+/* line 638, ../sass/flat.scss */
 .null_message {
   line-height: 200px;
   text-align: center;
   color: crimson;
 }
-/* line 628, ../sass/flat.scss */
+/* line 642, ../sass/flat.scss */
 .null_message i {
   padding-right: 5px;
 }
 
-/* line 634, ../sass/flat.scss */
+/* line 648, ../sass/flat.scss */
 .select2-container {
   width: 100%;
 }
 
-/* line 638, ../sass/flat.scss */
+/* line 652, ../sass/flat.scss */
 .paging_full_numbers {
   padding-left: 60%;
 }
 
-/* line 641, ../sass/flat.scss */
+/* line 655, ../sass/flat.scss */
 a.paginate_button {
   border: 1px solid #ddd !important;
   padding: 5px 10px;
@@ -9173,51 +9191,52 @@ a.paginate_button {
   cursor: pointer;
 }
 
-/* line 649, ../sass/flat.scss */
+/* line 663, ../sass/flat.scss */
 a.paginate_button:hover {
   background: #e7e7e7;
   text-decoration: none;
   cursor: hand;
 }
 
-/* line 654, ../sass/flat.scss */
+/* line 668, ../sass/flat.scss */
 a.disabled {
   background: #666;
   color: white;
 }
 
-/* line 658, ../sass/flat.scss */
+/* line 672, ../sass/flat.scss */
 a.disabled:hover {
   background: #666;
 }
 
-/* line 661, ../sass/flat.scss */
+/* line 675, ../sass/flat.scss */
 .dataTables_length {
   width: 200px;
   float: left;
 }
-/* line 665, ../sass/flat.scss */
+/* line 679, ../sass/flat.scss */
 .dataTables_length label select {
   display: inherit;
   width: 50px !important;
 }
 
-/* line 673, ../sass/flat.scss */
+/* line 687, ../sass/flat.scss */
 .dataTables_filter label {
   float: right;
   padding-right: 5%;
 }
-/* line 676, ../sass/flat.scss */
+/* line 690, ../sass/flat.scss */
 .dataTables_filter label input {
   display: initial;
   width: 200px;
 }
 
-/* line 684, ../sass/flat.scss */
+/* line 698, ../sass/flat.scss */
 .dataTables_info {
   font-size: 14px;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 progress
@@ -9234,18 +9253,26 @@ progress
 =======
 /* line 688, ../sass/flat.scss */
 >>>>>>> 82c13dd18304b9e07024fdd1a5ecf77746b9a63d
+=======
+/* line 702, ../sass/flat.scss */
+>>>>>>> 03845a196c9a232a4253dde1a24143df21ec5a1d
 .editable-click:hover {
   cursor: hand !important;
 }
 
-/* line 695, ../sass/flat.scss */
+/* line 705, ../sass/flat.scss */
+.modal {
+  z-index: 2000000000000000000000000;
+}
+
+/* line 709, ../sass/flat.scss */
 .sizer, .show-collapse {
   float: right;
   color: #ccc;
   cursor: pointer;
 }
 
-/* line 700, ../sass/flat.scss */
+/* line 714, ../sass/flat.scss */
 .sizer:hover, .show-collapse:hover {
   color: #333;
   cursor: hand;
@@ -9254,50 +9281,83 @@ progress
 >>>>>>> b4b01cf1267a640284df48615e622a27a008f1fd
 =======
 
-/* line 705, ../sass/flat.scss */
+/* line 719, ../sass/flat.scss */
 #graph {
   height: 300px;
   overflow: auto;
 }
 
-/* line 709, ../sass/flat.scss */
+/* line 723, ../sass/flat.scss */
 h6.table-header {
   margin-bottom: 2px !important;
   padding: 5px 7.5px;
   background: #e7e7e7;
 }
-/* line 713, ../sass/flat.scss */
+/* line 727, ../sass/flat.scss */
 h6.table-header span {
   padding-left: 30%;
 }
-/* line 715, ../sass/flat.scss */
+/* line 729, ../sass/flat.scss */
 h6.table-header span button {
   margin-left: 5px;
 }
 
-/* line 724, ../sass/flat.scss */
+/* line 738, ../sass/flat.scss */
 .analytics_row {
   border-top: 1px solid #ddd !important;
   box-shadow: none !important;
 }
-/* line 727, ../sass/flat.scss */
+/* line 741, ../sass/flat.scss */
 .analytics_row .panel-heading {
   border-top: 1px solid #ddd;
   background-color: #fff !important;
   border: none;
 }
-/* line 731, ../sass/flat.scss */
+/* line 745, ../sass/flat.scss */
 .analytics_row .panel-heading h4.panel-title {
   padding-left: 0;
   margin-bottom: 5px !important;
 }
-/* line 735, ../sass/flat.scss */
+/* line 749, ../sass/flat.scss */
 .analytics_row .panel-heading h4.panel-title a {
   text-decoration: none !important;
 }
-/* line 741, ../sass/flat.scss */
+/* line 752, ../sass/flat.scss */
+.analytics_row .panel-heading h4.panel-title i {
+  color: inherit;
+  padding-left: 10px;
+}
+/* line 759, ../sass/flat.scss */
 .analytics_row .panel-collapse .panel-body {
   border: none !important;
   box-shadow: 0;
 }
+<<<<<<< HEAD
 >>>>>>> 82c13dd18304b9e07024fdd1a5ecf77746b9a63d
+=======
+
+/* line 767, ../sass/flat.scss */
+.activity, .status {
+  font-size: 10px !important;
+}
+/* line 769, ../sass/flat.scss */
+.activity .activity-text, .status .activity-text {
+  font-style: italic;
+  font-weight: bold;
+}
+
+/* line 774, ../sass/flat.scss */
+.status {
+  float: right;
+}
+
+/* line 778, ../sass/flat.scss */
+#district_progress {
+  display: inline-block;
+  vertical-align: middle;
+  width: 5%;
+  margin-bottom: 0;
+  height: 20px !important;
+  padding: 3px;
+}
+>>>>>>> 03845a196c9a232a4253dde1a24143df21ec5a1d

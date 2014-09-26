@@ -31,8 +31,8 @@ class M_Analytics extends MY_Model
         /* using CI database active record*/
         try {
             $query = "SELECT 
-                        f.fac_mfl AS facility_mfl,f.fac_name AS Name,f.fac_ownership AS onwership,f.fac_type AS type,f.fac_level AS level,
-                        f.fac_district AS district,f.fac_county AS county
+                        f.fac_mfl, f.fac_name ,f.fac_ownership ,f.fac_type ,f.fac_level ,
+                        f.fac_district ,f.fac_county 
                         FROM
                         assessment_tracker ast
                             JOIN
@@ -44,6 +44,7 @@ class M_Analytics extends MY_Model
                            JOIN
                         survey_categories sc ON sc.sc_id = ss.sc_id AND sc.sc_name = '" . $survey_category . "'
                         WHERE ast.ast_section = 'section-6'
+                        GROUP BY f.fac_mfl
                     ORDER BY f.fac_county , f.fac_district";
             
             $this->dataSet = $this->db->query($query, array($survey));
@@ -62,6 +63,15 @@ class M_Analytics extends MY_Model
         }
     }
     
+    public function getReportingList($survey,$survey_category){
+    	$query = "CALL get_reporting_list('".$survey."','".$survey_category."');";
+    	$this->dataSet = $this->db->query($query, array($survey));
+            $this->dataSet = $this->dataSet->result_array();
+            if ($this->dataSet) {
+            	//echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
+                return $this->dataSet;
+            } 
+     }
     public function get_facility_reporting_summary($survey) {
         
         /*using CI Database Active Record*/
@@ -77,11 +87,7 @@ class M_Analytics extends MY_Model
             } else {
                 return $this->dataSet = false;
             }
-            
-            //die(var_dump($this->dataSet));
-            
-            
-        }
+         }
         catch(exception $ex) {
             
             //ignore
@@ -91,116 +97,34 @@ class M_Analytics extends MY_Model
         }
     }
     
-    /**
-     * Community Strategy
-     */
-    public function getCommunityStrategy($criteria, $value, $survey) {
+    //community strategy
+    public function getCommunityStrategy($criteria, $value, $survey, $survey_category, $for) {
         
         /*using CI Database Active Record*/
         
         //$data=array();
         $data = '';
+        $query = "CALL get_community_strategy('".$criteria."','".$value."','".$survey."','".$survey_category."','".$for."');";
         
-        switch ($criteria) {
-            case 'national':
-                $criteria_condition = ' ';
-                break;
-
-            case 'county':
-                $criteria_condition = 'WHERE fac_county=?';
-                break;
-
-            case 'district':
-                $criteria_condition = 'WHERE fac_district=?';
-                break;
-
-            case 'facility':
-                $criteria_condition = 'WHERE fac_mfl=?';
-                break;
-
-            case 'none':
-                $criteria_condition = '';
-                break;
-        }
-        
-        $query = "SELECT
-    cs.strategy_code AS strategy,
-    SUM(cs.cs_response) AS strategy_number
-FROM
-    community_strategies cs
-WHERE
-    cs.strategy_code IN (SELECT
-            question_code
-        FROM
-            questions
-        WHERE
-            question_for = 'cms')
-        AND cs.fac_mfl IN (SELECT
-            fac_mfl
-        FROM
-            facilities f
-                JOIN
-            survey_status ss ON ss.fac_id = f.fac_mfl
-                JOIN
-            survey_types st ON (st.st_id = ss.st_id
-                AND st.st_name = '" . $survey . "')
-                 " . $criteria_condition . ")
-AND cs.cs_response!=-1
-GROUP BY cs.strategy_code ASC;";
         try {
             $this->dataSet = $this->db->query($query, array($value));
             $this->dataSet = $this->dataSet->result_array();
             if ($this->dataSet !== NULL) {
-                
-                //prep data for the pie chart format
-                $i = 1;
-                $size = count($this->dataSet);
-                foreach ($this->dataSet as $value) {
-                    switch ($this->getCommunityStrategyName($value['strategy'])) {
-                        case 'Total number of Community Units established and functional':
-                            $strategy = 'CU established and functional';
-                            break;
-
-                        case 'Total number of Community Units regularly supervised and provided feedback':
-                            $strategy = 'CU regularly supervised';
-                            break;
-
-                        case 'Total number of CHWs and CHEWs trained on Integrated Community Case Management (ICCM)':
-                            $strategy = 'CHWs & CHEWs on ICCM';
-                            break;
-
-                        case 'Total number of Community Units supported by incentives for CHWs':
-                            $strategy = 'CU supported by incentives for CHW';
-                            break;
-
-                        case 'Total number of cases treated with Zinc and ORS co-pack under Community Case Management of diarrhoea':
-                            $strategy = 'Cases treated with Zinc & ORS';
-                            break;
-                    }
-                    if ($i == $size) {
-                        $data[] = array($strategy, $value['strategy_number']);
-                    } else {
-                        $data[] = array($strategy, $value['strategy_number']);
-                        $i++;
-                    }
-                }
-                $this->dataSet = $data;
-                return $this->dataSet;
-            } else {
-                return $this->dataSet = null;
-            }
-            
-            //die(var_dump($this->dataSet));
-            
-            
-        }
+            	foreach ($this->dataSet as $value) {
+                	//echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
+                	if(array_key_exists('strategy', $value)){
+                		$data[$value['question_name']][$value['strategy']] = (int)$value['strategy_number'];
+                	}
+                 }
+			}
+             }
         catch(Exception $ex) {
             
             //ignore
             //die($ex->getMessage());//exit;
-            
-            
-        }
+         }
+		 //die(var_dump($data));die;
+		return $data;
     }
     
     /*
@@ -1254,11 +1178,11 @@ WHERE
                     // }
                     
                     foreach ($this->dataSet as $value) {
-                        
+                       
                         $indicator = $value['indicator_name'];
                         
                         //echo $value['indicator'];die;
-                        $data['response'][$indicator][$value['response']] = (int)$value['count(il.li_response)'];
+                        $data['response'][$indicator][$value['response']] = (int)$value['total_response'];
                         
                         $data['categories'] = array_keys($data['response']);
                     }
@@ -1270,7 +1194,7 @@ WHERE
                     return $this->dataSet = null;
                 }
                 
-                die(var_dump($this->dataSet));
+                //die(var_dump($this->dataSet));
             }
             catch(exception $ex) {
                 
@@ -1318,7 +1242,7 @@ WHERE
                     return $this->dataSet = null;
                 }
                 
-                die(var_dump($this->dataSet));
+                //die(var_dump($this->dataSet));
             }
             catch(exception $ex) {
                 
@@ -1963,7 +1887,7 @@ ORDER BY oa.question_code ASC";
                 //echo($this->db->last_query());die;
                 if ($this->dataSet !== NULL) {
                     
-                    // echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
+                     //echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
                     foreach ($this->dataSet as $value) {
                         if (array_key_exists('frequency', $value)) {
                             $data[$value['supply_name']][$value['frequency']] = (int)$value['total_response'];
@@ -1975,8 +1899,8 @@ ORDER BY oa.question_code ASC";
                         } else if (array_key_exists('total_functional', $value)) {
                             $data[$value['supply_name']]['functional']+= (int)$value['total_functional'];
                             $data[$value['supply_name']]['non_functional']+= (int)$value['total_non_functional'];
-                        } else if (array_key_exists('supplier_code', $value)) {
-                            $data[$value['supply_name']][$value['supplier_code']] = (int)$value['total_response'];
+                        } else if (array_key_exists('supply_name', $value)) {
+                            $data[$value['supply_name']][$value['supply_name']] = (int)$value['total_response'];
                         }
                     }
                      //echo "<pre>";print_r($data);echo "</pre>";die;
@@ -2550,7 +2474,7 @@ ORDER BY f.fac_county ASC;";
         /**
          * List of Counties that have reported
          */
-        public function getReportingCounties($survey, $survey_category) {
+        public function getReportingCounties() {
             
             /*using CI Database Active Record*/
             try {
@@ -2629,13 +2553,13 @@ ORDER BY f.fac_county ASC;";
             
             //var_dump($reportingCounties);die;
             for ($x = 0; $x < sizeof($reportingCounties); $x++) {
-                $allData[$reportingCounties[$x]['county']] = $this->getReportingRatio($survey, $survey_category, $reportingCounties[$x]['county']);
+                $allData[$reportingCounties[$x]['county']] = $this->getReportingRatio($survey, $survey_category, $reportingCounties[$x]['county'],'county');
             }
             
             //echo '<pre>';print_r($allData);echo '</pre>';
             return $allData;
         }
-        function getReportingRatio($survey, $survey_category, $county) {
+        function getReportingRatio($survey, $survey_category, $county,$statistic) {
             
             /*using DQL*/
             
@@ -2643,7 +2567,7 @@ ORDER BY f.fac_county ASC;";
             
             try {
                 
-                $query = 'CALL get_reporting_ratio("' . $survey . '","' . $survey_category . '","' . $county . '");';
+                $query = 'CALL get_reporting_ratio("' . $survey . '","' . $survey_category . '","' . $county . '","' . $statistic . '");';
                 $myData = $this->db->query($query);
                 $finalData = $myData->result_array();
                 
@@ -2737,14 +2661,14 @@ ORDER BY f.fac_county ASC;";
         /**
          * Run County Maps
          */
-        public function runMap($survey, $survey_category) {
+        public function runMap($survey, $survey_category,$statistic) {
             $myData = array();
             $counties = $this->getAllCountyNames();
             foreach ($counties as $county) {
                 $countyName = $county['countyName'];
                 
                 //$countyName=str_replace("'","", $countyName);
-                $myData[$countyName] = array($this->getReportingRatio($survey, $survey_category, $countyName), $county['countyFusionMapId'], $countyName);
+                $myData[$countyName] = array($this->getReportingRatio($survey, $survey_category, $countyName,$statistic), $county['countyFusionMapId'], $countyName);
             }
             
             return $myData;
@@ -4034,11 +3958,8 @@ ORDER BY question_code";
                 $queryData->free_result();
                 
                 foreach ($this->dataSet as $value_) {
-                    
-                    // echo '<pre>';print_r($this->dataSet);echo '</pre>';die;
-                    $question = $this->getQuestionName($value_['question_code']);
-                    
-                    // $question = trim($question, 'Does this facility have an updated');
+                	$question = $this->getQuestionName($value_['question_code']);
+                   	// $question = trim($question, 'Does this facility have an updated');
                     // $question = trim($question, '?');
                     
                     // // if ($question == 'Has the facility done baby friendly hospital initiative in the last 6 months') {
@@ -4053,6 +3974,7 @@ ORDER BY question_code";
                     // // if ($question == 'Does this Facility have a designated location for oral rehydration?') {
                     // // }
                     //echo $question;
+                  //echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
                     switch ($statistics) {
                         case 'response':
                             $yes = $value_['yes_values'];
@@ -4067,12 +3989,15 @@ ORDER BY question_code";
                            
                             $data[$question] = (int)$value_['total'];
                             break;
-
                         case 'reason':
                             $question = $this->getQuestionName($value_['questions']);
                             $data[$question][$value_['reason']] = $value_['total_response'];
                             break;
-
+							
+						case 'healthservice':
+							$data[$question][$value_['response']]=(int)$value_['total_response'];
+							
+							break;
                         case 'reason_raw':
                         case 'response_raw':
                         case 'total_raw':
@@ -4389,7 +4314,7 @@ ORDER BY question_code";
                 $this->dataSet = $queryData->result_array();
                 $queryData->next_result();
                 
-                echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
+                //echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
                 // Dump the extra resultset.
                 $queryData->free_result();
                 $pharmacyvalue = 0;

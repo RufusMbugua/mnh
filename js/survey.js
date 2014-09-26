@@ -1,8 +1,4 @@
-function startSurvey(base_url, survey) {
-
-	/**
-	 * variables
-	 */
+function startSurvey(base_url, survey, survey_category, district) {
 	var form_id = '';
 	var link_id = '';
 	var linkIdUrl = '';
@@ -10,6 +6,14 @@ function startSurvey(base_url, survey) {
 	var linkDomain = '';
 	var visit_site = '';
 	var devices = '';
+	var fac_mfl = '';
+	var fac_county = '';
+	var fac_district = '';
+
+	getDistrictData(base_url, district, survey, survey_category);
+
+	// Bound Events
+
 
 
 	//start of close_opened_form click event
@@ -24,30 +28,41 @@ function startSurvey(base_url, survey) {
 	});
 	/*end of close_opened_form click event
 
-					/*----------------------------------------------------------------------------------------------------------------*/
+
+        /*----------------------------------------------------------------------------------------------------------------*/
 
 	/*start of loadGlobalJS*/
 	var onload_queue = [];
 	var dom_loaded = false;
 
+	/**
+	 * [loadGlobalJS description]
+	 * @param  {[type]}   src      [description]
+	 * @param  {Function} callback [description]
+	 * @return {[type]}            [description]
+	 */
 	function loadGlobalJS(src, callback) {
 		var script = document.createElement('script');
 		script.type = "text/javascript";
 		script.async = true;
 		script.src = src;
 		script.onload = script.onreadystatechange = function() {
-			if (dom_loaded)
+			if (dom_loaded) {
 				callback();
-			else
+			} else {
 				onload_queue.push(callback);
-			// clean up for IE and Opera
-			script.onload = null;
-			script.onreadystatechange = null;
+				// clean up for IE and Opera
+				script.onload = null;
+				script.onreadystatechange = null;
+			}
 		};
 		var head = document.getElementsByTagName('head')[0];
 		head.appendChild(script);
 	} /*end of loadGlobalJS*/
-
+	/**
+	 * [domLoaded description]
+	 * @return {[type]} [description]
+	 */
 	function domLoaded() {
 		dom_loaded = true;
 		var len = onload_queue.length;
@@ -74,14 +89,17 @@ function startSurvey(base_url, survey) {
 
 	/*----------------------------------------------------------------------------------------------------------------*/
 	var loaded = false;
-
+	/**
+	 * [loadGlobalScript description]
+	 * @return {[type]} [description]
+	 */
 	function loadGlobalScript() {
 		loaded = true;
 
 		var scripts = [base_url + 'js/js_ajax_load.js'];
 
 		for (i = 0; i < scripts.length; i++) {
-			loadGlobalJS(scripts[i]);
+			loadGlobalJS(scripts[i], function() {});
 		}
 		form_id = '#' + $(".form-container").find('form').attr('id');
 
@@ -91,50 +109,86 @@ function startSurvey(base_url, survey) {
 
 
 	//load 1st section of the assessment on page load
-	$(".form-container").load(base_url + 'c_load/get_facility_list ', function(response, status, xrc) {
-		$(".form-container").html(response);
-		console.log(form_id);
-		//alert(status);
+	$(".form-container").load(base_url + 'c_load/get_facility_list', function() {
 		// facilityMFL=12864;
 		//loadGlobalScript();//renderFacilityInfo(facilityMFL);
 
+		
+		// $('.dataTables_length').addClass('breadcrumb');
+		
+		$('.activity-text').each(function() {
+			time = $(this).text();
+			if (time != 'not started yet') {
+				newTime = moment(time, 'YYYY-MM-DD H:i:s').fromNow();
+				$(this).text(newTime.toLowerCase());
+			}
+			//alert(moment().fromNow());
+		});
+		$('.dataTable').dataTable({
+			"sPaginationType": "full_numbers"
+		});
+		$('.dataTables_info').addClass('breadcrumb');
 		//so which link was clicked?
-		$('.action').on('click', function() {
-			link_id = '#' + $(this).find('a').attr('id');
+		$('.action').live('click', function() {
+			link_id = '#' + $(this).attr('data-mfl');
 			link_id = link_id.substr(link_id.indexOf('#') + 1, link_id.length);
+			section = $(this).attr('data-section');
+			action = $(this).attr('data-action');
+			console.log(section);
 			//linkSub=$(link_id).attr('class');
 			//linkIdUrl=link_id.substr(link_id.indexOf('#')+1,(link_id.indexOf('_li')-1));
 			facilityMFL = link_id;
+			the_url = base_url + 'c_load/startSurvey/' + survey + '/' + survey_category + '/' + facilityMFL + '/2013-2014';
+			$.ajax({
+				type: 'POST',
+				data: '',
+				async: false,
+				url: the_url,
+				beforeSend: function() {
+					$(".form-container").empty();
+            $(".form-container").append('<div class="loader" >Loading...</div>');
 
-			//alert(link_id);
-			if (link_id) 
-				if (survey == 'mnh') {
-					$(".form-container").load(base_url + 'c_load/get_mnh_form');
-					form_id = 'mnh_tool';
-				} else {
-					$(".form-container").load(base_url + 'c_load/get_mch_form');
-					form_id = 'mch_tool';
+				},
+				success: function(data) {
+					obj = jQuery.parseJSON(data);
+					console.log(obj);
+					fac_name = obj[0].fac_name;
+					fac_district = obj[0].fac_district;
+					fac_county = obj[0].fac_county;
+					message = obj[0].fac_name + ' in ' + obj[0].fac_district + ' District, ' + obj[0].fac_county + ' County, is now reporting on the ' + survey.toUpperCase() + ' Survey.';
+					console.log(message);
+					runNotification(base_url, 'c_admin/getContacts', message);
 				}
-				console.log(form_id);
-				//delegate events
-				//if(loaded==false)
-				//include remote scripts
+			});
+			//alert(link_id);
+			if (link_id) {
+				if (survey == 'mnh') {
+					current_form = 'c_load/get_mnh_form';
+				} else if (survey == 'hcw') {
+					current_form = 'c_load/get_hcw_form';
+				} else {
+					current_form = 'c_load/get_mch_form';
+				}
+			}
+			$(".form-container").load(base_url + current_form, function() {
 				loadGlobalScript();
 				renderFacilityInfo(facilityMFL);
 				break_form_to_steps(form_id);
 				select_option_changed();
+				loadSection(section,action);
 
+			});
 
-		});
-	}); /*end of which link was clicked*/
+		}); /*end of which link was clicked*/
+	}); /*close form-container LOAD FN() */
 	/*----------------------------------------------------------------------------------------------------------------*/
+
 
 	/*-----------------------------------------------------------------------------------------------------------------*/
 	/*start of ajax data requests*/
 	function renderFacilityInfo(facilityMFL) {
 		$.ajax({
 			type: "GET",
-
 			url: base_url + "c_load/getFacilityDetails",
 			dataType: "json",
 			cache: "true",
@@ -164,6 +218,7 @@ function startSurvey(base_url, survey) {
 					$("#facilityOwnedBy option").filter(function() {
 						return $(this).text() == facility.facOwnership;
 					}).first().prop("selected", true);
+
 					$("#facilityDistrict option").filter(function() {
 						return $(this).text() == facility.facDistrict;
 					}).first().prop("selected", true);
@@ -198,9 +253,8 @@ function startSurvey(base_url, survey) {
 	/*-----------------------------------------------------------------------------------------------------------------*/
 
 
-	//equipment availability change detectors			
+	//equipment availability change detectors
 	function select_option_changed() {
-
 		/*
 		 * Checking for all SELECT inputs
 		 */
@@ -217,7 +271,7 @@ function startSurvey(base_url, survey) {
 				cb_id = '#' + $(this).attr('id');
 
 				//alert(cb_id);
-				cb_no = cb_id.substr(cb_id.indexOf('_') + 1, (cb_id.length)); //for the numerical part of the id
+				cb_no = cb_id.substr(cb_id.indexOf('_') + 1, (cb_id.length)) //for the numerical part of the id
 
 				//substr(id.indexOf('_')+1,id.length)
 				//cb_id=cb_id.substr(cb_id.indexOf('#'),(cb_id.indexOf('_')))//for the trimmed id
@@ -281,7 +335,7 @@ function startSurvey(base_url, survey) {
 				$('#transfusion_n').show();
 			}
 
-			if ($(this).attr('id') == 'mnhceocAspectResponse_2' && $(this).val() == 'Yes') {
+			if ($(this).attr('id') == 'mnhceocAspectResponse_4' && $(this).val() == 'Yes') {
 				//CS conduction
 				//hide follow up qn
 				$('#csdone_n').hide();
@@ -293,7 +347,7 @@ function startSurvey(base_url, survey) {
 
 
 			}
-			if ($(this).attr('id') == 'mnhceocAspectResponse_2' && $(this).val() == 'No') {
+			if ($(this).attr('id') == 'mnhceocAspectResponse_4' && $(this).val() == 'No') {
 				//show no follow up qn
 				$('#csdone_n').prop('disabled', false);
 				$('#csdone_n').show();
@@ -334,7 +388,7 @@ function startSurvey(base_url, survey) {
 				$('#label_reason_other_1').hide();
 			}
 
-			if ($(this).attr('id') == 'mnhceocReason_2' && $(this).val() == 'Other') {
+			if ($(this).attr('id') == 'mnhceocReason_4' && $(this).val() == 'Other') {
 				//show input field on other
 
 				$('#mnhceocReasonOther_2').prop('disabled', false);
@@ -343,7 +397,7 @@ function startSurvey(base_url, survey) {
 
 			}
 
-			if ($(this).attr('id') == 'mnhceocReason_2' && $(this).val() != 'Other') {
+			if ($(this).attr('id') == 'mnhceocReason_4' && $(this).val() != 'Other') {
 
 				//hide other input field
 				$('#mnhceocReasonOther_2').prop('disabled', true);
@@ -356,7 +410,7 @@ function startSurvey(base_url, survey) {
 
 		$(form_id).find(':radio').on('change', function() {
 			r_id = '#' + $(this).attr('name');
-			r_no = r_id.substr(r_id.indexOf('_') + 1, (r_id.length)); //for the numerical part of the name
+			r_no = r_id.substr(r_id.indexOf('_') + 1, (r_id.length)) //for the numerical part of the name
 			if ($(this).val() == 'Never Available') {
 				$('#cqNumberOfUnits_' + r_no).val(0);
 				$('#cqExpiryDate_' + r_no).val('n/a');
@@ -411,17 +465,452 @@ function startSurvey(base_url, survey) {
 		$('#editEquipmentListTopButton,#editEquipmentListTopButton_2,#editEquipmentListTopButton_3a,#editEquipmentListTopButton_3b,#editEquipmentListTopButton_4').click(function() {
 			$('#tableEquipmentList,#tableEquipmentList_2,#tableEquipmentList_3a,#tableEquipmentList_3b,#tableEquipmentList_4').find('select[class="cloned left-combo"]').prop('disabled', false);
 		});
+	} //end of select_option_changed
+	$(".Options").click(function() {
+		//$("div[id*='PayMethod_']:visible").slideToggle("slow");
+		var ID = $(this).attr("id");
+		if (this.checked) {
+			$("#ind_" + ID).slideToggle("slow");
+		}
+	});
+	/**
+	 * [selectpnesevereTreatment description]
+	 * @param  {[type]} select [description]
+	 * @return {[type]}        [description]
+	 */
+	function selectpnesevereTreatment(select) {
+		var value = select.options[select.selectedIndex].value;
+		if (value != "pnesevereTreatment_0") {
+			var option = select.options[select.selectedIndex];
+			var ul = select.parentNode.getElementsByTagName('ol')[0];
+			var choices = ul.getElementsByTagName('input');
+			for (var i = 0; i < choices.length; i++)
+				if (choices[i].value == option.value)
+					return;
+			var li = document.createElement('li');
+			var input = document.createElement('input');
+			var text = document.createTextNode(option.firstChild.data);
+			input.type = 'hidden';
+			input.name = 'mchtreatment[SeverePneumonia][]';
+			input.value = option.value;
+			li.appendChild(input);
+			li.appendChild(text);
+			li.setAttribute("id", code);
+			li.setAttribute('onclick', 'this.parentNode.removeChild(this);');
+			li.setAttribute('class', 'treatment');
+			ul.appendChild(li);
+			var code = select.options[select.selectedIndex].value;
+			var txt = document.createElement("input");
+			txt.setAttribute("value", code);
+			txt.setAttribute("type", "hidden");
+			txt.setAttribute("name", "pneTreat[]");
+
+			var diver = document.getElementById("pneTreatmentSection");
+
+			diver.appendChild(txt);
 
 
-	} //end of select_option_changed 
+		}
+	} // close select treatment
+	/**
+	 * [selectpneTreatment description]
+	 * @param  {[type]} select [description]
+	 * @return {[type]}        [description]
+	 */
+	function selectpneTreatment(select) {
+		var value = select.options[select.selectedIndex].value;
+		if (value != "pneTreatment_0") {
+			var option = select.options[select.selectedIndex];
+			var ul = select.parentNode.getElementsByTagName('ol')[0];
+			var choices = ul.getElementsByTagName('input');
+			for (var i = 0; i < choices.length; i++)
+				if (choices[i].value == option.value)
+					return;
+			var li = document.createElement('li');
+			var input = document.createElement('input');
+			var text = document.createTextNode(option.firstChild.data);
+			input.type = 'hidden';
+			input.name = 'mchtreatment[Pneumonia][]';
+			input.value = option.value;
+			li.appendChild(input);
+			li.appendChild(text);
+			li.setAttribute("id", code);
+			li.setAttribute('onclick', 'this.parentNode.removeChild(this);');
+			li.setAttribute('class', 'treatment');
+			ul.appendChild(li);
+			var code = select.options[select.selectedIndex].value;
+			var txt = document.createElement("input");
+			txt.setAttribute("value", code);
+			txt.setAttribute("type", "hidden");
+			txt.setAttribute("name", "pneTreat[]");
 
+			var diver = document.getElementById("pneTreatmentSection");
 
+			diver.appendChild(txt);
+		}
+	} // close select treatment
+	/**
+	 * [selectmalconfirmedTreatment description]
+	 * @param  {[type]} select [description]
+	 * @return {[type]}        [description]
+	 */
+	function selectmalconfirmedTreatment(select) {
+		var value = select.options[select.selectedIndex].value;
+		if (value != "malconfrimedTreatment_0") {
+			var option = select.options[select.selectedIndex];
+			var ul = select.parentNode.getElementsByTagName('ol')[0];
+			var choices = ul.getElementsByTagName('input');
+			for (var i = 0; i < choices.length; i++)
+				if (choices[i].value == option.value)
+					return;
+			var li = document.createElement('li');
+			var input = document.createElement('input');
+			var text = document.createTextNode(option.firstChild.data);
+			input.type = 'hidden';
+			input.name = 'mchtreatment[ConfirmedMalaria][]';
+			input.value = option.value;
+			li.appendChild(input);
+			li.appendChild(text);
+			li.setAttribute("id", code);
+			li.setAttribute('onclick', 'this.parentNode.removeChild(this);');
+			li.setAttribute('class', 'treatment');
+			ul.appendChild(li);
+			var code = select.options[select.selectedIndex].value;
+			var txt = document.createElement("input");
+			txt.setAttribute("value", code);
+			txt.setAttribute("type", "hidden");
+			txt.setAttribute("name", "malTreat[]");
+
+			var diver = document.getElementById("malTreatmentSection");
+
+			diver.appendChild(txt);
+		}
+	} // close select treatment
+	/**
+	 * [selectmalnotconfirmedTreatment description]
+	 * @param  {[type]} select [description]
+	 * @return {[type]}        [description]
+	 */
+	function selectmalnotconfirmedTreatment(select) {
+		var value = select.options[select.selectedIndex].value;
+		if (value != "malnotconfrimedTreatment_0") {
+			var option = select.options[select.selectedIndex];
+			var ul = select.parentNode.getElementsByTagName('ol')[0];
+			var choices = ul.getElementsByTagName('input');
+			for (var i = 0; i < choices.length; i++)
+				if (choices[i].value == option.value)
+					return;
+			var li = document.createElement('li');
+			var input = document.createElement('input');
+			var text = document.createTextNode(option.firstChild.data);
+			input.type = 'hidden';
+			input.name = 'mchtreatment[NotConfirmedMalaria][]';
+			input.value = option.value;
+			li.appendChild(input);
+			li.appendChild(text);
+			li.setAttribute("id", code);
+			li.setAttribute('onclick', 'this.parentNode.removeChild(this);');
+			li.setAttribute('class', 'treatment');
+			ul.appendChild(li);
+			var code = select.options[select.selectedIndex].value;
+			var txt = document.createElement("input");
+			txt.setAttribute("value", code);
+			txt.setAttribute("type", "hidden");
+			txt.setAttribute("name", "malTreat[]");
+
+			var diver = document.getElementById("malTreatmentSection");
+
+			diver.appendChild(txt);
+		}
+	} // close select treatment
+	/**
+	 * [selectseverediaTreatment description]
+	 * @param  {[type]} select [description]
+	 * @return {[type]}        [description]
+	 */
+	function selectseverediaTreatment(select) {
+		var value = select.options[select.selectedIndex].value;
+		if (value != "severediaTreatment_0") {
+			var option = select.options[select.selectedIndex];
+			var ul = select.parentNode.getElementsByTagName('ol')[0];
+			var choices = ul.getElementsByTagName('input');
+			for (var i = 0; i < choices.length; i++)
+				if (choices[i].value == option.value)
+					return;
+			var li = document.createElement('li');
+			var input = document.createElement('input');
+			var text = document.createTextNode(option.firstChild.data);
+			input.type = 'hidden';
+			input.name = 'mchtreatment[SevereDehydration][]';
+			input.value = option.value;
+			li.appendChild(input);
+			li.appendChild(text);
+			li.setAttribute("id", code);
+			li.setAttribute('class', 'treatment');
+			li.setAttribute('onclick', 'this.parentNode.removeChild(this);');
+			var code = select.options[select.selectedIndex].value;
+			ul.appendChild(li);
+		}
+	} // close select treatment
+	/**
+	 * [selectsomedehydrationdiaTreatment description]
+	 * @param  {[type]} select [description]
+	 * @return {[type]}        [description]
+	 */
+	function selectsomedehydrationdiaTreatment(select) {
+		var value = select.options[select.selectedIndex].value;
+		if (value != "somedehydrationdiaTreatment_0") {
+			var option = select.options[select.selectedIndex];
+			var ul = select.parentNode.getElementsByTagName('ol')[0];
+			var choices = ul.getElementsByTagName('input');
+			for (var i = 0; i < choices.length; i++)
+				if (choices[i].value == option.value)
+					return;
+			var li = document.createElement('li');
+			var input = document.createElement('input');
+			var text = document.createTextNode(option.firstChild.data);
+			input.type = 'hidden';
+			input.name = 'mchtreatment[SomeDehydration][]';
+			input.value = option.value;
+			li.appendChild(input);
+			li.appendChild(text);
+			li.setAttribute("id", code);
+			li.setAttribute('class', 'treatment');
+			li.setAttribute('onclick', 'this.parentNode.removeChild(this);');
+			var code = select.options[select.selectedIndex].value;
+			ul.appendChild(li);
+		}
+	} // close select treatment
+	/**
+	 * [selectdysentryTreatment description]
+	 * @param  {[type]} select [description]
+	 * @return {[type]}        [description]
+	 */
+	function selectdysentryTreatment(select) {
+		var value = select.options[select.selectedIndex].value;
+		if (value != "dysentryTreatment_0") {
+			var option = select.options[select.selectedIndex];
+			var ul = select.parentNode.getElementsByTagName('ol')[0];
+			var choices = ul.getElementsByTagName('input');
+			for (var i = 0; i < choices.length; i++)
+				if (choices[i].value == option.value)
+					return;
+			var li = document.createElement('li');
+			var input = document.createElement('input');
+			var text = document.createTextNode(option.firstChild.data);
+			input.type = 'hidden';
+			input.name = 'mchtreatment[Dysentry][]';
+			input.value = option.value;
+			li.appendChild(input);
+			li.appendChild(text);
+			li.setAttribute("id", code);
+			li.setAttribute('class', 'treatment');
+			li.setAttribute('onclick', 'this.parentNode.removeChild(this);');
+			var code = select.options[select.selectedIndex].value;
+			ul.appendChild(li);
+		}
+	} // close select treatment
+	/**
+	 * [selectnodehydrationdiaTreatment description]
+	 * @param  {[type]} select [description]
+	 * @return {[type]}        [description]
+	 */
+	function selectnodehydrationdiaTreatment(select) {
+		var value = select.options[select.selectedIndex].value;
+		if (value != "nodehydrationTreatment_0") {
+			var option = select.options[select.selectedIndex];
+			var ul = select.parentNode.getElementsByTagName('ol')[0];
+			var choices = ul.getElementsByTagName('input');
+			for (var i = 0; i < choices.length; i++)
+				if (choices[i].value == option.value)
+					return;
+			var li = document.createElement('li');
+			var input = document.createElement('input');
+			var text = document.createTextNode(option.firstChild.data);
+			input.type = 'hidden';
+			input.name = 'mchtreatment[NoDehydration][]';
+			input.value = option.value;
+			li.appendChild(input);
+			li.appendChild(text);
+			li.setAttribute("id", code);
+			li.setAttribute('class', 'treatment');
+			li.setAttribute('onclick', 'this.parentNode.removeChild(this);');
+			var code = select.options[select.selectedIndex].value;
+			ul.appendChild(li);
+		}
+	} // close select treatment
+	/**
+	 * [selectnoclassificationTreatment description]
+	 * @param  {[type]} select [description]
+	 * @return {[type]}        [description]
+	 */
+	function selectnoclassificationTreatment(select) {
+		var value = select.options[select.selectedIndex].value;
+		if (value != "noclassificationTreatment_0") {
+			var option = select.options[select.selectedIndex];
+			var ul = select.parentNode.getElementsByTagName('ol')[0];
+			var choices = ul.getElementsByTagName('input');
+			for (var i = 0; i < choices.length; i++)
+				if (choices[i].value == option.value)
+					return;
+			var li = document.createElement('li');
+			var input = document.createElement('input');
+			var text = document.createTextNode(option.firstChild.data);
+			input.type = 'hidden';
+			input.name = 'mchtreatment[NoClassification][]';
+			input.value = option.value;
+			li.appendChild(input);
+			li.appendChild(text);
+			li.setAttribute("id", code);
+			li.setAttribute('class', 'treatment');
+			li.setAttribute('onclick', 'this.parentNode.removeChild(this);');
+			var code = select.options[select.selectedIndex].value;
+			ul.appendChild(li);
+		}
+	} // close select treatment
+	/**
+	 * [selectothertreatmentTreatment description]
+	 * @param  {[type]} select [description]
+	 * @return {[type]}        [description]
+	 */
+	function selectothertreatmentTreatment(select) {
+		var value = select.options[select.selectedIndex].value;
+		if (value != "othertreat_0") {
+			var option = select.options[select.selectedIndex];
+			var ul = select.parentNode.getElementsByTagName('ol')[0];
+			var choices = ul.getElementsByTagName('input');
+			for (var i = 0; i < choices.length; i++)
+				if (choices[i].value == option.value)
+					return;
+			var li = document.createElement('li');
+			var input = document.createElement('input');
+			var text = document.createTextNode(option.firstChild.data);
+			input.type = 'hidden';
+			input.name = 'indicatormchsymptom[pne][]';
+			input.value = option.value;
+			li.appendChild(input);
+			li.appendChild(text);
+			li.setAttribute("id", code);
+			li.setAttribute('class', 'treatment');
+			li.setAttribute('onclick', 'this.parentNode.removeChild(this);');
+			var code = select.options[select.selectedIndex].value;
+			ul.appendChild(li);
+		}
+	} // close select treatment
+	/**
+	 * [selectdiaresponseTreatment description]
+	 * @param  {[type]} select [description]
+	 * @return {[type]}        [description]
+	 */
+	function selectdiaresponseTreatment(select) {
+		var value = select.options[select.selectedIndex].value;
+		if (value != "diaresponse_0") {
+			var option = select.options[select.selectedIndex];
+			var ul = select.parentNode.getElementsByTagName('ol')[0];
+			var choices = ul.getElementsByTagName('input');
+			for (var i = 0; i < choices.length; i++)
+				if (choices[i].value == option.value)
+					return;
+			var li = document.createElement('li');
+			var input = document.createElement('input');
+			var text = document.createTextNode(option.firstChild.data);
+			input.type = 'hidden';
+			input.name = 'indicatormchsymptom[dia][]';
+			input.value = option.value;
+			li.appendChild(input);
+			li.appendChild(text);
+			li.setAttribute("id", code);
+			li.setAttribute('class', 'treatment');
+			li.setAttribute('onclick', 'this.parentNode.removeChild(this);');
+			var code = select.options[select.selectedIndex].value;
+			ul.appendChild(li);
+		}
+	} // close select treatment
+	/**
+	 * [selectfevresponseTreatment description]
+	 * @param  {[type]} select [description]
+	 * @return {[type]}        [description]
+	 */
+	function selectfevresponseTreatment(select) {
+		var value = select.options[select.selectedIndex].value;
+		if (value != "fevresponse_0") {
+			var option = select.options[select.selectedIndex];
+			var ul = select.parentNode.getElementsByTagName('ol')[0];
+			var choices = ul.getElementsByTagName('input');
+			for (var i = 0; i < choices.length; i++)
+				if (choices[i].value == option.value)
+					return;
+			var li = document.createElement('li');
+			var input = document.createElement('input');
+			var text = document.createTextNode(option.firstChild.data);
+			input.type = 'hidden';
+			input.name = 'indicatormchsymptom[fev][]';
+			input.value = option.value;
+			li.appendChild(input);
+			li.appendChild(text);
+			li.setAttribute("id", code);
+			li.setAttribute('class', 'treatment');
+			li.setAttribute('onclick', 'this.parentNode.removeChild(this);');
+			var code = select.options[select.selectedIndex].value;
+			ul.appendChild(li);
+		}
+	} // close select treatment
+	/**
+	 * [selectearresponseTreatment description]
+	 * @param  {[type]} select [description]
+	 * @return {[type]}        [description]
+	 */
+	function selectearresponseTreatment(select) {
+		var value = select.options[select.selectedIndex].value;
+		if (value != "earresponse_0") {
+			var option = select.options[select.selectedIndex];
+			var ul = select.parentNode.getElementsByTagName('ol')[0];
+			var choices = ul.getElementsByTagName('input');
+			for (var i = 0; i < choices.length; i++)
+				if (choices[i].value == option.value)
+					return;
+			var li = document.createElement('li');
+			var input = document.createElement('input');
+			var text = document.createTextNode(option.firstChild.data);
+			input.type = 'hidden';
+			input.name = 'indicatormchsymptom[ear][]';
+			input.value = option.value;
+			li.appendChild(input);
+			li.appendChild(text);
+			li.setAttribute("id", code);
+			li.setAttribute('class', 'treatment');
+			li.setAttribute('onclick', 'this.parentNode.removeChild(this);');
+			var code = select.options[select.selectedIndex].value;
+			ul.appendChild(li);
+		}
+	} // close select treatment
+	/**
+	 * [toggle_table description]
+	 * @param  {[type]} el [description]
+	 * @return {[type]}    [description]
+	 */
+	function toggle_table(el) {
+		id = $(el).attr("id");
+		name = $(el).attr("name");
+		radioValue = $(el).attr("value");
+		// alert("This is the id: "+id+" and definately the name: "+name);
+		if (radioValue === '1') {
+			$('.' + name).show();
+		} else {
+			$('.' + name).hide();
+		}
+	}
+	/**
+	 * [break_form_to_steps description]
+	 * @param  {[type]} form_id [description]
+	 * @return {[type]}         [description]
+	 */
 	function break_form_to_steps(form_id) {
 		//form_id='#zinc_ors_inventory';
-		//alert(form_id);	
+		//alert(form_id);
 		var end_url;
 		$(form_id).formwizard({
-			formPluginEnabled: true,
+			formPluginEnabled: false,
 			validationEnabled: false,
 			historyEnabled: true,
 			focusFirstInput: true,
@@ -440,21 +929,21 @@ function startSurvey(base_url, survey) {
 		$(form_id).find('input,select,radio,form').removeClass('ui-helper-reset ui-state-default ui-helper-reset ui-wizard-content');
 
 		var remoteAjax = {}; // empty options object
-		the_url = '';
-		if (survey == 'mnh') {
-			the_url = base_url + "submit/c_form/complete_mnh_survey"; // the url which stores the stuff in db for each step
 
-		} else {
-			the_url = base_url + "submit/c_form/complete_ch_survey"; // the url which stores the stuff in db for each step
-
-		} // for each step in the wizard, add an option to the remoteAjax object...
-		$(form_id + ".step").each(function() {
+		$(form_id + " .step").each(function() { // for each step in the wizard, add an option to the remoteAjax object...
+			if (survey == 'mnh') {
+				form_url = base_url + "submit/c_form/complete_mnh_survey";
+			} else if (survey == 'hcw') {
+				form_url = base_url + "submit/c_form/complete_hcw_survey";
+			} else {
+				form_url = base_url + "submit/c_form/complete_ch_survey";
+			}
 
 			remoteAjax[$(this).attr("id")] = {
-				url: the_url,
+				url: form_url,
 				dataType: 'json',
 				beforeSubmit: function(data) {
-					$("#data").html("<div class='error ui-autocomplete-loading' style='width:auto;height:25px'>Processing...</div>");
+					$("#data").html('<div class="loader" >Loading...</div>')
 				},
 				//beforeSubmit: function(data){$("#data").html("Saving the previous section's response")},
 				success: function(data) {
@@ -463,27 +952,45 @@ function startSurvey(base_url, survey) {
 						$("#data").html("Section was Saved Successfully...").fadeTo("slow", 0);
 						$(form_id).bind("after_remote_ajax", function(event, fdata) {
 							//console.log($(form_id).formwizard('state'));
-							if (form_id == "#mnh_tool") {
-								if (fdata.currentStep == 'section-7') {
-									//	alert('Yes');
-									//$(form_id).formwizard('reset');
-									//$(form_id).formwizard('show','No');
-									// console.log($(form_id).formwizard('state'));
+							if (survey == 'mnh') {
+								if (fdata.currentStep == 'section-8') {
+
 									$(".form-container").load(base_url + 'c_load/survey_complete', function() {
-										window.location = base_url + '/' + survey + '/assessment';
+										window.location = base_url + '/assessment';
 									});
 
+									message = fac_name + ' in ' + fac_district + ' District, ' + fac_county + ' County, has completed the ' + survey.toUpperCase() + ' Survey.';
+									console.log(message);
+									runNotification(base_url, 'c_admin/getContacts', message);
 								}
-							} else {
-								if (fdata.currentStep == 'section-6') {
+
+							} else if (survey == 'ch') {
+								if (fdata.currentStep == 'section-9') {
 									//alert('Yes');
 									//$(form_id).formwizard('reset');
 									//$(form_id).formwizard('show','No');
 									// console.log($(form_id).formwizard('state'));
 									$(".form-container").load(base_url + 'c_load/survey_complete', function() {
-										window.location = base_url + '/' + survey + '/assessment';
+										window.location = base_url + '/assessment';
 									});
 
+									message = fac_name + ' in ' + fac_district + ' District, ' + fac_county + ' County, has completed the ' + survey.toUpperCase() + ' Survey.';
+									console.log(message);
+									runNotification(base_url, 'c_admin/getContacts', message);
+								}
+							} else {
+								if (fdata.currentStep == 'section-5') {
+									//alert('Yes');
+									//$(form_id).formwizard('reset');
+									//$(form_id).formwizard('show','No');
+									// console.log($(form_id).formwizard('state'));
+									$(".form-container").load(base_url + 'c_load/survey_complete', function() {
+										window.location = base_url + '/assessment';
+									});
+
+									message = fac_name + ' in ' + fac_district + ' District, ' + fac_county + ' County, has completed the ' + survey.toUpperCase() + ' Survey.';
+									console.log(message);
+									runNotification(base_url, 'c_admin/getContacts', message);
 								}
 							}
 
@@ -496,6 +1003,7 @@ function startSurvey(base_url, survey) {
 
 					return data; //return true to make the wizard move to the next step, false will cause the wizard to stay on the current step
 				}
+
 			};
 
 
@@ -530,7 +1038,7 @@ function startSurvey(base_url, survey) {
 						$("#data").fadeTo(5000, 0);
 						//$('#sectionNavigation').hide();
 						$(".form-container").load(base_url + 'c_load/survey_complete', function() {
-							window.location = base_url + 'commodity/assessment';
+							window.location = base_url + '/assessment';
 						});
 
 					}
@@ -543,9 +1051,12 @@ function startSurvey(base_url, survey) {
 			}
 		});
 
-		//check if deliveries are conducted		
+		/**
+		 * [description]
+		 * @return {[type]} [description]
+		 */
 		$('#facDeliveriesDone').change(function() {
-			if ($(this).val() == "Yes" || $(this).val() === "") {
+			if ($(this).val() == "Yes" || $(this).val() == "") {
 				//show next section, hide this section
 				$('#delivery_centre').find('input').prop('disabled', true);
 				$('#delivery_centre').hide();
@@ -560,14 +1071,16 @@ function startSurvey(base_url, survey) {
 			}
 		});
 
-		//fixed heading function
+		/**
+		 * [UpdateTableHeaders description]
+		 */
 		function UpdateTableHeaders() {
 			$(".persist-area").each(function() {
 
 				var el = $(this),
 					offset = el.offset(),
 					scrollTop = $(window).scrollTop(),
-					floatingHeader = $(".floatingHeader", this);
+					floatingHeader = $(".floatingHeader", this)
 
 				if ((scrollTop > offset.top) && (scrollTop < offset.top + el.height())) {
 					floatingHeader.css({
@@ -577,10 +1090,13 @@ function startSurvey(base_url, survey) {
 					floatingHeader.css({
 						"visibility": "hidden"
 					});
-				}
+				};
 			});
 		}
-
+		/**
+		 * [description]
+		 * @return {[type]} [description]
+		 */
 		$(function() {
 
 			var clonedHeaderRow;
@@ -600,10 +1116,77 @@ function startSurvey(base_url, survey) {
 
 		});
 
-		//$(form_id).formwizard('show','section-2');
-	}
-	//--end of function break_form_to_steps(form_id)
-}
 
+	} //--end of function break_form_to_steps(form_id)
+	/**
+	 * [getDistrictData description]
+	 * @param  {[type]} base_url        [description]
+	 * @param  {[type]} county          [description]
+	 * @param  {[type]} survey_type     [description]
+	 * @param  {[type]} survey_category [description]
+	 * @return {[type]}                 [description]
+	 */
+	function getDistrictData(base_url, district, survey_type, survey_category) {
+		//alert(county);
+		$.ajax({
+			url: base_url + 'c_analytics/getDistrictData/' + survey_type + '/' + survey_category + '/' + district,
+			beforeSend: function(xhr) {
+				xhr.overrideMimeType("text/plain; charset=x-user-defined");
+			},
+			success: function(data) {
+				obj = jQuery.parseJSON(data);
+				console.log(obj);
+				$('#current_survey').text(survey_type.toUpperCase() + ' SURVEY');
+				$('#targeted').text(obj[0].actual);
+				$('#finished').text(obj[0].reported);
+				$('#not-finished').text(obj[0].pending);
+				$('#not-started').text(obj[0].notstarted);
+				var percentage = Math.round((obj[0].reported / obj[0].actual * 100), 2);
+				$('#percentage_completed').text(percentage + '%')
+				// $('#district_progress').attr('aria-valuenow', percentage);
+				$('#district_progress .bar').css('width', percentage + '%');
+			}
+		});
+	}
+	/**
+	 * [check description]
+	 * @param  {[type]} el [description]
+	 * @return {[type]}    [description]
+	 */
+	function check(el) {
+
+		id = $(el).attr("id");
+		name = $(el).attr("name");
+
+
+		if ($('#' + id).prop("checked")) {
+			$('.' + id).attr("readonly", false);
+			var input = document.createElement('input');
+			input.type = 'hidden';
+			input.name = 'mchtreatmentnew[' + name + '][]';
+			input.value = el.value;
+			document.getElementById("chells").appendChild(input);
+
+		} else {
+			$('.' + id).attr("readonly", true);
+			$('.' + id).attr("value", 0);
+		}
+
+	}
+	/**
+	 * [loadSection description]
+	 * @param  {[type]} base_url        [description]
+	 * @param  {[type]} survey          [description]
+	 * @param  {[type]} survey_category [description]
+	 * @param  {[type]} facilityMFL     [description]
+	 * @return {[type]}                 [description]
+	 */
+	function loadSection(section,action) {
+		if (action == 'continue') {
+			
+			(data != '') ? $(form_id).formwizard('show', 'section-' + (parseInt(section) + 1)) : $(form_id).formwizard('show', 'section-1');
+		}
+	}
+}
 
 /*---------------------end form wizard functions----------------------------------------------------------------*/

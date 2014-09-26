@@ -170,7 +170,7 @@ progress[value]::-webkit-progress-value::before {
                 $('#mnh-map').css(styles2);
                 $('#ch-map').css(styles2);
             });
-            runMap('mnh','end-term');
+            runMap('mnh','end-term','county');
             $('.dropdown-menu li a').click(function(){
                 survey=$(this).attr('data-survey');
                 survey_category=$(this).attr('data-survey-category');
@@ -201,7 +201,7 @@ progress[value]::-webkit-progress-value::before {
         function runMap(survey,survey_category){
 
             $.ajax({
-                url: '<?php echo base_url();?>c_front/runMap/'+survey+'/'+survey_category,
+                url: '<?php echo base_url();?>c_front/runMap/'+survey+'/'+survey_category+'/county',
                 beforeSend: function(xhr) {
                     xhr.overrideMimeType("text/plain; charset=x-user-defined");
                 },
