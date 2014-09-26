@@ -702,17 +702,21 @@ ORDER BY fac_level;");
     }
     
     public function getStaffAvailability($criteria, $value, $survey, $survey_category, $for) {
-        $in_facility = $on_duty = $resultsArray = array();
+        $in_facility = $on_duty = $category = $resultsArray = array();
         $value = urldecode($value);
         $results = $this->m_analytics->getStaffAvailability($criteria, $value, $survey, $survey_category, $for);
         
+           //echo '<pre>';print_r($results);echo '</pre>';
         $category = array();
-        foreach ($results as $guide => $result) {
-            $category[] = $guide;
-            foreach ($result as $name => $data) {
+        foreach ($results as $guide ) {
+            $category = array('total_in_facility','total_on_duty');
+//echo '<pre>';print_r($guide);echo '</pre>';
+            foreach ($guide as $name => $data) {
+                //echo '<pre>';print_r($guide);echo '</pre>';
                 $gData[$name]['total_in_facility'][] = (int)$data['total_facility'];
                 $gData[$name]['total_on_duty'][] = (int)$data['total_duty'];
             }
+
         }
         
         $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#a6c96a');
@@ -723,6 +727,7 @@ ORDER BY fac_level;");
             $color = $colors[$colorCount];
             $count = 0;
             foreach ($data as $stack => $actual) {
+                //echo '<pre>';print_r($actual);echo '</pre>';
                 if ($count == 0) {
                     $resultArray[] = array('name' => $name, 'data' => $actual, 'stack' => ucwords(str_replace('_', ' ', $stack)), 'color' => $color);
                 } else {
@@ -1007,6 +1012,10 @@ ORDER BY fac_level;");
      */
     public function getMNHSuppliesAvailability($criteria, $value, $survey, $survey_category) {
         $this->getSuppliesStatistics($criteria, $value, $survey, $survey_category, 'mnh', 'availability');
+    }
+
+    public function getMNHMainSupplier($criteria,$value,$survey,$survey_category){
+        $this->getSuppliesStatistics($criteria, $value, $survey, $survey_category, 'mch', 'supplier');
     }
     
     /**
@@ -1364,6 +1373,7 @@ ORDER BY fac_level;");
                 }
                 
                 foreach ($fData as $key => $value) {
+                    //echo $stack;
                     $resultArray[] = array('name' => $key, 'data' => $value);
                 }
                 
@@ -1535,6 +1545,17 @@ ORDER BY fac_level;");
      */
     public function getMNHEquipmentFrequency($criteria, $value, $survey, $survey_category) {
         $this->getEquipmentStatistics($criteria, $value, $survey, $survey_category, 'mnh', 'availability');
+    }
+
+     /**
+     * [getMNHEquipmentFrequency description]
+     * @param  [type] $criteria [description]
+     * @param  [type] $value    [description]
+     * @param  [type] $survey   [description]
+     * @return [type] $for      [description]
+     */
+    public function getMNHEquipmentElectricity($criteria, $value, $survey, $survey_category) {
+        $this->getEquipmentStatistics($criteria, $value, $survey, $survey_category, 'mhw', 'availability');
     }
     
     /**

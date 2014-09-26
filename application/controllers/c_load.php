@@ -1403,13 +1403,10 @@ Indicate the total # of children that received the following treatment. </br>
             <th rowspan="1" colspan="2">Available Quantities</th>
         </tr>
         <tr>
-<<<<<<< HEAD
-            <th>Available </th>
-            <th>Not Available </th>
-=======
+
             <th>Available</th>
             <th>Not Available</th>
->>>>>>> 03845a196c9a232a4253dde1a24143df21ec5a1d
+
             <th>OPD</th>
             <th>MCH</th>
             <th>U5 Clinic</th>
