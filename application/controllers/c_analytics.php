@@ -528,13 +528,13 @@ ORDER BY fac_level;");
     public function getCommunityStrategyCH($criteria, $value, $survey, $survey_category, $option) {
         $results = $this->m_analytics->getCommunityStrategy($criteria, $value, $survey, $survey_category, 'cms');
         ksort($results);
-          //echo "<pre>";print_r($results);echo "</pre>";die;
+          // echo "<pre>";print_r($results);echo "</pre>";die;
 
-        $count = 0;
+        $count = 1;
         
         foreach ($results as $key => $result) {
 
-        	if ( $count >= 1 && $count <= 3) {
+        	if ( $count >= 1 && $count <=3 ) {
                 $data['community'][$key] = $result;
             } elseif ($count >= 4 && $count <= 7) {
             	$data['referral'][$key] = $result;
@@ -542,10 +542,11 @@ ORDER BY fac_level;");
                 $data['trained'][$key] = $result;
 
             }
-          }
             $count++;
+          }
+            
 
-        
+        // echo "<pre>";print_r($data);echo "</pre>";die;
 
 		foreach($data[$option] as $key => $value) {
 			$category[] = $key;
