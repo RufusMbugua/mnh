@@ -169,4 +169,4 @@ pip-log.txt
 application/models/m_analytics.php
 
 #My Ignores
-application/config
+application/config/database.php
