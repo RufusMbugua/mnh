@@ -596,6 +596,7 @@ function statisticsHandler(criteria, value, survey, survey_category, indicator_t
                     loadGraph(base_url, 'c_analytics/getCHSuppliesAvailability/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#supplies_availability');
                     loadGraph(base_url, 'c_analytics/getCHSuppliesLocation/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#supplies_location');
                     loadGraph(base_url, 'c_analytics/getCHTestingSupplies/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#testing_supplies');
+                    loadGraph(base_url, 'c_analytics/getCHTestingSuppliesAvailability/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#testingSuppliesAvailability');
                     loadGraph(base_url, 'c_analytics/getCHSuppliesSupplier/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#ch_suppliers');
 
                     break;
