@@ -5411,7 +5411,7 @@ background: #ddd;
      * @param  string  $type        [description]
      * @return [type]               [description]
      */
-    public function populateGraph($resultArray = '', $drilldown = '', $category = '', $criteria = '', $stacking = '', $margin = 0, $type = '', $resultSize = '',$for='',$parent='',$statistics='') {
+    public function populateGraph($resultArray = '', $drilldown = '', $category = '', $criteria = '', $stacking = '', $margin = 0, $type = '', $resultSize = '', $for = '', $parent = '', $statistics = '') {
         $datas = array();
         $chart_size = (count($category) < 5) ? 5 : count($category);
         $given_size = ($resultSize != '' && $resultSize < 5) ? 5 : $resultSize;
@@ -5423,9 +5423,9 @@ background: #ddd;
         switch ($type) {
             case 'line':
             case 'column':
-                $datas['chart_width'] = ($resultSize != '') ? $given_size * 80 : $chart_size * 80;
-                $datas['chart_length'] = 200;
-                $datas['chart_label_rotation'] = (int) - 45;
+                // $datas['chart_width'] = '100%';//($resultSize != '') ? $given_size * 30 : $chart_size * 30;
+                $datas['chart_length'] = 300;
+                $datas['chart_label_rotation'] = (int) - 65;
                 $datas['chart_legend_floating'] = true;
                 break;
 
@@ -5437,9 +5437,9 @@ background: #ddd;
                 //$datas['chart_width'] = 100;
                 break;
         }
-        $datas['statistics']=$statistics;
-        $datas['data_parent']=$parent;
-        $datas['data_for']=$for;
+        $datas['statistics'] = $statistics;
+        $datas['data_parent'] = $parent;
+        $datas['data_for'] = $for;
         $datas['chart_stacking'] = $stacking;
         $datas['color_scheme'] = ($stacking != '') ? array('#8bbc21', '#fb4347', '#92e18e', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#a6c96a') : array('#66aaf7', '#f66c6f', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#a6c96a');
         $datas['chart_categories'] = $category;

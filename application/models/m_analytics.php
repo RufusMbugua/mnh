@@ -1796,7 +1796,7 @@ ORDER BY oa.question_code ASC";
                 if ($this->dataSet !== NULL) {
                     foreach ($this->dataSet as $value) {
                         
-                        echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
+                        // echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
                         if (array_key_exists('frequency', $value)) {
                             $data[$value['commodity_name']][$value['frequency']] = (int)$value['total_response'];
                         } else if (array_key_exists('location', $value)) {

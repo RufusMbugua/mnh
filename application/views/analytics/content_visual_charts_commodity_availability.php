@@ -342,7 +342,7 @@
                 </div>
                 <div class="medium-graph">
                     <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Reasons for Bundling Unavailability</span><span class="sizer">Click to Enlarge</span></h6>
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Bundling Unavailability Reasons</span><span class="sizer">Click to Enlarge</span></h6>
                     </div>
                     <div class="portlet-body">
 

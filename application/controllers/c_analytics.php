@@ -2353,7 +2353,7 @@ ORDER BY fac_level;");
         $value = urldecode($value);
         $results = $this->m_analytics->getIndicatorStatistics($criteria, $value, $survey, $survey_category, $for);
         
-        //echo "<pre>"; print_r($results);echo "</pre>";die;
+        // echo "<pre>"; print_r($results);echo "</pre>";die;
         foreach ($results['response'] as $key => $result) {
             
             $key = str_replace('_', ' ', $key);
