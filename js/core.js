@@ -279,12 +279,12 @@ function runNotification(base_url, function_url, messsage) {
                     period = '';
                 }
 
-                // newMessage = period + ' ' + v.cl_name + ',  ' + message;
-                // var emailmessage = [period, v.cl_name, message];
-                // emailmessage = JSON.stringify(emailmessage);
-                // console.log(emailmessage);
-                // notify_email(email, emailmessage);
-                // notify_sms(phoneNumber, newMessage);
+                newMessage = period + ' ' + v.cl_name + ',  ' + message;
+                var emailmessage = [period, v.cl_name, message];
+                emailmessage = JSON.stringify(emailmessage);
+                console.log(emailmessage);
+                notify_email(email, emailmessage);
+                notify_sms(phoneNumber, newMessage);
 
             });
         }
