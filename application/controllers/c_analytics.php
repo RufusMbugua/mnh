@@ -754,7 +754,7 @@ ORDER BY fac_level;");
     public function getTreatmentStatistics($criteria, $value, $survey, $survey_category, $statistic, $option) {
         $results = $this->m_analytics->getTreatmentStatistics($criteria, $value, $survey, $survey_category, $statistic);
         
-        // echo "<pre>";print_r($results);echo "</pre>";die;
+         // echo "<pre>";print_r($results);echo "</pre>";die;
         
         $count = 0;
         foreach ($results as $stack => $result) {
@@ -763,7 +763,7 @@ ORDER BY fac_level;");
                 //echo $name;
                 switch ($statistic) {
                     case 'cases':
-                        $category = '';
+                        $category[$option] = array('Case Numbers');
                         
                         $resultArray[] = array('name' => $name, 'data' => array($data), 'stack' => $stack);
                         
@@ -774,10 +774,6 @@ ORDER BY fac_level;");
                         $gData = array();
                         
                         foreach ($data as $commodity => $numbers) {
-                             // echo $commodity . '</br>';
-                            // $commodity = $this->sortTreatment($commodity, $option);
-                             // echo 'New :</br>';
-                             // echo $commodity . '</br>';
                             $newdata[$stack][$commodity][$name] = $numbers;
                         }
                         $category[$stack][] = $name;

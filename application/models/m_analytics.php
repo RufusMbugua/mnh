@@ -454,6 +454,10 @@ ORDER BY lq.lq_response ASC";
             
             //echo($this->db->last_query());die;
             if ($this->dataSet !== NULL) {
+                // echo "<pre>";
+                //             print_r($this->dataSet);
+                //             echo "</pre>";
+                //             die;
                 
                 foreach ($this->dataSet as $value) {
                     switch ($statistic) {
