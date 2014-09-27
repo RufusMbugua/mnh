@@ -211,6 +211,12 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-md-12">
+                <div class="ui horizontal icon divider">
+  <i class="icon circular fa fa-bar-chart"></i>
+</div>
+                </div>
+                
                 <div class="x-large-graph">
                    <h5>Classification and Treatment</h5>
                     <div class="medium-graph">
@@ -244,8 +250,12 @@
                     </div>
                 </div>
                 </div>
-
-                <div class="medium-graph">
+  <div class="col-md-12">
+                <div class="ui horizontal icon divider">
+  <i class="icon circular fa fa-bar-chart"></i>
+</div>
+                </div>
+                <div class="semi-large-graph">
                     <div class="portlet-title">
                         <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Danger Signs Assessed in ongoing session</span><span class="sizer">Click to Enlarge</span></h6>
                     </div>

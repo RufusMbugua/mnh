@@ -5470,6 +5470,12 @@ background: #ddd;
         }
         return $result;
     }
+    /**
+     * [loadTable description]
+     * @param  [type] $data     [description]
+     * @param  string $editable [description]
+     * @return [type]           [description]
+     */
     public function loadTable($data, $editable = '') {
         $tmpl = array('table_open' => '<div class="table-container"><table cellpadding="4" cellspacing="0" class="table table-condensed table-striped table-bordered table-hover dataTable">', 'heading_row_start' => '<tr>', 'heading_row_end' => '</tr>', 'heading_cell_start' => '<th>', 'heading_cell_end' => '</th>', 'row_start' => '<tr>', 'row_end' => '</tr>', 'cell_start' => '<td>', 'cell_end' => '</td>', 'row_alt_start' => '<tr>', 'row_alt_end' => '</tr>', 'cell_alt_start' => '<td>', 'cell_alt_end' => '</td>', 'table_close' => '</table></div>');
         
