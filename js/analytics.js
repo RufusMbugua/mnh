@@ -375,6 +375,7 @@ function subHandler(criteria, county, district, facility, survey, survey_categor
     }
 }
 
+
 function indicatorHandler(criteria, value, survey, survey_category, indicator_type) {
     loadGraph(base_url, 'c_analytics/getIndicatorComparison/' + criteria + '/' + value + '/' + survey + '/' + survey_category + '/' + indicator_type, '#indicator_comparison');
 }
@@ -428,6 +429,7 @@ function loadEnlargedGraph(base_url, graph_url, title, raw_url) {
         loadModalForm(base_url, '', title, '90%', contents);
         loadGraph(base_url, graph_url, '#graph');
     }
+
 }
 
 function statisticsHandler(criteria, value, survey, survey_category, indicator_type, section) {
@@ -440,6 +442,7 @@ function statisticsHandler(criteria, value, survey, survey_category, indicator_t
                     loadGraph(base_url, 'c_analytics/getFacilityOwnerPerCounty/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#MNHfacility_ownership');
                     loadGraph(base_url, 'c_analytics/getFacilityLevelPerCounty/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#MNHfacility_levels');
                     loadGraph(base_url, 'c_analytics/getFacilityTypePerCounty/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#MNHfacility_type');
+                    loadGraph(base_url, 'c_analytics/getServices/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#DeliveryReasons');
                     loadGraph(base_url, 'c_analytics/getServices/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#24Hr');
                     loadGraph(base_url, 'c_analytics/getHFM/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#HFM');
                     loadGraph(base_url, 'c_analytics/getBedStatistics/' + criteria + '/' + value + '/' + survey + '/' + survey_category + '/total', '#NnB');
@@ -510,13 +513,15 @@ function statisticsHandler(criteria, value, survey, survey_category, indicator_t
                     break;
 
                 case 'section-9':
+                    loadGraph(base_url, 'c_analytics/getMNHresourcesAvailability/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#mnhresource_availability');
                     loadGraph(base_url, 'c_analytics/getMNHresourcesSupplier/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#mnhresource_mainSource');
                     loadGraph(base_url, 'c_analytics/getRunningWaterLocation/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#mnhresource_location');
                     loadGraph(base_url, 'c_analytics/getWasteStatistics/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#mnhresource_wasteDisposal');
-					loadGraph(base_url, 'c_analytics/getRunningWaterAvailability/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#mnhresource_availability');
-					loadGraph(base_url, 'c_analytics/getRunningWaterStorage/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#mnhwatersource');
-					loadGraph(base_url, 'c_analytics/getmnhWaterStorage/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#mnhwateravailability');
-					
+					loadGraph(base_url, 'c_analytics/getRunningWaterAvailability/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#mnhwater_availability');
+                    loadGraph(base_url, 'c_analytics/getMNHEquipmentElectricity/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#mnhequipment_electricity');
+                    loadGraph(base_url, 'c_analytics/getMNHMainSupplier/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#mnhelectricitysupplier');
+                    loadGraph(base_url, 'c_analytics/getMNHMainSource/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#mnhelectricitysource');
+
                     break;
 
                 case 'section-10':
@@ -531,6 +536,7 @@ function statisticsHandler(criteria, value, survey, survey_category, indicator_t
 
             break;
         case 'ch':
+
             switch (section) {
                 case 'section-1':
                     loadGraph(base_url, 'c_analytics/getFacilityOwnerPerCounty/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#facility_owner');
@@ -591,7 +597,7 @@ function statisticsHandler(criteria, value, survey, survey_category, indicator_t
                     loadGraph(base_url, 'c_analytics/getCHSuppliesLocation/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#supplies_location');
                     loadGraph(base_url, 'c_analytics/getCHTestingSupplies/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#testing_supplies');
                     loadGraph(base_url, 'c_analytics/getCHSuppliesSupplier/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#ch_suppliers');
-					loadGraph(base_url, 'c_analytics/getCHTestingSuppliesAvailability/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#testingSuppliesAvailability');
+
                     break;
 
                 case 'section-8':
@@ -608,6 +614,7 @@ function statisticsHandler(criteria, value, survey, survey_category, indicator_t
 
                     break;
             }
+
             break;
     }
 
