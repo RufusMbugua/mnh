@@ -63,6 +63,15 @@ class M_Analytics extends MY_Model
         }
     }
     
+    public function getReportingList($survey,$survey_category){
+    	$query = "CALL get_reporting_list('".$survey."','".$survey_category."');";
+    	$this->dataSet = $this->db->query($query, array($survey));
+            $this->dataSet = $this->dataSet->result_array();
+            if ($this->dataSet) {
+            	//echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
+                return $this->dataSet;
+            } 
+     }
     public function get_facility_reporting_summary($survey) {
         
         /*using CI Database Active Record*/
@@ -78,11 +87,7 @@ class M_Analytics extends MY_Model
             } else {
                 return $this->dataSet = false;
             }
-            
-            //die(var_dump($this->dataSet));
-            
-            
-        }
+         }
         catch(exception $ex) {
             
             //ignore
@@ -92,9 +97,7 @@ class M_Analytics extends MY_Model
         }
     }
     
-    /**
-     * Community Strategy
-     */
+    //community strategy
     public function getCommunityStrategy($criteria, $value, $survey, $survey_category, $for) {
         
         /*using CI Database Active Record*/
@@ -1123,11 +1126,11 @@ WHERE
                     // }
                     
                     foreach ($this->dataSet as $value) {
-                        
+                       
                         $indicator = $value['indicator_name'];
                         
                         //echo $value['indicator'];die;
-                        $data['response'][$indicator][$value['response']] = (int)$value['count(il.li_response)'];
+                        $data['response'][$indicator][$value['response']] = (int)$value['total_response'];
                         
                         $data['categories'] = array_keys($data['response']);
                     }
@@ -1139,7 +1142,7 @@ WHERE
                     return $this->dataSet = null;
                 }
                 
-                die(var_dump($this->dataSet));
+                //die(var_dump($this->dataSet));
             }
             catch(exception $ex) {
                 
@@ -1187,7 +1190,7 @@ WHERE
                     return $this->dataSet = null;
                 }
                 
-                die(var_dump($this->dataSet));
+                //die(var_dump($this->dataSet));
             }
             catch(exception $ex) {
                 
@@ -1737,13 +1740,13 @@ ORDER BY oa.question_code ASC";
                 if ($this->dataSet !== NULL) {
                     foreach ($this->dataSet as $value) {
                         
-                        //echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
+                        echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
                         if (array_key_exists('frequency', $value)) {
                             $data[$value['commodity_name']][$value['frequency']] = (int)$value['total_response'];
                         } else if (array_key_exists('location', $value)) {
                             $location = explode(',', $value['location']);
                             foreach ($location as $place) {
-                                $data[$value['location']][$place]+= (int)$value['total_response'];
+                                $data[$value['commodity_name']][$place]+= (int)$value['total_response'];
                             }
                         } else if (array_key_exists('reason', $value)) {
                             $data[$value['commodity_name']][$value['reason']] = (int)$value['total_response'];
@@ -1836,11 +1839,12 @@ ORDER BY oa.question_code ASC";
                     foreach ($this->dataSet as $value) {
                         if (array_key_exists('frequency', $value)) {
                             $data[$value['supply_name']][$value['frequency']] = (int)$value['total_response'];
-                        } else if (array_key_exists('locations', $value)) {
-                            $location = explode(',', $value['locations']);
-                            foreach ($location as $place) {
+                        } else if (array_key_exists('location', $value)) {
+                            $location = explode(',', $value['location']);
+                           foreach ($location as $place) {
                                 $data[$value['supply_name']][$place]+= (int)$value['total_response'];
                             }
+                           //$data[$value['supply_name']][$value['location']]=(int)$value['total_response'];
                         } else if (array_key_exists('total_functional', $value)) {
                             $data[$value['supply_name']]['functional']+= (int)$value['total_functional'];
                             $data[$value['supply_name']]['non_functional']+= (int)$value['total_non_functional'];
@@ -3919,6 +3923,7 @@ ORDER BY question_code";
                     // // if ($question == 'Does this Facility have a designated location for oral rehydration?') {
                     // // }
                     //echo $question;
+                  //echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
                     switch ($statistics) {
                         case 'response':
                             $yes = $value_['yes_values'];
@@ -3934,13 +3939,16 @@ ORDER BY question_code";
                             //echo $question;
                             $data[$question] = (int)$value_['total'];
                             break;
-
                         case 'reason':
                             $question = $this->getQuestionName($value_['questions']);
                             $data[$question][$value_['reason']] = $value_['total_response'];
                             break;
-
-                        case 'reason_raw':
+							
+						case 'healthservice':
+							$data[$question][$value_['response']]=(int)$value_['total_response'];
+							break;
+						
+						case 'reason_raw':
                         case 'response_raw':
                         case 'total_raw':
                             $data[] = $value_;
@@ -4268,7 +4276,7 @@ ORDER BY question_code";
                 $this->dataSet = $queryData->result_array();
                 $queryData->next_result();
                 
-                echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
+                //echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
                 // Dump the extra resultset.
                 $queryData->free_result();
                 $pharmacyvalue = 0;
