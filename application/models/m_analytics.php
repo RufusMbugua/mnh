@@ -454,10 +454,6 @@ ORDER BY lq.lq_response ASC";
             
             //echo($this->db->last_query());die;
             if ($this->dataSet !== NULL) {
-                // echo "<pre>";
-                //             print_r($this->dataSet);
-                //             echo "</pre>";
-                //             die;
                 
                 foreach ($this->dataSet as $value) {
                     switch ($statistic) {
@@ -1796,7 +1792,7 @@ ORDER BY oa.question_code ASC";
                 if ($this->dataSet !== NULL) {
                     foreach ($this->dataSet as $value) {
                         
-                        // echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
+                        //echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
                         if (array_key_exists('frequency', $value)) {
                             $data[$value['commodity_name']][$value['frequency']] = (int)$value['total_response'];
                         } else if (array_key_exists('location', $value)) {
@@ -4010,9 +4006,9 @@ ORDER BY question_code";
 							
 						case 'healthservice':
 							$data[$question][$value_['response']]=(int)$value_['total_response'];
+							
 							break;
-						
-						case 'reason_raw':
+                        case 'reason_raw':
                         case 'response_raw':
                         case 'total_raw':
                             $data[] = $value_;
