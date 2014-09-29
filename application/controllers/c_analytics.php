@@ -2425,7 +2425,10 @@ ORDER BY fac_level;");
         //echo '<pre>';print_r($results);echo '</pre>';die;
         $options = '<option>Choose Indicator Type</option>';
         foreach ($results as $value) {
-            $options.= '<option value="' . $value['il_for'] . '">' . $value['il_full_name'] . '</option>';
+            if($value['il_full_name']!=''){
+                $options.= '<option value="' . $value['il_for'] . '">' . $value['il_full_name'] . '</option>';
+            }
+            
         }
         echo $options;
     }
