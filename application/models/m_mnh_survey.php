@@ -4578,6 +4578,7 @@ class M_MNH_Survey extends MY_Model
             (isset($this->elements[$i]['hwReason'])) ? $this->theForm->setArReasonUnavailable($this->elements[$i]['hwReason']) : $this->theForm->setArReasonUnavailable("N/A");
             (isset($this->elements[$i]['hwAvailability'])) ? $this->theForm->setArAvailability($this->elements[$i]['hwAvailability']) : $this->theForm->setArAvailability("N/A");
             (isset($this->elements[$i]['hwLocation'])) ? $this->theForm->setArLocation($this->elements[$i]['hwLocation']) : $this->theForm->setArLocation("N/A");
+            (isset($this->elements[$i]['hwSource'])) ? $this->theForm->setArLocation($this->elements[$i]['hwSource']) : $this->theForm->setArLocation("N/A");
             
             //$this -> theForm -> setSource($this -> elements[$i]['hwSource']);
             $this->theForm->setArCreated(new DateTime());

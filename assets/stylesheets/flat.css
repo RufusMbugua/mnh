@@ -9236,7 +9236,26 @@ a.disabled:hover {
   font-size: 14px;
 }
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+progress
+{
+  -webkit-appearance: progress-bar;
+  box-sizing: border-box;
+  display: inline-block;
+  height: 1em;
+  width: 10em;
+  vertical-align: -0.2em;
+}
+=======
+/* line 679, ../sass/flat.scss */
+=======
+/* line 688, ../sass/flat.scss */
+>>>>>>> 82c13dd18304b9e07024fdd1a5ecf77746b9a63d
+=======
 /* line 702, ../sass/flat.scss */
+>>>>>>> 03845a196c9a232a4253dde1a24143df21ec5a1d
 .editable-click:hover {
   cursor: hand !important;
 }
@@ -9258,6 +9277,9 @@ a.disabled:hover {
   color: #333;
   cursor: hand;
 }
+<<<<<<< HEAD
+>>>>>>> b4b01cf1267a640284df48615e622a27a008f1fd
+=======
 
 /* line 719, ../sass/flat.scss */
 #graph {
@@ -9310,6 +9332,9 @@ h6.table-header span button {
   border: none !important;
   box-shadow: 0;
 }
+<<<<<<< HEAD
+>>>>>>> 82c13dd18304b9e07024fdd1a5ecf77746b9a63d
+=======
 
 /* line 767, ../sass/flat.scss */
 .activity, .status {
@@ -9335,3 +9360,4 @@ h6.table-header span button {
   height: 20px !important;
   padding: 3px;
 }
+>>>>>>> 03845a196c9a232a4253dde1a24143df21ec5a1d
