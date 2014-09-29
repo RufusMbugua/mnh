@@ -1186,7 +1186,16 @@ ORDER BY fac_level;");
     
     public function getCommodityStatistics($criteria, $value, $survey, $survey_category, $for, $statistic) {
         $results = $this->m_analytics->getCommodityStatistics($criteria, $value, $survey, $survey_category, $for, $statistic);
-		if(($statistic == 'availability' && $for == 'bun') ||($statistic == 'unavailability' && $for == 'bun') || ($statistic == 'location' && $for == 'bun')){
+		if (($statistic == 'supplier' && $for == 'mnh') || ($statistic == 'supplier' && $for == 'ch') ) {
+            foreach ($results as $key => $result) {
+                foreach ($result as $k => $value) {
+                    $gData[] = array('name' => $k, 'y' => (int)$value);
+                }
+            }
+            $resultArray[] = array('name' => $key, 'data' => $gData);
+            $this->populateGraph($resultArray, '', $category, $criteria, '', 40, 'pie', (int)sizeof($category));
+        }
+        else if(($statistic == 'availability' && $for == 'bun') ||($statistic == 'unavailability' && $for == 'bun') || ($statistic == 'location' && $for == 'bun')){
 			$key = str_replace('_', ' ', $key);
         foreach ($results as $key => $result) {
             $key = str_replace('_', ' ', $key);
