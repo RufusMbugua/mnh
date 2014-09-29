@@ -1200,6 +1200,7 @@ ORDER BY fac_level;");
             }
         }
         foreach ($data as $key => $val) {
+            
             $key = str_replace('_', ' ', $key);
             $key = ucwords($key);
             $key = str_replace(' ', '-', $key);
