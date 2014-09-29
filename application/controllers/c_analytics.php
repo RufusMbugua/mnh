@@ -710,37 +710,39 @@ ORDER BY fac_level;");
            //echo '<pre>';print_r($results);echo '</pre>';
         $category = array();
         foreach ($results as $guide ) {
-            $category = array('total_in_facility','total_on_duty');
+            // $category = array('total_in_facility','total_on_duty');
 //echo '<pre>';print_r($guide);echo '</pre>';
             foreach ($guide as $name => $data) {
                 //echo '<pre>';print_r($guide);echo '</pre>';
-                $gData[$name]['total_in_facility'][] = (int)$data['total_facility'];
-                $gData[$name]['total_on_duty'][] = (int)$data['total_duty'];
+                $gData[$name]['Total in Facility'] = (int)$data['total_facility'];
+                $gData[$name]['Total on Duty'] = (int)$data['total_duty'];
             }
 
         }
         
         $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#a6c96a');
         
-        //echo '<pre>';print_r($gData);echo '</pre>'; exit;
-        $colorCount = 0;
+        // echo '<pre>';print_r($gData);echo '</pre>'; exit;
+        
         foreach ($gData as $name => $data) {
-            $color = $colors[$colorCount];
-            $count = 0;
-            foreach ($data as $stack => $actual) {
-                //echo '<pre>';print_r($actual);echo '</pre>';
-                if ($count == 0) {
-                    $resultArray[] = array('name' => $name, 'data' => $actual, 'stack' => ucwords(str_replace('_', ' ', $stack)), 'color' => $color);
-                } else {
-                    $resultArray[] = array('name' => $name, 'data' => $actual, 'stack' => ucwords(str_replace('_', ' ', $stack)), 'linkedTo' => ':previous', 'color' => $color);
-                }
-                $count++;
+            $colorCount = 0;
+            $category = array_keys($data);
+           
+            // $fData = array_values($data);
+            foreach($data as $k=>$val){
+                $color = $colors[$colorCount];
+                $fData[]=array('name'=>$k,'y'=>$val);
+                $colorCount++;
+
             }
-            $colorCount++;
+
+            $resultArray[]=array('name'=>$name,'data'=>$fData);
+            $fData=array();
+               
         }
         
-        //echo "<pre>";print_r($resultArray);echo "</pre>";die;
-        $this->populateGraph($resultArray, '', $category, $criteria, 'normal', 90, 'bar');
+        // echo "<pre>";print_r($resultArray);echo "</pre>";die;
+        $this->populateGraph($resultArray, '', $category, $criteria, 'normal', 90, 'bar','','','','',$colors);
     }
     
     //get treatment symptoms
