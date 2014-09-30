@@ -945,7 +945,7 @@ ORDER BY fac_level;");
         $results = $this->m_analytics->getSuppliesStatistics($criteria, $value, $survey, $survey_category, $for, $statistic);
         
         //echo '<pre>';print_r($results);echo '</pre>';die;
-        if (($statistic == 'location' && $for == 'mh') || ($statistic == 'supplier' && $for == 'mh') || ($statistic == 'supplier' && $for == 'mch')) {
+        if (($statistic == 'location' && $for == 'mh') || ($statistic == 'supplier' && $for == 'mh') || ($statistic == 'supplier' && $for == 'mch') || ($statistic == 'supplier' && $for == 'mnh')) {
             foreach ($results as $key => $result) {
                 foreach ($result as $k => $value) {
                     $gData[] = array('name' => $k, 'y' => (int)$value);
@@ -2052,7 +2052,9 @@ ORDER BY fac_level;");
     public function getServices($criteria, $value, $survey, $survey_category) {
         $this->getQuestionStatisticsSingle($criteria, $value, $survey, $survey_category, 'serv', 'response');
     }
-    
+    public function getDeliveryServices($criteria, $value, $survey, $survey_category) {
+        $this->getQuestionStatisticsSingle($criteria, $value, $survey, $survey_category, 'prep', 'response');
+    }
     /**
      * [getHIV description]
      * @param  [type] $criteria [description]

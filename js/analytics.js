@@ -442,7 +442,8 @@ function statisticsHandler(criteria, value, survey, survey_category, indicator_t
                     loadGraph(base_url, 'c_analytics/getFacilityOwnerPerCounty/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#MNHfacility_ownership');
                     loadGraph(base_url, 'c_analytics/getFacilityLevelPerCounty/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#MNHfacility_levels');
                     loadGraph(base_url, 'c_analytics/getFacilityTypePerCounty/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#MNHfacility_type');
-                    loadGraph(base_url, 'c_analytics/getServices/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#DeliveryReasons');
+                    loadGraph(base_url, 'c_analytics/getDeliveryServices/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#DeliveryReasons');
+                    loadGraph(base_url,'c_analytics/getDeliveryReason/' + criteria + '/' + value + '/' + survey + '/' + survey_category,'#MainDeliveryReasons');
                     loadGraph(base_url, 'c_analytics/getServices/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#24Hr');
                     loadGraph(base_url, 'c_analytics/getHFM/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#HFM');
                     loadGraph(base_url, 'c_analytics/getBedStatistics/' + criteria + '/' + value + '/' + survey + '/' + survey_category + '/total', '#NnB');
@@ -514,7 +515,7 @@ function statisticsHandler(criteria, value, survey, survey_category, indicator_t
                     loadGraph(base_url, 'c_analytics/getWasteStatistics/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#mnhresource_wasteDisposal');
                     loadGraph(base_url, 'c_analytics/getMNHEquipmentElectricity/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#mnhequipment_electricity');
                     loadGraph(base_url, 'c_analytics/getMNHMainSupplier/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#mnhelectricitysupplier');
-                    loadGraph(base_url, 'c_analytics/getMNHElectricityMainSource/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#mnhelectricitysource');
+                    //loadGraph(base_url, 'c_analytics/getMNHElectricityMainSource/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#mnhelectricitysource');
 						//section 7 of 8: Other
                     loadGraph(base_url, 'c_analytics/getMNHSuppliesAvailability/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#MNHsupplies_availability');
                     loadGraph(base_url, 'c_analytics/getMNHSuppliesLocation/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#MNHsupplies_location');

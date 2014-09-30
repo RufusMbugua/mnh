@@ -2131,7 +2131,7 @@ LIMIT 0 , 1000
                 //echo($this->db->last_query());die;
                 if ($this->dataSet !== NULL) {
                     
-                    // echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
+                    //echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
                     foreach ($this->dataSet as $value) {
                         if (array_key_exists('frequency', $value)) {
                             $data[$value['resource_name']][$value['frequency']] = (int)$value['total_response'];
@@ -2143,8 +2143,8 @@ LIMIT 0 , 1000
                         }
                         if (array_key_exists('suppliers', $value)) {
                             $data[$value['resource_name']][$value['suppliers']] = (int)$value['total_response'];
-                        }if(array_key_exists('mainSource', $value)){
-                        	$data[$value['equipment_name']][$value['mainSource']]=(int)$value['total_response'];
+                        }if(array_key_exists('mainsource', $value)){
+                        	$data[$value['equipment_name']][$value['mainsource']]=(int)$value['total_response'];
                         }
                     }
                     // echo "<pre>";print_r($data);echo "</pre>";die;
@@ -4243,11 +4243,11 @@ ORDER BY question_code";
                    
                     
                     //1. collect the categories
-                    $data[$question]['skill'] = $skillvalue;
-                    $data[$question]['staff'] = $staffvalue;
-                    $data[$question]['infrastructure'] = $infrastructurevalue;
-                    $data[$question]['equipment'] = $equipmentvalue;
-                    $data[$question]['commodities'] = $commoditiesvalue;
+                    $data[$question]['Inadequate_skill'] = $skillvalue;
+                    $data[$question]['Inadequate_staff'] = $staffvalue;
+                    $data[$question]['Inadequate_infrastructure'] = $infrastructurevalue;
+                    $data[$question]['Inadequate_equipment'] = $equipmentvalue;
+                    $data[$question]['Inadequate_commodities'] = $commoditiesvalue;
                     $data[$question]['other'] = $othervalue;
                 } else {
                     return null;

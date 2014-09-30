@@ -658,11 +658,21 @@
                 </div>
                 <div class="medium-graph">
                     <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Main Reasons For Not Conducting Deliveries</span><span class="sizer">Click to Enlarge</span></h6>
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Conducting Deliveries</span><span class="sizer">Click to Enlarge</span></h6>
                     </div>
                     <div class="portlet-body">
 
                         <div class="chart" id="DeliveryReasons">
+                        </div>
+                    </div>
+                </div>
+                <div class="medium-graph">
+                    <div class="portlet-title">
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Main Reasons For Not Conducting Deliveries</span><span class="sizer">Click to Enlarge</span></h6>
+                    </div>
+                    <div class="portlet-body">
+
+                        <div class="chart" id="MainDeliveryReasons">
                         </div>
                     </div>
                 </div>
