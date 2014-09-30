@@ -52,7 +52,7 @@
 
             $('#county').change(function() {
                 value = $(this).val();
-                loadData(base_url,'getDistrictNamesJSON',value,'#district','Please Select a District');
+                loadData(base_url,'getDistrictNamesJSON',value,'#district','Please Select a Sub County');
             });
         });
     </script>
