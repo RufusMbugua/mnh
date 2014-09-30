@@ -1,3 +1,32 @@
+<style type="text/css">
+progress
+{
+    width: 89%;
+}
+progress[value] {
+  /* Reset the default appearance */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+   appearance: none;
+
+  width: 250px;
+  height: 20px;
+}
+
+progress[value]::-webkit-progress-bar {
+  background-color: #eee;
+  border-radius: 2px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+}
+
+progress[value]::-webkit-progress-value::before {
+  content: '80%';
+  position: absolute;
+  right: 0;
+  top: -125%;
+}
+
+</style>
 <div id="site">
     <div class="center-wrapper">
 
@@ -68,7 +97,9 @@
                         <div class="statistic"><div class="icon"><span><i class="fa fa-hospital-o"></i></span></div><div class="data" id="finished"><span class="text">Facilities that have finished reporting</span><span class="digit">0</span></div></div>
                         <div class="statistic"><div class="icon"><span><i class="fa fa-hospital-o"></i></span></div><div class="data" id="started"><span class="text">Facilities that have started but not finished</span><span class="digit">0</span></div></div>
                         <div class="statistic"><div class="icon"><span><i class="fa fa-hospital-o"></i></span></div><div class="data" id="not_started"><span class="text">Facilities that have not started</span><span class="digit">0</span></div></div>
+
                         <div class="statistic"><div class="icon"><span><i class="fa fa-bar-chart-o"></i></span></div><div class="data" id="county_progress"><span class="text">Reporting Progress</span><span class="digit"><div class = "progress" style = "width: 300px;"><div class = "progress-bar" aria-valuenow = "0" aria-valuemax = "100" >0%</div></div></span></div></div>
+
 
                         <button id="load_analytics"><i class="fa fa-bar-chart-o"></i>Click to View Analytics</button>
                         <button id="load_county_summary"><i class="fa fa-bar-chart-o"></i>Click to Download Excel Summary</button>

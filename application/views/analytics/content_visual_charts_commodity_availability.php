@@ -5,6 +5,7 @@
 </style>
 <!-- BEGIN CHART PORTLET 1-->
 
+
 <div class="panel-group" id="accordion">
     <div class="panel panel-default analytics_row section" id="reporting-parent">
         <div class="panel-heading">
@@ -41,8 +42,6 @@
         </div>
     </div>
     <div class="analytics_row" id="reporting-parent">
-
-
     </div>
     <div class="panel panel-default analytics_row section" data-survey='ch' id="ch-section-1">
         <div class="panel-heading">
@@ -86,7 +85,7 @@
                 </div>
                 <div class="medium-graph">
                     <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Staff Training</span><span class="sizer">Click to Enlarge</span></h6>
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Staff Training Before and After 2010</span><span class="sizer">Click to Enlarge</span></h6>
                     </div>
                     <div class="portlet-body">
 
@@ -114,7 +113,25 @@
                         </div>
                     </div>
                 </div>
-
+                <div class="medium-graph">
+                    <div class="portlet-title">
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">IMCI Consultation Room</span><span class="sizer">Click to Enlarge</span></h6>
+                    </div>
+                    <div class="portlet-body">
+					<div class="chart" id="imci">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="medium-graph">
+                    <div class="portlet-title">
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Health Service: Where are sick children seen?</span><span class="sizer">Click to Enlarge</span></h6>
+                    </div>
+                    <div class="portlet-body">
+						<div class="chart" id="chhealth_service">
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -130,7 +147,7 @@
             <div class="panel-body">
                 <div class="medium-graph">
                     <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Guidelines and Job Aids</span><span class="sizer">Click to Enlarge</span></h6>
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Guidelines and Job Aids Availability</span><span class="sizer">Click to Enlarge</span></h6>
                     </div>
                     <div class="portlet-body">
 
@@ -150,7 +167,7 @@
               </div>-->
                 <div class="medium-graph">
                     <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Tools</span><span class="sizer">Click to Enlarge</span></h6>
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Tools Availability</span><span class="sizer">Click to Enlarge</span></h6>
                     </div>
                     <div class="portlet-body">
 
@@ -183,9 +200,8 @@
         </div>
         <div id="collapseThree" class="panel-collapse collapse">
             <div class="panel-body">
-                <div class="medium-graph">
+                <div class="x-large-graph" style="height:400px">
                    <h5>Data From Under 5 Register</h5>
-                   <div class="x-large-graph">
                     <div class="portlet-title">
                         <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Assessment</span><span class="sizer">Click to Enlarge</span></h6>
                     </div>
@@ -194,8 +210,13 @@
                         <div class="chart" id="u5_register">
                         </div>
                     </div>
-                    </div>
                 </div>
+                <div class="col-md-12">
+                <div class="ui horizontal icon divider">
+  <i class="icon circular fa fa-bar-chart"></i>
+</div>
+                </div>
+                
                 <div class="x-large-graph">
                    <h5>Classification and Treatment</h5>
                     <div class="medium-graph">
@@ -229,10 +250,14 @@
                     </div>
                 </div>
                 </div>
-
-                <div class="medium-graph">
+  <div class="col-md-12">
+                <div class="ui horizontal icon divider">
+  <i class="icon circular fa fa-bar-chart"></i>
+</div>
+                </div>
+                <div class="semi-large-graph">
                     <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Danger Signs</span><span class="sizer">Click to Enlarge</span></h6>
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Danger Signs Assessed in ongoing session</span><span class="sizer">Click to Enlarge</span></h6>
                     </div>
                     <div class="portlet-body">
 
@@ -317,7 +342,7 @@
                 </div>
                 <div class="medium-graph">
                     <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Bundling Unavailability</span><span class="sizer">Click to Enlarge</span></h6>
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Bundling Unavailability Reasons</span><span class="sizer">Click to Enlarge</span></h6>
                     </div>
                     <div class="portlet-body">
 
@@ -371,7 +396,7 @@
                 </div>
                 <div class="medium-graph">
                     <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Reasons for Non-Functionality</span><span class="sizer">Click to Enlarge</span></h6>
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">ORT Corner Functionality</span><span class="sizer">Click to Enlarge</span></h6>
                     </div>
                     <div class="portlet-body">
 
@@ -387,7 +412,7 @@
         <div class="panel-heading">
             <h4 class="panel-title">
                 <a data-toggle="collapse" data-parent="#accordion" href="#collapseSix">
-                    Section 6 :Equipment <span class="show-collapse"><span class="txt">Click to Expand</span><i class="fa fa-chevron-right"></i></span>
+                    Section 6 :Equipment  Availability and Status<span class="show-collapse"><span class="txt">Click to Expand</span><i class="fa fa-chevron-right"></i></span>
                 </a>
             </h4>
         </div>
@@ -395,7 +420,7 @@
             <div class="panel-body">
                 <div class="medium-graph">
                     <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Availability</span><span class="sizer">Click to Enlarge</span></h6>
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Equipment Availability</span><span class="sizer">Click to Enlarge</span></h6>
                     </div>
                     <div class="portlet-body">
 
@@ -405,7 +430,7 @@
                 </div>
                 <div class="medium-graph">
                     <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Functionality</span><span class="sizer">Click to Enlarge</span></h6>
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Equipment Functionality</span><span class="sizer">Click to Enlarge</span></h6>
                     </div>
                     <div class="portlet-body">
 
@@ -415,7 +440,7 @@
                 </div>
                 <div class="medium-graph">
                     <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Location</span><span class="sizer">Click to Enlarge</span></h6>
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Equipment Location</span><span class="sizer">Click to Enlarge</span></h6>
                     </div>
                     <div class="portlet-body">
 
@@ -431,7 +456,7 @@
         <div class="panel-heading">
             <h4 class="panel-title">
                 <a data-toggle="collapse" data-parent="#accordion" href="#collapseSeven">
-                    Section 7 : Supplies <span class="show-collapse"><span class="txt">Click to Expand</span><i class="fa fa-chevron-right"></i></span>
+                    Section 7 : Supplies Availability<span class="show-collapse"><span class="txt">Click to Expand</span><i class="fa fa-chevron-right"></i></span>
                 </a>
             </h4>
         </div>
@@ -439,7 +464,7 @@
             <div class="panel-body">
                 <div class="medium-graph">
                     <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Availability</span><span class="sizer">Click to Enlarge</span></h6>
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Supplies Availability</span><span class="sizer">Click to Enlarge</span></h6>
                     </div>
                     <div class="portlet-body">
 
@@ -449,7 +474,7 @@
                 </div>
                 <div class="medium-graph">
                     <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Location</span><span class="sizer">Click to Enlarge</span></h6>
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Supplies Location</span><span class="sizer">Click to Enlarge</span></h6>
                     </div>
                     <div class="portlet-body">
 
@@ -457,10 +482,29 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="medium-graph">
                     <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Suppliers</span><span class="sizer">Click to Enlarge</span></h6>
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Availability of Testing Supplies </span><span class="sizer">Click to Enlarge</span></h6>
+                    </div>
+                    <div class="portlet-body">
+
+                        <div class="chart" id="testingSuppliesAvailability">
+                        </div>
+                    </div>
+                </div>
+				<div class="medium-graph">
+                    <div class="portlet-title">
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Testing Supplies Location</span><span class="sizer">Click to Enlarge</span></h6>
+                    </div>
+                    <div class="portlet-body">
+
+                        <div class="chart" id="testing_supplies">
+                        </div>
+                    </div>
+                </div>
+                <div class="medium-graph">
+                    <div class="portlet-title">
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Main Suppliers</span><span class="sizer">Click to Enlarge</span></h6>
                     </div>
                     <div class="portlet-body">
                         <div class="chart" id="ch_suppliers">
@@ -475,7 +519,7 @@
         <div class="panel-heading">
             <h4 class="panel-title">
                 <a data-toggle="collapse" data-parent="#accordion" href="#collapseEight">
-                    Section 8 : Resources <span class="show-collapse"><span class="txt">Click to Expand</span><i class="fa fa-chevron-right"></i></span>
+                    Section 8 : Resources Availability<span class="show-collapse"><span class="txt">Click to Expand</span><i class="fa fa-chevron-right"></i></span>
                 </a>
             </h4>
         </div>
@@ -483,7 +527,7 @@
             <div class="panel-body">
                 <div class="medium-graph">
                     <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Availability</span><span class="sizer">Click to Enlarge</span></h6>
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title"> Resource Availability</span><span class="sizer">Click to Enlarge</span></h6>
                     </div>
                     <div class="portlet-body">
 
@@ -493,7 +537,7 @@
                 </div>
                 <div class="medium-graph">
                     <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Location</span><span class="sizer">Click to Enlarge</span></h6>
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Resource Location</span><span class="sizer">Click to Enlarge</span></h6>
                     </div>
                     <div class="portlet-body">
 
@@ -503,7 +547,7 @@
                 </div>
                 <div class="medium-graph">
                     <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Suppliers</span><span class="sizer">Click to Enlarge</span></h6>
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Main Suppliers</span><span class="sizer">Click to Enlarge</span></h6>
                     </div>
                     <div class="portlet-body">
 
@@ -604,7 +648,7 @@
                 </div>
                 <div class="medium-graph">
                     <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Health Facility Committees</span><span class="sizer">Click to Enlarge</span></h6>
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Health Facility Management</span><span class="sizer">Click to Enlarge</span></h6>
                     </div>
                     <div class="portlet-body">
 
@@ -614,7 +658,27 @@
                 </div>
                 <div class="medium-graph">
                     <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Nurses and Beds</span><span class="sizer">Click to Enlarge</span></h6>
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Conducting Deliveries</span><span class="sizer">Click to Enlarge</span></h6>
+                    </div>
+                    <div class="portlet-body">
+
+                        <div class="chart" id="DeliveryReasons">
+                        </div>
+                    </div>
+                </div>
+                <div class="medium-graph">
+                    <div class="portlet-title">
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Main Reasons For Not Conducting Deliveries</span><span class="sizer">Click to Enlarge</span></h6>
+                    </div>
+                    <div class="portlet-body">
+
+                        <div class="chart" id="MainDeliveryReasons">
+                        </div>
+                    </div>
+                </div>
+                <div class="medium-graph">
+                    <div class="portlet-title">
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Nurses and Beds Availability</span><span class="sizer">Click to Enlarge</span></h6>
                     </div>
                     <div class="portlet-body">
 
@@ -624,7 +688,7 @@
                 </div>
                 <div class="medium-graph">
                     <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">24 Hour Service</span><span class="sizer">Click to Enlarge</span></h6>
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">24 Hour Service Provision</span><span class="sizer">Click to Enlarge</span></h6>
                     </div>
                     <div class="portlet-body">
 
@@ -648,7 +712,7 @@
             <div class="panel-body">
                 <div class="medium-graph">
                     <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Data Deliveries</span><span class="sizer">Click to Enlarge</span></h6>
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Provision of Data Deliveries</span><span class="sizer">Click to Enlarge</span></h6>
                     </div>
                     <div class="portlet-body">
 
@@ -658,7 +722,27 @@
                 </div>
                 <div class="medium-graph">
                     <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">CEmONC</span><span class="sizer">Click to Enlarge</span></h6>
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Provision of BEmONC Services</span><span class="sizer">Click to Enlarge</span></h6>
+                    </div>
+                    <div class="portlet-body">
+
+                        <div class="chart" id="BEMONCQuestions">
+                        </div>
+                    </div>
+                </div>
+                <div class="medium-graph">
+                    <div class="portlet-title">
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">BEmONC Reasons not provided</span><span class="sizer">Click to Enlarge</span></h6>
+                    </div>
+                    <div class="portlet-body">
+
+                        <div class="chart" id="BEMONCReasons">
+                        </div>
+                    </div>
+                </div>
+                <div class="medium-graph">
+                    <div class="portlet-title">
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Provision of CEmONC</span><span class="sizer">Click to Enlarge</span></h6>
                     </div>
                     <div class="portlet-body">
 
@@ -704,7 +788,7 @@
                 </div>
                 <div class="medium-graph">
                     <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">New Born</span><span class="sizer">Click to Enlarge</span></h6>
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Provision of New Born Care</span><span class="sizer">Click to Enlarge</span></h6>
                     </div>
                     <div class="portlet-body">
 
@@ -714,7 +798,7 @@
                 </div>
                 <div class="medium-graph">
                     <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Kangaroo Mother Care</span><span class="sizer">Click to Enlarge</span></h6>
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Provision of Kangaroo Mother Care</span><span class="sizer">Click to Enlarge</span></h6>
                     </div>
                     <div class="portlet-body">
 
@@ -732,45 +816,26 @@
                         </div>
                     </div>
                 </div>
-                <div class="medium-graph">
-                    <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">BEmONC Questions</span><span class="sizer">Click to Enlarge</span></h6>
-                    </div>
-                    <div class="portlet-body">
-
-                        <div class="chart" id="BEMONCQuestions">
-                        </div>
-                    </div>
-                </div>
-                <div class="medium-graph">
-                    <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">BEmONC Reasons</span><span class="sizer">Click to Enlarge</span></h6>
-                    </div>
-                    <div class="portlet-body">
-
-                        <div class="chart" id="BEMONCReasons">
-                        </div>
-                    </div>
-                </div>
+                
             </div>
         </div>
     </div>
-    <!--
-<div class="panel panel-default analytics_row section" data-survey='mnh' id="mnh-section-2">
-<div class="panel-heading">
-<h4 class="panel-title">
-<a data-toggle="collapse" data-parent="#accordion" href="#collapseTen">
-<span class="show-collapse"><span class="txt">Click to Expand</span><i class="fa fa-chevron-right"></i></span>
-</a>
-</h4>
-</div>
-<div id="collapseTen" class="panel-collapse collapse">
-<div class="panel-body">
-
-</div>
-</div>
-</div>
--->
+		    <!--
+		<div class="panel panel-default analytics_row section" data-survey='mnh' id="mnh-section-2">
+		<div class="panel-heading">
+		<h4 class="panel-title">
+		<a data-toggle="collapse" data-parent="#accordion" href="#collapseTen">
+		<span class="show-collapse"><span class="txt">Click to Expand</span><i class="fa fa-chevron-right"></i></span>
+		</a>
+		</h4>
+		</div>
+		<div id="collapseTen" class="panel-collapse collapse">
+		<div class="panel-body">
+		
+		</div>
+		</div>
+		</div>
+		-->
     <div class="panel panel-default analytics_row section" data-survey='mnh' id="mnh-section-3">
         <div class="panel-heading">
             <h4 class="panel-title">
@@ -827,7 +892,7 @@
 
                 <div class="medium-graph">
                     <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Staff Availability</span><span class="sizer">Click to Enlarge</span></h6>
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Service Training Before 2010 and After 2010</span><span class="sizer">Click to Enlarge</span></h6>
                     </div>
                     <div class="portlet-body">
 
@@ -835,7 +900,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="medium-graph">
+                <!--<div class="medium-graph">
                     <div class="portlet-title">
                         <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Staff Retention</span><span class="sizer">Click to Enlarge</span></h6>
                     </div>
@@ -844,7 +909,7 @@
                         <div class="chart" id="MNHstaffRetention">
                         </div>
                     </div>
-                </div>
+                </div>-->
                 <div class="medium-graph">
                     <div class="portlet-title">
                         <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Staff Training</span><span class="sizer">Click to Enlarge</span></h6>
@@ -967,7 +1032,7 @@
             <div class="panel-body">
                 <div class="medium-graph">
                     <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Equipment Availability</span><span class="sizer">Click to Enlarge</span></h6>
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">I.Equipment Availability</span><span class="sizer">Click to Enlarge</span></h6>
                     </div>
                     <div class="portlet-body">
 
@@ -977,7 +1042,7 @@
                 </div>
                 <div class="medium-graph">
                     <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Equipment Functionality</span><span class="sizer">Click to Enlarge</span></h6>
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">I.Equipment Functionality</span><span class="sizer">Click to Enlarge</span></h6>
                     </div>
                     <div class="portlet-body">
 
@@ -987,7 +1052,7 @@
                 </div>
                 <div class="medium-graph">
                     <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Equipment Location</span><span class="sizer">Click to Enlarge</span></h6>
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">I.Equipment Location</span><span class="sizer">Click to Enlarge</span></h6>
                     </div>
                     <div class="portlet-body">
 
@@ -995,20 +1060,154 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-    <div class="panel panel-default analytics_row section" data-survey='mnh' id="mnh-section-8">
-        <div class="panel-heading">
-            <h4 class="panel-title">
-                <a data-toggle="collapse" data-parent="#accordion" href="#collapseSeventeen">
-                    Section 8: Supplies<span class="show-collapse"><span class="txt">Click to Expand</span><i class="fa fa-chevron-right"></i></span>
-                </a>
-            </h4>
-        </div>
-        <div id="collapseSeventeen" class="panel-collapse collapse">
-            <div class="panel-body">
+                
                 <div class="medium-graph">
+                    <div class="portlet-title">
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">I.Testing Supplies Availability </span><span class="sizer">Click to Enlarge</span></h6>
+                    </div>
+                    <div class="portlet-body">
+
+                        <div class="chart" id="mnhtesting_availability">
+                        </div>
+                    </div>
+                </div>
+               <div class="medium-graph">
+                    <div class="portlet-title">
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">I.Testing Supplies Location</span><span class="sizer">Click to Enlarge</span></h6>
+                    </div>
+                    <div class="portlet-body">
+
+                        <div class="chart" id="mnhtesting_supplies">
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <div class="panel-body">
+              <div class="medium-graph">
+                    <div class="portlet-title">
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title"> II.KITS/SETS Availability</span><span class="sizer">Click to Enlarge</span></h6>
+                    </div>
+                    <div class="portlet-body">
+
+                        <div class="chart" id="mnhDelivery_availability">
+                        </div>
+                    </div>
+                </div>
+                <div class="medium-graph">
+                    <div class="portlet-title">
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title"> II.KITS/SETS Location</span><span class="sizer">Click to Enlarge</span></h6>
+                    </div>
+                    <div class="portlet-body">
+
+                        <div class="chart" id="mnhDelivery_location">
+                        </div>
+                    </div>
+                </div>
+                <div class="medium-graph">
+                    <div class="portlet-title">
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title"> II.KITS/SETS Functionality</span><span class="sizer">Click to Enlarge</span></h6>
+                    </div>
+                    <div class="portlet-body">
+
+                        <div class="chart" id="mnhDelivery_functionality">
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <div class="panel-body">
+                <div class="medium-graph">
+                    <div class="portlet-title">
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">III.Running Water Availability</span><span class="sizer">Click to Enlarge</span></h6>
+                    </div>
+                    <div class="portlet-body">
+
+                        <div class="chart" id="mnhresource_availability">
+                        </div>
+                    </div>
+               </div>
+               <div class="medium-graph">
+                    <div class="portlet-title">
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">III.Running Water Location </span><span class="sizer">Click to Enlarge</span></h6>
+                    </div>
+                    <div class="portlet-body">
+
+                        <div class="chart" id="mnhresource_location">
+                        </div>
+                    </div>
+                </div>
+                <div class="medium-graph">
+                    <div class="portlet-title">
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">III.Main Running Water Source</span><span class="sizer">Click to Enlarge</span></h6>
+                    </div>
+                    <div class="portlet-body">
+
+                        <div class="chart" id="mnhwatersource">
+                        </div>
+                    </div>
+                </div>
+                <div class="medium-graph">
+                    <div class="portlet-title">
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">III.Water Storage Availability</span><span class="sizer">Click to Enlarge</span></h6>
+                    </div>
+                    <div class="portlet-body">
+
+                        <div class="chart" id="mnhwateravailability">
+                        </div>
+                    </div>
+                </div>
+                <div class="medium-graph">
+                    <div class="portlet-title">
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">III.Community Main Water Source</span><span class="sizer">Click to Enlarge</span></h6>
+                    </div>
+                    <div class="portlet-body">
+
+                        <div class="chart" id="mnhresource_mainSource">
+                        </div>
+                    </div>
+                </div>
+                <div class="medium-graph">
+                    <div class="portlet-title">
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">III.Provision of Waste Disposal</span><span class="sizer">Click to Enlarge</span></h6>
+                    </div>
+                    <div class="portlet-body">
+
+                        <div class="chart" id="mnhresource_wasteDisposal">
+                        </div>
+                    </div>
+                </div>
+                <div class="medium-graph">
+                    <div class="portlet-title">
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">III.Electricity Availability</span><span class="sizer">Click to Enlarge</span></h6>
+                    </div>
+                    <div class="portlet-body">
+
+                        <div class="chart" id="mnhequipment_electricity">
+                        </div>
+                    </div>
+                </div>
+                 <div class="medium-graph">
+                    <div class="portlet-title">
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">III.Main Electricity Supplier</span><span class="sizer">Click to Enlarge</span></h6>
+                    </div>
+                    <div class="portlet-body">
+
+                        <div class="chart" id="mnhelectricitysupplier">
+                        </div>
+                    </div>
+                </div>
+                <div class="medium-graph">
+                    <div class="portlet-title">
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">III.Main Electricity Source</span><span class="sizer">Click to Enlarge</span></h6>
+                    </div>
+                    <div class="portlet-body">
+
+                        <div class="chart" id="mnhelectricitysource">
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <div class="panel-body">
+           		<div class="medium-graph">
                     <div class="portlet-title">
                         <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Supplies Availability</span><span class="sizer">Click to Enlarge</span></h6>
                     </div>
@@ -1041,78 +1240,16 @@
             </div>
         </div>
     </div>
-    <div class="panel panel-default analytics_row section" data-survey='mnh' id="mnh-section-9">
+    
+    <div class="panel panel-default analytics_row section" data-survey='mnh' id="mnh-section-8">
         <div class="panel-heading">
             <h4 class="panel-title">
                 <a data-toggle="collapse" data-parent="#accordion" href="#collapseEighteen">
-                    Section 9 : Resources<span class="show-collapse"><span class="txt">Click to Expand</span><i class="fa fa-chevron-right"></i></span>
+                    Section 8 : Community Strategy<span class="show-collapse"><span class="txt">Click to Expand</span><i class="fa fa-chevron-right"></i></span>
                 </a>
             </h4>
         </div>
         <div id="collapseEighteen" class="panel-collapse collapse">
-            <div class="panel-body">
-                <div class="medium-graph">
-                    <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Availability</span><span class="sizer">Click to Enlarge</span></h6>
-                    </div>
-                    <div class="portlet-body">
-
-                        <div class="chart" id="mnhresource_availability">
-                        </div>
-                    </div>
-                </div>
-                <div class="medium-graph">
-                    <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Location</span><span class="sizer">Click to Enlarge</span></h6>
-                    </div>
-                    <div class="portlet-body">
-
-                        <div class="chart" id="mnhresource_location">
-                        </div>
-                    </div>
-                </div>
-                <div class="medium-graph">
-                    <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Storage</span><span class="sizer">Click to Enlarge</span></h6>
-                    </div>
-                    <div class="portlet-body">
-
-                        <div class="chart" id="mnhresource_storage">
-                        </div>
-                    </div>
-                </div>
-                <div class="medium-graph">
-                    <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Waste Disposal</span><span class="sizer">Click to Enlarge</span></h6>
-                    </div>
-                    <div class="portlet-body">
-
-                        <div class="chart" id="mnhresource_wasteDisposal">
-                        </div>
-                    </div>
-                </div>
-                <div class="medium-graph">
-                    <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Main Source</span><span class="sizer">Click to Enlarge</span></h6>
-                    </div>
-                    <div class="portlet-body">
-
-                        <div class="chart" id="mnhresource_mainSource">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="panel panel-default analytics_row section" data-survey='mnh' id="mnh-section-10">
-        <div class="panel-heading">
-            <h4 class="panel-title">
-                <a data-toggle="collapse" data-parent="#accordion" href="#collapseNineteen">
-                    Section 10 : Community Strategy<span class="show-collapse"><span class="txt">Click to Expand</span><i class="fa fa-chevron-right"></i></span>
-                </a>
-            </h4>
-        </div>
-        <div id="collapseNineteen" class="panel-collapse collapse">
             <div class="panel-body">
                 <div class="medium-graph">
                 <div class="portlet-title">

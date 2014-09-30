@@ -1160,7 +1160,9 @@ $this->write_counties();
                     $ort_location = '<tr id="ort_location" style="display:true">
             <td colspan="1">' . $value['questionName'] . '</td>
             <td colspan="2">
+
             '.$data.'
+
             </td>
             <input type="hidden"  name="questionCode_' . $counter . '" id="questionCode_' . $counter . '" value="' . $value['questionCode'] . '" />
         </tr>';
@@ -1624,7 +1626,7 @@ $this->write_counties();
     </tr>';
         }
         
-        // echo $this->mnhCEOCAspectsSection;die;
+        //echo $this->mnhCEOCAspectsSection;die;
         return $this->mnhCEOCAspectsSection;
     }
     
@@ -2815,60 +2817,60 @@ $this->write_counties();
                 }
             }
 
-			if ($section != 'svc' && $section != 'ror' && $section != 'tl') {
-				if ($value['indicatorName'] == 'Correct Classification') {
-					$data[$section][] = '
-					<tr>
-						<td colspan="1"><strong>(' . $numbering[$base - 1] . ')</strong> ' . $value['indicatorName'] . '</td>
-						<td></td>
-						<td></td>
-						' . $responseAssessorRow . '
-						<td></td>
-						<input type="hidden"  name="indicatorCode_' . $counter . '" id="indicatorCode_' . $counter . '" value="' . $value['indicatorCode'] . '" />
-					</tr>';
-				} else if ($section == 'sgn') {
-					$data[$section][] = '
-					<tr>
-						<td colspan="1"><strong>(' . $numbering[$base - 1] . ')</strong> ' . $value['indicatorName'] . '</td>
-						' . $responseHCWRow . '
-						<td>' . $findingHCWRow . '</td>
-						<input type="hidden"  name="indicatorCode_' . $counter . '" id="indicatorCode_' . $counter . '" value="' . $value['indicatorCode'] . '" />
-					</tr>';
-				} else {
-					if ($value['indicatorCode'] == 'CHI105') {
-						$data[$section][] = '<tr><th colspan="5"><strong>(' . $numbering[$base - 1] . ')</strong>Breathing</th></tr>';
-					}
-					if (($value['indicatorCode'] >= 'CHI105') && ($value['indicatorCode'] <= 'CHI110')) {
-						$countme++;
-						$data[$section][] = '
-						<tr>
-							<td colspan="1"><strong>(' . $numbering[$base - 1] . ')</strong> ' . $value['indicatorName'] . '</td>
-							' . $responseHCWRow . '
-							<td>' . $findingHCWRow . '</td>
-							' . $responseAssessorRow . '
-							<td>' . $findingAssessorRow . '</td>
-							<input type="hidden"  name="indicatorCode_' . $counter . '" id="indicatorCode_' . $counter . '" value="' . $value['indicatorCode'] . '" />
-						</tr>';
-					} else {
-						$data[$section][] = '
-						<tr>
-							<td colspan="1"><strong>(' . $numbering[$base - 1] . ')</strong> ' . $value['indicatorName'] . '</td>
-							' . $responseHCWRow . '
-							<td>' . $findingHCWRow . '</td>
-							' . $responseAssessorRow . '
-							<td>' . $findingAssessorRow . '</td>
-							<input type="hidden"  name="indicatorCode_' . $counter . '" id="indicatorCode_' . $counter . '" value="' . $value['indicatorCode'] . '" />
-						</tr>';
-					}
-				}
+            if ($section != 'svc' && $section != 'ror' && $section != 'tl') {
+                if ($value['indicatorName'] == 'Correct Classification') {
+                    $data[$section][] = '
+                    <tr>
+                        <td colspan="1"><strong>(' . $numbering[$base - 1] . ')</strong> ' . $value['indicatorName'] . '</td>
+                        <td></td>
+                        <td></td>
+                        ' . $responseAssessorRow . '
+                        <td></td>
+                        <input type="hidden"  name="indicatorCode_' . $counter . '" id="indicatorCode_' . $counter . '" value="' . $value['indicatorCode'] . '" />
+                    </tr>';
+                } else if ($section == 'sgn') {
+                    $data[$section][] = '
+                    <tr>
+                        <td colspan="1"><strong>(' . $numbering[$base - 1] . ')</strong> ' . $value['indicatorName'] . '</td>
+                        ' . $responseHCWRow . '
+                        <td>' . $findingHCWRow . '</td>
+                        <input type="hidden"  name="indicatorCode_' . $counter . '" id="indicatorCode_' . $counter . '" value="' . $value['indicatorCode'] . '" />
+                    </tr>';
+                } else {
+                    if ($value['indicatorCode'] == 'CHI105') {
+                        $data[$section][] = '<tr><th colspan="5"><strong>(' . $numbering[$base - 1] . ')</strong>Breathing</th></tr>';
+                    }
+                    if (($value['indicatorCode'] >= 'CHI105') && ($value['indicatorCode'] <= 'CHI110')) {
+                        $countme++;
+                        $data[$section][] = '
+                        <tr>
+                            <td colspan="1"><strong>(' . $numbering[$base - 1] . ')</strong> ' . $value['indicatorName'] . '</td>
+                            ' . $responseHCWRow . '
+                            <td>' . $findingHCWRow . '</td>
+                            ' . $responseAssessorRow . '
+                            <td>' . $findingAssessorRow . '</td>
+                            <input type="hidden"  name="indicatorCode_' . $counter . '" id="indicatorCode_' . $counter . '" value="' . $value['indicatorCode'] . '" />
+                        </tr>';
+                    } else {
+                        $data[$section][] = '
+                        <tr>
+                            <td colspan="1"><strong>(' . $numbering[$base - 1] . ')</strong> ' . $value['indicatorName'] . '</td>
+                            ' . $responseHCWRow . '
+                            <td>' . $findingHCWRow . '</td>
+                            ' . $responseAssessorRow . '
+                            <td>' . $findingAssessorRow . '</td>
+                            <input type="hidden"  name="indicatorCode_' . $counter . '" id="indicatorCode_' . $counter . '" value="' . $value['indicatorCode'] . '" />
+                        </tr>';
+                    }
+                }
             } else {
-				$data[$section][] = '
-				<tr>
-					<td colspan="1"><strong>(' . $numbering[$base - 1] . ')</strong> ' . $value['indicatorName'] . '</td>
-					' . $responseHCWRow . '
-					<td>' . $findingHCWRow . '</td>
-					<input type="hidden"  name="indicatorCode_' . $counter . '" id="indicatorCode_' . $counter . '" value="' . $value['indicatorCode'] . '" />
-				</tr>';
+                $data[$section][] = '
+                <tr>
+                    <td colspan="1"><strong>(' . $numbering[$base - 1] . ')</strong> ' . $value['indicatorName'] . '</td>
+                    ' . $responseHCWRow . '
+                    <td>' . $findingHCWRow . '</td>
+                    <input type="hidden"  name="indicatorCode_' . $counter . '" id="indicatorCode_' . $counter . '" value="' . $value['indicatorCode'] . '" />
+                </tr>';
             }
         }
         
@@ -2880,7 +2882,7 @@ $this->write_counties();
         }
         return $this->mchIndicatorsSection;
     }
-	
+    
     public function createMCHIndicatorsSectionforPDF() {
         $this->data_found = $this->m_mch_survey->getIndicatorNames();
         
@@ -2918,58 +2920,58 @@ $this->write_counties();
                 }
                 if ($value['indicatorName'] == 'Correct Classification') {
                     $data[$section][] = '
-					<tr>
-					<td colspan="1"><strong>(' . $numbering[$base - 1] . ')</strong> ' . $value['indicatorName'] . '</td>
-					<td></td><td></td><td>Yes <input name="mchIndicator_' . $counter . '" value="Yes" type="radio"> No <input value="No" name="mchIndicator_' . $counter . '"  type="radio"></td><td></td>
-					<input type="hidden"  name="mchIndicatorCode_' . $counter . '" id="mchIndicatorCode_' . $counter . '" value="' . $value['indicatorCode'] . '" />
-					</tr>';
+                    <tr>
+                    <td colspan="1"><strong>(' . $numbering[$base - 1] . ')</strong> ' . $value['indicatorName'] . '</td>
+                    <td></td><td></td><td>Yes <input name="mchIndicator_' . $counter . '" value="Yes" type="radio"> No <input value="No" name="mchIndicator_' . $counter . '"  type="radio"></td><td></td>
+                    <input type="hidden"  name="mchIndicatorCode_' . $counter . '" id="mchIndicatorCode_' . $counter . '" value="' . $value['indicatorCode'] . '" />
+                    </tr>';
                 } else {
                     $data[$section][] = '
-					<tr>
-					<td colspan="1"><strong>(' . $numbering[$base - 1] . ')</strong> ' . $value['indicatorName'] . '</td>
-					<td>Yes <input name="mchIndicator_' . $counter . '" value="Yes" type="radio"> No <input value="No" name="mchIndicator_' . $counter . '"  type="radio">
-					</td>
-					<td>' . $findingRow . '</td>
-					<td>Yes <input name="mchIndicator_' . $counter . '" value="Yes" type="radio"> No <input value="No" name="mchIndicator_' . $counter . '"  type="radio">
-					</td>
-					<td>' . $findingRow . '</td>
-					<input type="hidden"  name="mchIndicatorCode_' . $counter . '" id="mchIndicatorCode_' . $counter . '" value="' . $value['indicatorCode'] . '" />
-					</tr>';
+                    <tr>
+                    <td colspan="1"><strong>(' . $numbering[$base - 1] . ')</strong> ' . $value['indicatorName'] . '</td>
+                    <td>Yes <input name="mchIndicator_' . $counter . '" value="Yes" type="radio"> No <input value="No" name="mchIndicator_' . $counter . '"  type="radio">
+                    </td>
+                    <td>' . $findingRow . '</td>
+                    <td>Yes <input name="mchIndicator_' . $counter . '" value="Yes" type="radio"> No <input value="No" name="mchIndicator_' . $counter . '"  type="radio">
+                    </td>
+                    <td>' . $findingRow . '</td>
+                    <input type="hidden"  name="mchIndicatorCode_' . $counter . '" id="mchIndicatorCode_' . $counter . '" value="' . $value['indicatorCode'] . '" />
+                    </tr>';
                 }
             } elseif ($section == 'sgn') {
                 $data[$section][] = '
                 <tr>
-				<td colspan="1"><strong>(' . $numbering[$base - 1] . ')</strong> ' . $value['indicatorName'] . '</td>
-				<td>Yes <input name="mchIndicator_' . $counter . '" value="Yes" type="radio"> No <input value="No" name="mchIndicator_' . $counter . '"  type="radio">
-				</td>
-				<td>Present <input name="mchIndicator_' . $counter . '" value="Yes" type="radio"> Not Present <input value="No" name="mchIndicator_' . $counter . '"  type="radio">
-				</td>
-				<input type="hidden"  name="mchIndicatorCode_' . $counter . '" id="mchIndicatorCode_' . $counter . '" value="' . $value['indicatorCode'] . '" />
-				</tr>';
+                <td colspan="1"><strong>(' . $numbering[$base - 1] . ')</strong> ' . $value['indicatorName'] . '</td>
+                <td>Yes <input name="mchIndicator_' . $counter . '" value="Yes" type="radio"> No <input value="No" name="mchIndicator_' . $counter . '"  type="radio">
+                </td>
+                <td>Present <input name="mchIndicator_' . $counter . '" value="Yes" type="radio"> Not Present <input value="No" name="mchIndicator_' . $counter . '"  type="radio">
+                </td>
+                <input type="hidden"  name="mchIndicatorCode_' . $counter . '" id="mchIndicatorCode_' . $counter . '" value="' . $value['indicatorCode'] . '" />
+                </tr>';
             } elseif ($section == 'svc') {
                 $findings = explode(';', $value['indicatorFindings']);
-				foreach ($findings as $finding) {
-					if(!empty($finding)){
-						$findingRow = '<input type="text"> ' .$finding;
-					}
-				}
-			
+                foreach ($findings as $finding) {
+                    if(!empty($finding)){
+                        $findingRow = '<input type="text"> ' .$finding;
+                    }
+                }
+            
                 $data[$section][] = '
                 <tr>
-					<td colspan="1"><strong>(' . $numbering[$base - 1] . ')</strong> ' . $value['indicatorName'] . '</td>
-					<td>Yes <input name="mchIndicator_' . $counter . '" value="Yes" type="radio"> No <input value="No" name="mchIndicator_' . $counter . '"  type="radio">
-					</td>
-					<td>' . $findingRow . '</td>
-					<input type="hidden"  name="mchIndicatorCode_' . $counter . '" id="mchIndicatorCode_' . $counter . '" value="' . $value['indicatorCode'] . '" />
-				</tr>';
+                    <td colspan="1"><strong>(' . $numbering[$base - 1] . ')</strong> ' . $value['indicatorName'] . '</td>
+                    <td>Yes <input name="mchIndicator_' . $counter . '" value="Yes" type="radio"> No <input value="No" name="mchIndicator_' . $counter . '"  type="radio">
+                    </td>
+                    <td>' . $findingRow . '</td>
+                    <input type="hidden"  name="mchIndicatorCode_' . $counter . '" id="mchIndicatorCode_' . $counter . '" value="' . $value['indicatorCode'] . '" />
+                </tr>';
             } else {
                 $data[$section][] = '
                 <tr>
-					<td colspan="1"><strong>(' . $numbering[$base - 1] . ')</strong> ' . $value['indicatorName'] . '</td>
-					<td>Yes <input name="mchIndicator_' . $counter . '" value="Yes" type="radio"> No <input value="No" name="mchIndicator_' . $counter . '"  type="radio">
-					</td>
-					<input type="hidden"  name="mchIndicatorCode_' . $counter . '" id="mchIndicatorCode_' . $counter . '" value="' . $value['indicatorCode'] . '" />
-				</tr>';
+                    <td colspan="1"><strong>(' . $numbering[$base - 1] . ')</strong> ' . $value['indicatorName'] . '</td>
+                    <td>Yes <input name="mchIndicator_' . $counter . '" value="Yes" type="radio"> No <input value="No" name="mchIndicator_' . $counter . '"  type="radio">
+                    </td>
+                    <input type="hidden"  name="mchIndicatorCode_' . $counter . '" id="mchIndicatorCode_' . $counter . '" value="' . $value['indicatorCode'] . '" />
+                </tr>';
             }
         }
         
@@ -2981,7 +2983,7 @@ $this->write_counties();
         }
         return $this->mchIndicatorsSectionPDF;
     }
-	
+    
     public function createQuestionsSectionPDF() {
         $this->data_found = $this->m_mch_survey->getAllQuestions();
         
@@ -5143,6 +5145,7 @@ GROUP BY st_name,sc_name,facilityCode;";
                         <input type="hidden"  name="questionCode_' . $counter . '" id="questionCode_' . $counter . '" value="' . $value['questionCode'] . '" />';
                     }   
                 
+
                 $data = '<tr>
             <td >' . $value['questionName'] . '</td>'.$questionRow.'
             </tr>';
@@ -5244,6 +5247,7 @@ GROUP BY st_name,sc_name,facilityCode;";
                     }   
                 $this->HealthSection.= '<tr>
             <td colspan="1">' . $value['questionName'] . '</td>'.$questionRow.'</tr>';
+
             }
         }
         
@@ -5407,7 +5411,7 @@ background: #ddd;
      * @param  string  $type        [description]
      * @return [type]               [description]
      */
-    public function populateGraph($resultArray = '', $drilldown = '', $category = '', $criteria = '', $stacking = '', $margin = 0, $type = '', $resultSize = '',$for='',$parent='',$statistics='') {
+    public function populateGraph($resultArray = '', $drilldown = '', $category = '', $criteria = '', $stacking = '', $margin = 0, $type = '', $resultSize = '', $for = '', $parent = '', $statistics = '',$color_scheme='') {
         $datas = array();
         $chart_size = (count($category) < 5) ? 5 : count($category);
         $given_size = ($resultSize != '' && $resultSize < 5) ? 5 : $resultSize;
@@ -5419,9 +5423,9 @@ background: #ddd;
         switch ($type) {
             case 'line':
             case 'column':
-                $datas['chart_width'] = ($resultSize != '') ? $given_size * 80 : $chart_size * 80;
-                $datas['chart_length'] = 200;
-                $datas['chart_label_rotation'] = (int) - 45;
+                // $datas['chart_width'] = '100%';//($resultSize != '') ? $given_size * 30 : $chart_size * 30;
+                $datas['chart_length'] = 300;
+                $datas['chart_label_rotation'] = (int) - 65;
                 $datas['chart_legend_floating'] = true;
                 break;
 
@@ -5433,11 +5437,15 @@ background: #ddd;
                 //$datas['chart_width'] = 100;
                 break;
         }
-        $datas['statistics']=$statistics;
-        $datas['data_parent']=$parent;
-        $datas['data_for']=$for;
+        $datas['statistics'] = $statistics;
+        $datas['data_parent'] = $parent;
+        $datas['data_for'] = $for;
         $datas['chart_stacking'] = $stacking;
         $datas['color_scheme'] = ($stacking != '') ? array('#8bbc21', '#fb4347', '#92e18e', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#a6c96a') : array('#66aaf7', '#f66c6f', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#a6c96a');
+        if($color_scheme!=''){
+             $datas['color_scheme'] = $color_scheme;
+        }
+       
         $datas['chart_categories'] = $category;
         $datas['chart_title'] = 'Values';
         $datas['chart_drilldown'] = $drilldown;
@@ -5466,6 +5474,12 @@ background: #ddd;
         }
         return $result;
     }
+    /**
+     * [loadTable description]
+     * @param  [type] $data     [description]
+     * @param  string $editable [description]
+     * @return [type]           [description]
+     */
     public function loadTable($data, $editable = '') {
         $tmpl = array('table_open' => '<div class="table-container"><table cellpadding="4" cellspacing="0" class="table table-condensed table-striped table-bordered table-hover dataTable">', 'heading_row_start' => '<tr>', 'heading_row_end' => '</tr>', 'heading_cell_start' => '<th>', 'heading_cell_end' => '</th>', 'row_start' => '<tr>', 'row_end' => '</tr>', 'cell_start' => '<td>', 'cell_end' => '</td>', 'row_alt_start' => '<tr>', 'row_alt_end' => '</tr>', 'cell_alt_start' => '<td>', 'cell_alt_end' => '</td>', 'table_close' => '</table></div>');
         
@@ -5636,5 +5650,4 @@ background: #ddd;
         return $this->monthlydeliveries;
     }
 }
-
 

@@ -17,7 +17,7 @@ class C_Auth extends MY_Controller {
 
             // $this->facilityInDistrict=$this->m_mnh_survey->districtFacilities;
 
-            // $this->createFacilitiesListSection();
+            // $this->createFacilitiesListSection();get
 
 $assessment = $this->input->post('assessment');
 $category = $this->input->post('term');
@@ -32,7 +32,7 @@ $category = $this->input->post('term');
             }
             /*create session data*/
         /**/	$newdata = array('dName' => $this->m_mnh_survey->district->getDistrictName(),
-                             'dCode'=>$this->m_mnh_survey->district->getDistrictID(),'survey'=>$assessment,'survey_category'=>$category);
+                             'dCode'=>$this->m_mnh_survey->district->getDistrictID(),'survey'=>$assessment,'survey_category'=>strtolower($category));
            //var_dump($newdata); exit;
 
            $this -> session -> set_userdata($newdata);
