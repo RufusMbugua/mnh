@@ -1141,7 +1141,8 @@ ORDER BY fac_level;");
         $results = $this->m_analytics->getEquipmentStatistics($criteria, $value, $survey, $survey_category, $for, $statistic);
         
         //echo "<pre>"; print_r($results);echo "</pre>";die;
-        foreach ($results as $key => $result) {
+        
+        	foreach ($results as $key => $result) {
             
             $key = str_replace('_', ' ', $key);
             $key = ucwords($key);
@@ -1164,6 +1165,7 @@ ORDER BY fac_level;");
         }
         $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'column', (int)sizeof($category));
     }
+    
 
 
     public function getStorageStatistics($criteria, $value, $survey, $survey_category, $for) {
@@ -1187,7 +1189,7 @@ ORDER BY fac_level;");
     
     public function getCommodityStatistics($criteria, $value, $survey, $survey_category, $for, $statistic) {
         $results = $this->m_analytics->getCommodityStatistics($criteria, $value, $survey, $survey_category, $for, $statistic);
-		if(($statistic == 'availability' && $for == 'bun') ||($statistic == 'unavailability' && $for == 'bun') || ($statistic == 'location' && $for == 'bun')){
+		if(($statistic == 'availability' && $for == 'bun') ||($statistic == 'unavailability' && $for == 'bun') || ($statistic == 'location' && $for == 'bun')|| ($statistic == 'supplier' && $for == 'mnh')){
 			$key = str_replace('_', ' ', $key);
         foreach ($results as $key => $result) {
             $key = str_replace('_', ' ', $key);
@@ -1298,6 +1300,9 @@ ORDER BY fac_level;");
         $this->getResourcesStatistics($criteria, $value, $survey, $survey_category, 'hwr', 'availability');
     }
     
+	public function getMNHElectricityMainSource($criteria,$value,$survey,$survey_category){
+		$this->getResourcesStatistics($criteria, $value, $survey, $survey_category, 'mhw', 'location');
+	}
     /**
      * [getResourcesFrequencymnh description]
      * @param  [type] $criteria [description]
@@ -1376,8 +1381,15 @@ ORDER BY fac_level;");
                 }
                 
                 foreach ($fData as $key => $value) {
+                	
+                	if(($key == 'Once') ){
+                		$resultArray[] = array('name' => $key, 'data' => $value);
+                	}else{
                     //echo $stack;
-                    $resultArray[] = array('name' => $key, 'data' => $value);
+                    //$resultArray[] = array('name' => $key, 'data' => $value);
+					$resultArray[] = array('name' => $key.''.'Times', 'data' => $value);
+                }
+					//echo $key;die;
                 }
                 
                 $this->populateGraph($resultArray, '', $commodities, $criteria, 'percent', 130, 'column', (int)sizeof($commodities));
@@ -1427,12 +1439,13 @@ ORDER BY fac_level;");
     public function getSectionsChosen($survey) {
         switch ($survey) {
             case 'mnh':
-                $sectionNames = array('Facility Information', 'Facility Data And Maternal And Neotanal Service Delivery', 'Guidelines, Job Aid and Tools Availability', 'Staff Training', 'Commodity Availability', 'Commodity  Usage', 'Equipment Availability and Functionality', 'Supplies', 'Resources', 'Community Strategy');
-                $sections = 10;
+                //$sectionNames = array('Facility Information', 'Facility Data And Maternal And Neotanal Service Delivery', 'Guidelines, Job Aid and Tools Availability', 'Staff Training', 'Commodity Availability', 'Commodity  Usage', 'Equipment Availability and Functionality', 'Supplies Availability', 'Resources Availability', 'Community Strategy');
+                $sectionNames = array('Facility Information', 'Facility Data And Maternal And Neotanal Service Delivery', 'Guidelines, Job Aid and Tools Availability', 'Staff Training', 'Commodity Availability', 'Commodity  Usage', 'Equipment Availability and Functionality', 'Community Strategy');
+                $sections = 8;
                 break;
 
             case 'ch':
-                $sectionNames = array('Facility Information', 'Guidelines,Job Aids and Tools', 'Assessment', 'Commodity & Bundling', 'On-Site Rehydration', 'Equipment', 'Supplies', 'Resources', 'Community Strategy');
+                $sectionNames = array('Facility Information', 'Guidelines,Job Aids and Tools', 'Case Management', 'Commodity & Bundling', 'ORT Corner Assessment', 'Equipment Availability and Status', 'Supplies Availability', 'Resources Availability', 'Community Strategy');
                 $sections = 9;
                 break;
 
@@ -1558,7 +1571,7 @@ ORDER BY fac_level;");
      * @return [type] $for      [description]
      */
     public function getMNHEquipmentElectricity($criteria, $value, $survey, $survey_category) {
-        $this->getEquipmentStatistics($criteria, $value, $survey, $survey_category, 'mhw', 'availability');
+        $this->getResourcesStatistics($criteria, $value, $survey, $survey_category, 'mhw', 'availability');
     }
     
     /**
@@ -3811,10 +3824,10 @@ ORDER BY fac_level;");
     public function getResourcesLocation($criteria, $value, $survey, $survey_category, $for) {
         $results = $this->m_analytics->getResourcesLocation($criteria, $value, $survey, $survey_category, $for);
         
-        echo "<pre>";
-        print_r($results);
-        echo "</pre>";
-        die;
+        // echo "<pre>";
+        // print_r($results);
+        // echo "</pre>";
+        // die;
         $number = $resultArray = $q = $pharmacy = $store = $delivery = $other = array();
         $number = $resultArray = $q = array();
         $count = 0;
