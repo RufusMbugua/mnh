@@ -13,17 +13,28 @@ class C_Analytics extends MY_Controller
         
         
     }
+    
+    /**
+     * [index description]
+     * @return [type] [description]
+     */
     public function index(){
         redirect('analytics');
     }
+    
+    /**
+     * [submit_help description]
+     * @return [type] [description]
+     */
     public function submit_help() {
         var_dump($this->input->post());
     }
     
     /**
      * [setActive description]
-     * @param [type] $county
-     * @param [type] $survey
+     * @param [type] $county          [description]
+     * @param [type] $survey          [description]
+     * @param [type] $survey_category [description]
      */
     
     //function for Pie Chart
@@ -3819,6 +3830,15 @@ ORDER BY fac_level;");
         $this->loadExcel($data, 'Commodity Supplies and Equipments for ' . $value);
     }
     
+    /**
+     * [getResourcesLocation description]
+     * @param  [type] $criteria        [description]
+     * @param  [type] $value           [description]
+     * @param  [type] $survey          [description]
+     * @param  [type] $survey_category [description]
+     * @param  [type] $for             [description]
+     * @return [type]                  [description]
+     */
     public function getResourcesLocation($criteria, $value, $survey, $survey_category, $for) {
         $results = $this->m_analytics->getResourcesLocation($criteria, $value, $survey, $survey_category, $for);
         
@@ -3849,6 +3869,14 @@ ORDER BY fac_level;");
         //echo "<pre>";print_r($resultArray);echo "</pre>";die;
         $this->populateGraph($resultArray, '', $category, $criteria, '', 70, 'pie');
     }
+    
+    /**
+     * [getCountyData description]
+     * @param  [type] $survey_type     [description]
+     * @param  [type] $survey_category [description]
+     * @param  [type] $county          [description]
+     * @return [type]                  [description]
+     */
     public function getCountyData($survey_type, $survey_category, $county) {
         
         $county = urldecode($county);
@@ -3856,6 +3884,14 @@ ORDER BY fac_level;");
         $results = $this->m_analytics->getReportingRatio($survey_type, $survey_category, $county, 'county');
         echo json_encode($results);
     }
+    
+    /**
+     * [getDistrictData description]
+     * @param  [type] $survey_type     [description]
+     * @param  [type] $survey_category [description]
+     * @param  [type] $county          [description]
+     * @return [type]                  [description]
+     */
     public function getDistrictData($survey_type, $survey_category, $county) {
         
         $county = urldecode($county);
