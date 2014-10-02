@@ -2472,9 +2472,12 @@ public function getIndicatorTypes() {
     $results = $this->m_analytics->getIndicatorTypes();
     
     //echo '<pre>';print_r($results);echo '</pre>';die;
-    $options = '<option>Choose Indicator Type</option>';
+    $options = '<option>Select Symptom / Condition Assessment</option>';
     foreach ($results as $value) {
-        $options.= '<option value="' . $value['il_for'] . '">' . $value['il_full_name'] . '</option>';
+        if($value['il_full_name']!=''){
+         $options.= '<option value="' . $value['il_for'] . '">' . $value['il_full_name'] . '</option>';
+    }
+       
     }
     echo $options;
 }
