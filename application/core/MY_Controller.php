@@ -5441,7 +5441,7 @@ background: #ddd;
         $datas['data_parent'] = $parent;
         $datas['data_for'] = $for;
         $datas['chart_stacking'] = $stacking;
-        $datas['color_scheme'] = ($stacking != '') ? array('#8bbc21', '#fb4347', '#92e18e', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#a6c96a') : array('#66aaf7', '#f66c6f', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#a6c96a');
+        $datas['color_scheme'] = ($stacking != '') ? array('#8bbc21','#fb4347', '#92e18e', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#a6c96a') : array('#66aaf7', '#f66c6f', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#a6c96a');
         if($color_scheme!=''){
              $datas['color_scheme'] = $color_scheme;
         }

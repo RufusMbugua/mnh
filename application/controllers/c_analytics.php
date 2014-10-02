@@ -923,7 +923,7 @@ ORDER BY fac_level;");
             $key = str_replace(' ', '-', $key);
             $resultArray[] = array('name' => $key, 'data' => $val);
             
-            //echo '<pre>';print_r($results);echo '</pre>';die;
+            // echo '<pre>';print_r($results);echo '</pre>';die;
             
             
         }
@@ -972,8 +972,11 @@ ORDER BY fac_level;");
                 $key = str_replace(' ', '-', $key);
                 $resultArray[] = array('name' => $key, 'data' => $val);
             }
-            $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'column', (int)sizeof($category));
-        
+            if($statistic=='availability'){
+            $color_scheme= array('#8bbc21','#dddddd','#fb4347', '#92e18e', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#a6c96a');
+        }
+        $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'column', (int)sizeof($category),'','','',$color_scheme);
+    
         }
         else {
             foreach ($results as $key => $result) {
@@ -994,8 +997,11 @@ ORDER BY fac_level;");
                 $key = str_replace(' ', '-', $key);
                 $resultArray[] = array('name' => $key, 'data' => $val);
             }
-            $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'bar', (int)sizeof($category));
+            if($statistic=='availability'){
+            $color_scheme= array('#8bbc21','#dddddd','#fb4347', '#92e18e', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#a6c96a');
         }
+        $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'bar', (int)sizeof($category),'','','',$color_scheme);
+     }
         
         //echo '<pre>';print_r($resultArray);echo '</pre>';die;
         
@@ -1164,7 +1170,10 @@ ORDER BY fac_level;");
             
             
         }
-        $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'column', (int)sizeof($category));
+        if($statistic=='availability'){
+            $color_scheme= array('#8bbc21','#dddddd','#fb4347', '#92e18e', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#a6c96a');
+        }
+        $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'column', (int)sizeof($category),'','','',$color_scheme);
     }
     
 
@@ -1190,18 +1199,20 @@ ORDER BY fac_level;");
     
     public function getCommodityStatistics($criteria, $value, $survey, $survey_category, $for, $statistic) {
         $results = $this->m_analytics->getCommodityStatistics($criteria, $value, $survey, $survey_category, $for, $statistic);
-		if(($statistic == 'availability' && $for == 'bun') ||($statistic == 'unavailability' && $for == 'bun') || ($statistic == 'location' && $for == 'bun')|| ($statistic == 'supplier' && $for == 'mnh')){
+		// echo '<pre>';print_r($results);die;
+        if(($statistic == 'availability' && $for == 'bun') ||($statistic == 'unavailability' && $for == 'bun') || ($statistic == 'location' && $for == 'bun')|| ($statistic == 'supplier' && $for == 'mnh')){
 			$key = str_replace('_', ' ', $key);
         foreach ($results as $key => $result) {
             $key = str_replace('_', ' ', $key);
             $key = ucwords($key);
             $category[] = $key;
             foreach ($result as $name => $value) {
-                if ($name != 'Sometimes Available' && $name != 'N/A') {
+                if ($name != 'Sometimes Available' ) {
                     $data[$name][] = (int)$value;
                 }
             }
         }
+
         foreach ($data as $key => $val) {
             
             $key = str_replace('_', ' ', $key);
@@ -1209,7 +1220,11 @@ ORDER BY fac_level;");
             $key = str_replace(' ', '-', $key);
             $resultArray[] = array('name' => $key, 'data' => $val);
         }
-        $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'bar', (int)sizeof($category));
+        if($statistic=='availability'){
+            $color_scheme= array('#8bbc21','#dddddd','#fb4347', '#92e18e', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#a6c96a');
+        }
+        $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'column', (int)sizeof($category),'','','',$color_scheme);
+    
     
 		}else{
         $key = str_replace('_', ' ', $key);
@@ -1218,7 +1233,7 @@ ORDER BY fac_level;");
             $key = ucwords($key);
             $category[] = $key;
             foreach ($result as $name => $value) {
-                if ($name != 'Sometimes Available' && $name != 'N/A') {
+                if ($name != 'Sometimes Available') {
                     $data[$name][] = (int)$value;
                 }
             }
@@ -1229,7 +1244,11 @@ ORDER BY fac_level;");
             $key = str_replace(' ', '-', $key);
             $resultArray[] = array('name' => $key, 'data' => $val);
         }
-        $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'column', (int)sizeof($category));
+        if($statistic=='availability'){
+            $color_scheme= array('#8bbc21','#dddddd','#fb4347', '#92e18e', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#a6c96a');
+        }
+        $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'bar', (int)sizeof($category),'','','',$color_scheme);
+    
     }
     }
     /* public function getStorageStatistics($criteria, $value, $survey, $survey_category, $for) {
@@ -1283,7 +1302,11 @@ ORDER BY fac_level;");
             
             
         }
-        $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 70, 'bar');
+        if($statistic=='availability'){
+            $color_scheme= array('#8bbc21','#dddddd','#fb4347', '#92e18e', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#a6c96a');
+        }
+        $this->populateGraph($resultArray, '', $category, $criteria, 'percent', 130, 'bar', (int)sizeof($category),'','','',$color_scheme);
+    
     }
     
     /**
