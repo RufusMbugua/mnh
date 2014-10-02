@@ -2006,23 +2006,15 @@ public function getHSQuestions($criteria, $value, $survey, $survey_category, $fo
     $value = urldecode($value);
     $category[] = array();
     $results = $this->m_analytics->getQuestionStatistics($criteria, $value, $survey, $survey_category, $for, $statistics);
-    
+     // echo"<pre>";print_r($results);echo"<pre>";die;
     $result = $q = $resultArray = array();
     
-    $count = 0;
     foreach ($results as $key => $value) {
-        if ($count == 1) {
-            $category[] = $key;
-            $data = $value;
-        }
-        $count++;
+       foreach($value as $k=>$v){
+        $gData[] = array('name' => $k, 'y' => $v);
+       }
     }
     
-    // echo"<pre>";print_r($category);echo"<pre>";die;
-    foreach ($data as $key => $value_) {
-        
-        $gData[] = array('name' => $key, 'y' => $value_);
-    }
     $resultArray[] = array('name' => 'Values', 'data' => $gData);
     $this->populateGraph($resultArray, '', $category[1], $criteria, '', 70, 'pie', '', $for, 'question', $statistics);
 }
