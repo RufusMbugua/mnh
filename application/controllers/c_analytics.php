@@ -1104,20 +1104,21 @@ ORDER BY fac_level;");
         $count = 0;
 
         
-        //echo "<pre>";print_r($results);echo "</pre>";die;
+        // echo "<pre>";print_r($results);echo "</pre>";die;
         $number = $resultArray = $q = array();
-        $number = $resultArray = $q = $no = array();
+        $number = $resultArray = $q = $no = $yes = array();
         
         
         foreach ($results as $key => $value) {
             if ($count == 1):
                 $q[] = $key;
                 $no[] = (int)$value['no'];
+                $yes[]=(int)$value['yes'];
         endif;
         $count++;
         }
         
-        $resultArray = array(array('name' => 'No', 'data' => $no));
+        $resultArray = array(array('name' => 'Yes', 'data' => $yes),array('name' => 'No', 'data' => $no));
         
         //echo "<pre>";print_r($resultArray);echo "</pre>";die;
         $category = $q;
