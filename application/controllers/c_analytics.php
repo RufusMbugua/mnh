@@ -968,7 +968,7 @@ public function getSuppliesStatistics($criteria, $value, $survey, $survey_catego
         }
         $resultArray[] = array('name' => $key, 'data' => $gData);
         $this->populateGraph($resultArray, '', $category, $criteria, '', 40, 'pie', (int)sizeof($category));
-    } else if ($statistic == 'availability' && $for == 'ch') {
+    } else if (($statistic == 'availability' && $for == 'ch') || ($statistic == 'availability' && $for == 'mnh')) {
         foreach ($results as $key => $result) {
             $key = str_replace('_', ' ', $key);
             $key = ucwords($key);
