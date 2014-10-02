@@ -709,39 +709,26 @@ ORDER BY fac_level;");
         //echo '<pre>';print_r($results);echo '</pre>';
         $category = array();
         foreach ($results as $guide) {
-            $category = array('total_in_facility', 'total_on_duty');
+            // $category = array('Total in Facility', 'Total On Duty');
             
             //echo '<pre>';print_r($guide);echo '</pre>';
             foreach ($guide as $name => $data) {
                 
                 //echo '<pre>';print_r($guide);echo '</pre>';
-                $gData[$name]['total_in_facility'][] = (int)$data['total_facility'];
-                $gData[$name]['total_on_duty'][] = (int)$data['total_duty'];
+                $gData[$name]['Total in Facility'] = (int)$data['total_facility'];
+                $gData[$name]['Total On Duty'] = (int)$data['total_duty'];
             }
         }
         
         $colors = array('#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#a6c96a');
         
-        //echo '<pre>';print_r($gData);echo '</pre>'; exit;
-        $colorCount = 0;
         foreach ($gData as $name => $data) {
-            $color = $colors[$colorCount];
-            $count = 0;
-            foreach ($data as $stack => $actual) {
-                
-                //echo '<pre>';print_r($actual);echo '</pre>';
-                if ($count == 0) {
-                    $resultArray[] = array('name' => $name, 'data' => $actual, 'stack' => ucwords(str_replace('_', ' ', $stack)), 'color' => $color);
-                } else {
-                    $resultArray[] = array('name' => $name, 'data' => $actual, 'stack' => ucwords(str_replace('_', ' ', $stack)), 'linkedTo' => ':previous', 'color' => $color);
-                }
-                $count++;
-            }
-            $colorCount++;
+            $category=array_keys($data);
+            $resultArray[]=array('name'=>$name,'data'=>array_values($data));
         }
         
-        //echo "<pre>";print_r($resultArray);echo "</pre>";die;
-        $this->populateGraph($resultArray, '', $category, $criteria, 'normal', 90, 'bar');
+        // echo "<pre>";print_r($resultArray);echo "</pre>";die;
+        $this->populateGraph($resultArray, '', $category, $criteria, 'normal', 90, 'bar','','','','',$colors);
     }
     
     //get treatment symptoms
@@ -767,8 +754,8 @@ ORDER BY fac_level;");
                     case 'cases':
                         $category[] = $stack;
                         
-                        $gData[$stack][$name] = $data;
-                        $classifications[] = $name;
+                        $gData[$stack]+= $data;
+                        // $classifications[] = $name;
                         break;
 
                     case 'treatment':
@@ -828,28 +815,27 @@ ORDER BY fac_level;");
                 $resultArray[] = array('name' => $comm, 'data' => $ndata);
             }
         } else {
+            $resultArray=array(
+                array('name'=>'Diarrhoea','data'=>array($gData['dia'],0,0)),
+                array('name'=>'Malaria','data'=>array(0,$gData['fev'],0)),
+                array('name'=>'Pneumonia','data'=>array(0,0,$gData['pne'])));
+             $category[$option]=array('Diarrhoea','Malaria','Pneumonia');
+            // echo '<pre>';print_r($gData);die;
             foreach ($gData as $k => $values) {
                 // echo '<pre>';print_r($values);die;
-                foreach ($classifications as $classification) {
-                    if (array_key_exists($classification, $values)) {
-                        $fData[$k][$classification] = $values[$classification];
-                    }
-                    else{
-                        $fData[$k][$classification]=0;
-                    }
-                }
+                
             }
-            $category[$option]=array('Diarrhoea','Malaria','Pneumonia');
+           
 
-            foreach($fData as $key=>$value){
-                foreach($value as $k=>$v){
-                    $ffData[$k][]=$v;
-                }
+            // foreach($fData as $key=>$value){
+            //     foreach($value as $k=>$v){
+            //         $ffData[$key]=+$v;
+            //     }
 
-            }
-            foreach($ffData as $key=>$dat){
-                $resultArray[]=array('name'=>$key,'data'=>array_values($dat));
-            }
+            // }
+            // foreach($ffData as $key=>$dat){
+            //     $resultArray[]=array('name'=>$key,'data'=>array_values($dat));
+            // }
             // echo "<pre>";print_r($resultArray);echo "</pre>";die;
         }
        
@@ -2428,7 +2414,7 @@ public function getIndicatorStatistics($criteria, $value, $survey, $survey_categ
     $value = urldecode($value);
     $results = $this->m_analytics->getIndicatorStatistics($criteria, $value, $survey, $survey_category, $for);
     
-    //echo "<pre>"; print_r($results);echo "</pre>";die;
+    // echo "<pre>"; print_r($results);echo "</pre>";die;
     foreach ($results['response'] as $key => $result) {
         
         $key = str_replace('_', ' ', $key);
