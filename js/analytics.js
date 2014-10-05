@@ -67,7 +67,7 @@ function startAnalytics(base_url, county, survey, survey_category) {
     $('select#survey_type').change(function() {
         district_select = $('select#sub_county_select option:selected').text();
         //alert(district_select)
-        if (district_select !== 'Please Select a District' && district_select !== 'All Sub-Counties Selected') {
+        if (district_select !== 'Please Select a Sub County' && district_select !== 'All Sub-Counties Selected') {
             district = district_select;
         } else {
             district = '';
@@ -84,7 +84,7 @@ function startAnalytics(base_url, county, survey, survey_category) {
         survey = $('select#survey_type option:selected').attr('value');
         survey_category = $('select#survey_category option:selected').attr('value');
 
-        if (district !== 'All Sub-Counties Selected' && district !== 'Please Select a District') {
+        if (district !== 'All Sub-Counties Selected' && district !== 'Please Select a Sub County') {
             district = encodeURIComponent(district);
             loadFacilities(base_url, district, survey, survey_category);
         } else {
@@ -169,7 +169,7 @@ function startAnalytics(base_url, county, survey, survey_category) {
         if (county == 'Unselected') {
             raw_url = setRawUrl('national', county, district, facility, survey, survey_category, data_for, data_parent, statistics);
         } else {
-            if (district == '' || district == 'Please Select a District') {
+            if (district == '' || district == 'Please Select a Sub County') {
                 raw_url = setRawUrl('county', county, district, facility, survey, survey_category, data_for, data_parent, statistics);
             } else {
                 raw_url = setRawUrl('district', county, district, facility, survey, survey_category, data_for, data_parent, statistics);
@@ -506,6 +506,8 @@ function statisticsHandler(criteria, value, survey, survey_category, indicator_t
 					loadGraph(base_url, 'c_analytics/getMNHDeliveryKitsAvailability/' + criteria + '/' + value + '/' + survey + '/' + survey_category + '/' + survey, '#mnhDelivery_availability');
                     loadGraph(base_url, 'c_analytics/getMNHDeliveryKitsLocation/' + criteria + '/' + value + '/' + survey + '/' + survey_category + '/' + survey, '#mnhDelivery_location');
                     loadGraph(base_url, 'c_analytics/getMNHDeliveryKitsFunctionality/' + criteria + '/' + value + '/' + survey + '/' + survey_category + '/' + survey, '#mnhDelivery_functionality');
+                    loadGraph(base_url, 'c_analytics/getMNHSuppliesAvailability/' + criteria + '/' + value + '/' + survey + '/' + survey_category + '/' + survey, '#mnhsupplies_availability');
+                    loadGraph(base_url, 'c_analytics/getMNHSuppliesNameLocation/' + criteria + '/' + value + '/' + survey + '/' + survey_category + '/' + survey, '#mnhsupplies_location');
                     	//section 7 of 8: Part III
                     loadGraph(base_url, 'c_analytics/getRunningWaterAvailability/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#mnhresource_availability');
                     loadGraph(base_url, 'c_analytics/getRunningWaterLocation/' + criteria + '/' + value + '/' + survey + '/' + survey_category, '#mnhresource_location');

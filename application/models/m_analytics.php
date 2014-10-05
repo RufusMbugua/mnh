@@ -1650,6 +1650,7 @@ ORDER BY oa.question_code ASC";
                 
                 //echo($this->db->last_query());die;
                 if ($this->dataSet !== NULL) {
+                	//echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
                     foreach ($this->dataSet as $value) {
                         if (array_key_exists('frequency', $value)) {
                             $data[$value['equipment_name']][$value['frequency']] = (int)$value['total_response'];
@@ -1659,11 +1660,12 @@ ORDER BY oa.question_code ASC";
                                 $data[$value['equipment_name']][$place]+= (int)$value['total_response'];
                             }
                         } else if (array_key_exists('total_functional', $value)) {
-                            $data[$value['equipment_name']]['functional']+= (int)$value['total_functional'];
+                        	$data[$value['equipment_name']]['functional']+= (int)$value['total_functional'];
                             $data[$value['equipment_name']]['non_functional']+= (int)$value['total_non_functional'];
-                        }
+                        	
+                        	}
                     }
-                    
+                    }
                     /**
                      * Fix Data
                      */
@@ -1691,7 +1693,7 @@ ORDER BY oa.question_code ASC";
                             }
                         }
                         $data = $newData;
-                    }
+                    
                 } else {
                     return null;
                 }
@@ -1806,7 +1808,7 @@ ORDER BY oa.question_code ASC";
                                  $reason = trim($reason , "2. ");
                                  $reason = trim($reason , "3. ");
                                  if($reason!='' && $reason!='Select One'){
-$data[$value['commodity_name']][$reason]+= (int)$value['total_response'];
+							$data[$value['commodity_name']][$reason]+= (int)$value['total_response'];
                                  }
                                  
 
@@ -3989,8 +3991,8 @@ ORDER BY question_code";
                   //echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
                     switch ($statistics) {
                         case 'response':
-                            $yes = $value_['yes_values'];
-                            $no = $value_['no_values'];
+                            $yes = $value_['Yes'];
+                            $no = $value_['No'];
                             
                             //1. collect the categories
                             $data[$question]['yes'] = $yes;
@@ -4217,45 +4219,19 @@ ORDER BY question_code";
                 $queryData->free_result();
                 $pharmacyvalue = 0;
                 if ($this->dataSet !== NULL) {
+                	//echo "<pre>";print_r($this->dataSet);echo "</pre>";die;
                     foreach ($this->dataSet as $key => $value) {
-                        
-                        if (array_key_exists('skill', $value)) {
-                            $skillvalue+= $value['skill'];
+                        if(array_key_exists( 'question_code', $value)){
+                        	$reason = explode(',', $value['lq_reason']);
+							foreach ($reason as $value_) {
+								$data['question_code'][$value_] = (int)$value['total_response'];
+							}
                         }
-                        
-                        if (array_key_exists('staff', $value)) {
-                            $staffvalue+= $value['staff'];
-                        }
-                        if (array_key_exists('infrastructure', $value)) {
-                            $infrastructurevalue+= $value['infrastructure'];
-                        }
-                        if (array_key_exists('equipment', $value)) {
-                            $equipmentvalue+= $value['equipment'];
-                        }
-                        if (array_key_exists('commodities', $value)) {
-                            $commoditiesvalue+= $value['commodities'];
-                        }
-                        if (array_key_exists('other', $value)) {
-                            $othervalue+= $value['other'];
-                        }
-                    }
                     
-                   
-                    
-                    //1. collect the categories
-                    $data[$question]['Inadequate_skill'] = $skillvalue;
-                    $data[$question]['Inadequate_staff'] = $staffvalue;
-                    $data[$question]['Inadequate_infrastructure'] = $infrastructurevalue;
-                    $data[$question]['Inadequate_equipment'] = $equipmentvalue;
-                    $data[$question]['Inadequate_commodities'] = $commoditiesvalue;
-                    $data[$question]['other'] = $othervalue;
-                } else {
-                    return null;
-                }
                 //echo "<pre>";print_r($infrastructurevalue);echo "</pre>";die;
                 //echo "<pre>";print_r($other);echo "</pre>";die;
-                
-                
+                }
+                } 
             }
             catch(exception $ex) {
                 

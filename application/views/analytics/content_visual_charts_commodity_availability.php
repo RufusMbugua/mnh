@@ -203,7 +203,7 @@
                 <div class="x-large-graph" style="height:400px">
                    <h5>Data From Under 5 Register</h5>
                     <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Assessment</span><span class="sizer">Click to Enlarge</span></h6>
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Assessment: Cases Documented in Under five register in the last one month</span><span class="sizer">Click to Enlarge</span></h6>
                     </div>
                     <div class="portlet-body">
 
@@ -301,7 +301,7 @@
                 </div>
                 <div class="medium-graph">
                     <div class="portlet-title">
-                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Commodity Unavailability</span><span class="sizer">Click to Enlarge</span></h6>
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Main Reason for Unavailability</span><span class="sizer">Click to Enlarge</span></h6>
                     </div>
                     <div class="portlet-body">
 
@@ -572,7 +572,7 @@
             <div class="panel-body">
                 <div class="medium-graph">
                 <div class="portlet-title">
-                    <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Community Units</span><span class="sizer">Click to Enlarge</span></h6>
+                    <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Establishment of Community Units Support</span><span class="sizer">Click to Enlarge</span></h6>
                 </div>
                 <div class="portlet-body">
 
@@ -582,7 +582,7 @@
             </div>
          <div class="medium-graph">
                 <div class="portlet-title">
-                    <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Referred Cases</span><span class="sizer">Click to Enlarge</span></h6>
+                    <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Community Cases Management</span><span class="sizer">Click to Enlarge</span></h6>
                 </div>
                 <div class="portlet-body">
 				<div class="chart" id="chCases">
@@ -591,7 +591,7 @@
             </div>
        <div class="medium-graph">
                 <div class="portlet-title">
-                    <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">IMCI Trained</span><span class="sizer">Click to Enlarge</span></h6>
+                    <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Community level Staff availability and Training</span><span class="sizer">Click to Enlarge</span></h6>
                 </div>
                 <div class="portlet-body">
 					<div class="chart" id="chIMCITraining">
@@ -1024,7 +1024,7 @@
         <div class="panel-heading">
             <h4 class="panel-title">
                 <a data-toggle="collapse" data-parent="#accordion" href="#collapseSixteen">
-                    Section 7 :Equipment Availability and Functionality<span class="show-collapse"><span class="txt">Click to Expand</span><i class="fa fa-chevron-right"></i></span>
+                    Section 7 of 8 :I.Equipment Availability and Functionality<span class="show-collapse"><span class="txt">Click to Expand</span><i class="fa fa-chevron-right"></i></span>
                 </a>
             </h4>
         </div>
@@ -1082,7 +1082,18 @@
                     </div>
                 </div>
                 </div>
-                <div class="panel-body">
+               </div>
+              </div>
+              <div class="panel panel-default analytics_row section" data-survey='mnh' id="mnh-section-7">
+        		<div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapseSeventeen">
+                    Section 7 of 8 :II.KITS/SETS Availability<span class="show-collapse"><span class="txt">Click to Expand</span><i class="fa fa-chevron-right"></i></span>
+                </a>
+            </h4>
+        </div>
+        <div id="collapseSeventeen" class="panel-collapse collapse">
+            <div class="panel-body">
               <div class="medium-graph">
                     <div class="portlet-title">
                         <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title"> II.KITS/SETS Availability</span><span class="sizer">Click to Enlarge</span></h6>
@@ -1113,7 +1124,39 @@
                         </div>
                     </div>
                 </div>
+                <div class="medium-graph">
+                    <div class="portlet-title">
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title"> Supplies Name Availability</span><span class="sizer">Click to Enlarge</span></h6>
+                    </div>
+                    <div class="portlet-body">
+
+                        <div class="chart" id="mnhsupplies_availability">
+                        </div>
+                    </div>
                 </div>
+                <div class="medium-graph">
+                    <div class="portlet-title">
+                        <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">  Supplies Name Location</span><span class="sizer">Click to Enlarge</span></h6>
+                    </div>
+                    <div class="portlet-body">
+
+                        <div class="chart" id="mnhsupplies_location">
+                        </div>
+                    </div>
+                </div>
+                </div>
+               </div>
+              </div>
+              <div class="panel panel-default analytics_row section" data-survey='mnh' id="mnh-section-7">
+        		<div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapseEighteen">
+                    Section 7 of 8 :III.Resource Availability<span class="show-collapse"><span class="txt">Click to Expand</span><i class="fa fa-chevron-right"></i></span>
+                </a>
+            </h4>
+        </div>
+        <div id="collapseEighteen" class="panel-collapse collapse">
+            <div class="panel-body">
                 <div class="panel-body">
                 <div class="medium-graph">
                     <div class="portlet-title">
@@ -1240,20 +1283,21 @@
             </div>
         </div>
     </div>
+    </div>
     
     <div class="panel panel-default analytics_row section" data-survey='mnh' id="mnh-section-8">
         <div class="panel-heading">
             <h4 class="panel-title">
-                <a data-toggle="collapse" data-parent="#accordion" href="#collapseEighteen">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapseNineteen">
                     Section 8 : Community Strategy<span class="show-collapse"><span class="txt">Click to Expand</span><i class="fa fa-chevron-right"></i></span>
                 </a>
             </h4>
         </div>
-        <div id="collapseEighteen" class="panel-collapse collapse">
+        <div id="collapseNineteen" class="panel-collapse collapse">
             <div class="panel-body">
                 <div class="medium-graph">
                 <div class="portlet-title">
-                    <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Community Units</span><span class="sizer">Click to Enlarge</span></h6>
+                    <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Establishment of Community Units Support</span><span class="sizer">Click to Enlarge</span></h6>
                 </div>
                 <div class="portlet-body">
 
@@ -1263,7 +1307,7 @@
             </div>
             <div class="medium-graph">
                 <div class="portlet-title">
-                    <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Referred Cases</span><span class="sizer">Click to Enlarge</span></h6>
+                    <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Community MNH training</span><span class="sizer">Click to Enlarge</span></h6>
                 </div>
                 <div class="portlet-body">
 
@@ -1273,7 +1317,7 @@
             </div>
             <div class="medium-graph">
                 <div class="portlet-title">
-                    <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">IMCI Training</span><span class="sizer">Click to Enlarge</span></h6>
+                    <h6><i class="fa fa-bar-chart-o"></i><span class="graph-title">Referred Cases</span><span class="sizer">Click to Enlarge</span></h6>
                 </div>
                 <div class="portlet-body">
 
